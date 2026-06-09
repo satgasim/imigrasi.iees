@@ -1739,7 +1739,7 @@ async function muatThumbnail() {
    ▶ Aktifkan  : ubah false → true
    ▶ Nonaktifkan : ubah true → false
    ═══════════════════════════════════════════════════════════ */
-const BAHASA_AKTIF = true;
+const BAHASA_AKTIF = false;
 
 let langAktif = 'id';
 
@@ -1750,25 +1750,39 @@ function googleTranslateElementInit() {
     includedLanguages: 'en',
     autoDisplay: false
   }, 'gt-container');
+
+  // Jika sesi ini user memilih EN, terapkan kembali
+  if (sessionStorage.getItem('lang_pilihan') === 'en') {
+    setTimeout(() => {
+      const sel = document.querySelector('.goog-te-combo');
+      if (sel) { sel.value = 'en'; sel.dispatchEvent(new Event('change')); }
+      langAktif = 'en';
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('aktif'));
+      document.querySelectorAll('.lang-btn').forEach(b => {
+        if (b.getAttribute('onclick') === "gantiBahasa('en')") b.classList.add('aktif');
+      });
+    }, 600);
+  }
 }
 
 function gantiBahasa(lang) {
   if (!BAHASA_AKTIF) return;
   langAktif = lang;
+
   if (lang === 'en') {
+    sessionStorage.setItem('lang_pilihan', 'en');
     const sel = document.querySelector('.goog-te-combo');
     if (sel) { sel.value = 'en'; sel.dispatchEvent(new Event('change')); }
   } else {
-    const sel = document.querySelector('.goog-te-combo');
-    if (sel) {
-      sel.value = '';
-      sel.dispatchEvent(new Event('change'));
-    } else {
-      document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-      document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + window.location.hostname;
-      window.location.reload();
-    }
+    sessionStorage.removeItem('lang_pilihan');
+    // Hapus cookie Google Translate
+    const h = window.location.hostname;
+    document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+    document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${h}`;
+    document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.${h}`;
+    window.location.reload();
   }
+
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('aktif'));
   document.querySelectorAll('.lang-btn').forEach(b => {
     if (b.getAttribute('onclick') === `gantiBahasa('${lang}')`) b.classList.add('aktif');
