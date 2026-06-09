@@ -1759,10 +1759,15 @@ function gantiBahasa(lang) {
     const sel = document.querySelector('.goog-te-combo');
     if (sel) { sel.value = 'en'; sel.dispatchEvent(new Event('change')); }
   } else {
-    try {
-      document.querySelector('.goog-te-banner-frame')
-        ?.contentDocument.querySelector('#\\:1\\.restore')?.click();
-    } catch(e) { window.location.reload(); }
+    const sel = document.querySelector('.goog-te-combo');
+    if (sel) {
+      sel.value = '';
+      sel.dispatchEvent(new Event('change'));
+    } else {
+      document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + window.location.hostname;
+      window.location.reload();
+    }
   }
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('aktif'));
   document.querySelectorAll('.lang-btn').forEach(b => {
