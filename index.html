@@ -582,8 +582,34 @@ function filterMedia(btn, kat) {
   document.querySelectorAll('.filter-row .filter-btn').forEach(b => b.classList.remove('aktif'));
   btn.classList.add('aktif');
   document.querySelectorAll('.ig-galeri-grid .ig-galeri-item').forEach(item => {
-    item.style.display = (kat === 'semua' || item.dataset.kat === kat) ? '' : 'none';
+    if (kat === 'semua' || item.dataset.kat === kat) {
+      item.classList.remove('sembunyi');
+    } else {
+      item.classList.add('sembunyi');
+    }
   });
+}
+/* ── THUMBNAIL INSTAGRAM OTOMATIS ───────────────────────── */
+async function muatThumbnail() {
+  const items = document.querySelectorAll('.ig-galeri-item[data-url]');
+  for (const item of items) {
+    const url = item.dataset.url;
+    const postId = url.match(/\/(p|reel)\/([^/]+)\//)?.[2];
+    if (!postId) continue;
+    try {
+      const res = await fetch(
+        `https://api.allorigins.win/get?url=${encodeURIComponent('https://api.instagram.com/oembed/?url=' + url)}`
+      );
+      const data = await res.json();
+      const oembed = JSON.parse(data.contents);
+      if (oembed.thumbnail_url) {
+        const img = document.createElement('img');
+        img.src = oembed.thumbnail_url;
+        img.alt = oembed.title || '';
+        item.prepend(img);
+      }
+    } catch (e) { /* tampilkan placeholder saja */ }
+  }
 }
    
 /* ─── MODAL WEB ─────────────────────────────────────────── */
@@ -663,6 +689,51 @@ function filterMedia(btn, kat) {
   opacity: 0; transition: opacity .25s; font-size: 30px; color: white;
 }
 .ig-galeri-item:hover .ig-galeri-kaca { opacity: 1; }
+@media (max-width: 900px) {
+  .ig-galeri-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ─── GALERI INFORMASI ───────────────────────────────────── */
+.ig-galeri-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 3px; margin-top: 16px;
+}
+.ig-galeri-item {
+  aspect-ratio: 1; cursor: pointer;
+  overflow: hidden; position: relative;
+  background: var(--kartu);
+  transition: opacity .3s;
+}
+.ig-galeri-item img {
+  width: 100%; height: 100%; object-fit: cover;
+  display: block; transition: transform .3s;
+  position: absolute; inset: 0;
+}
+.ig-galeri-item:hover img { transform: scale(1.08); }
+.ig-galeri-placeholder {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 6px; padding: 8px;
+}
+.ig-galeri-item[data-kat="visa"] .ig-galeri-placeholder { background: linear-gradient(135deg, #003580, #0055cc); }
+.ig-galeri-item[data-kat="wasdakim"] .ig-galeri-placeholder { background: linear-gradient(135deg, #1a4a2a, #2d7a4a); }
+.ig-galeri-item[data-kat="deportasi"] .ig-galeri-placeholder { background: linear-gradient(135deg, #4a1010, #aa2020); }
+.ig-galeri-placeholder span { font-size: 24px; }
+.ig-galeri-placeholder small {
+  font-size: 10px; color: rgba(255,255,255,.85);
+  text-align: center; line-height: 1.3;
+}
+.ig-galeri-kaca {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,.4);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity .25s;
+  font-size: 28px; color: white; z-index: 2;
+}
+.ig-galeri-item:hover .ig-galeri-kaca { opacity: 1; }
+.ig-galeri-item.sembunyi { display: none; }
 @media (max-width: 900px) {
   .ig-galeri-grid { grid-template-columns: repeat(3, 1fr); }
 }
@@ -1234,140 +1305,137 @@ function filterMedia(btn, kat) {
 
     <div class="ig-galeri-grid">
 
-      <!-- ── KONTEN VISA ── -->
-      <div class="ig-galeri-item" data-kat="visa" onclick="bukaIgModal('https://www.instagram.com/p/DP0GWWlEhar/')">
-        <div class="ig-galeri-placeholder"><span>✈️</span><small>5 types of tourism visa</small></div>
-        <div class="ig-galeri-kaca">▶</div>
-      </div>
+  <div class="ig-galeri-item" data-kat="visa" data-url="https://www.instagram.com/p/DP0GWWlEhar/" onclick="bukaIgModal('https://www.instagram.com/p/DP0GWWlEhar/')">
+    <div class="ig-galeri-placeholder"><span>✈️</span><small>5 types of tourism visa</small></div>
+    <div class="ig-galeri-kaca">▶</div>
+  </div>
 
-      <div class="ig-galeri-item" data-kat="visa" onclick="bukaIgModal('https://www.instagram.com/p/DGzbIShPKbi/')">
-        <div class="ig-galeri-placeholder"><span>🌏</span><small>97 countries eligible for VoA</small></div>
-        <div class="ig-galeri-kaca">▶</div>
-      </div>
+  <div class="ig-galeri-item" data-kat="visa" data-url="https://www.instagram.com/p/DGzbIShPKbi/" onclick="bukaIgModal('https://www.instagram.com/p/DGzbIShPKbi/')">
+    <div class="ig-galeri-placeholder"><span>🌏</span><small>97 countries eligible for VoA</small></div>
+    <div class="ig-galeri-kaca">▶</div>
+  </div>
 
-      <div class="ig-galeri-item" data-kat="visa" onclick="bukaIgModal('https://www.instagram.com/p/DIQE6lhvb-E/')">
-        <div class="ig-galeri-placeholder"><span>🛬</span><small>Visa on Arrival</small></div>
-        <div class="ig-galeri-kaca">▶</div>
-      </div>
+  <div class="ig-galeri-item" data-kat="visa" data-url="https://www.instagram.com/p/DIQE6lhvb-E/" onclick="bukaIgModal('https://www.instagram.com/p/DIQE6lhvb-E/')">
+    <div class="ig-galeri-placeholder"><span>🛬</span><small>Visa on Arrival</small></div>
+    <div class="ig-galeri-kaca">▶</div>
+  </div>
 
-      <div class="ig-galeri-item" data-kat="visa" onclick="bukaIgModal('https://www.instagram.com/p/DKYeA1iPsUp/')">
-        <div class="ig-galeri-placeholder"><span>🖥️</span><small>Online registration office verification</small></div>
-        <div class="ig-galeri-kaca">▶</div>
-      </div>
+  <div class="ig-galeri-item" data-kat="visa" data-url="https://www.instagram.com/p/DKYeA1iPsUp/" onclick="bukaIgModal('https://www.instagram.com/p/DKYeA1iPsUp/')">
+    <div class="ig-galeri-placeholder"><span>🖥️</span><small>Online registration office verification</small></div>
+    <div class="ig-galeri-kaca">▶</div>
+  </div>
 
-      <div class="ig-galeri-item" data-kat="visa" onclick="bukaIgModal('https://www.instagram.com/p/DLgoNjmRhRY/')">
-        <div class="ig-galeri-placeholder"><span>📋</span><small>Indonesia new visa classifications</small></div>
-        <div class="ig-galeri-kaca">▶</div>
-      </div>
+  <div class="ig-galeri-item" data-kat="visa" data-url="https://www.instagram.com/p/DLgoNjmRhRY/" onclick="bukaIgModal('https://www.instagram.com/p/DLgoNjmRhRY/')">
+    <div class="ig-galeri-placeholder"><span>📋</span><small>Indonesia new visa classifications</small></div>
+    <div class="ig-galeri-kaca">▶</div>
+  </div>
 
-      <div class="ig-galeri-item" data-kat="visa" onclick="bukaIgModal('https://www.instagram.com/p/DPSjVoVkhHL/')">
-        <div class="ig-galeri-placeholder"><span>🇮🇩</span><small>Enter with all Indonesia</small></div>
-        <div class="ig-galeri-kaca">▶</div>
-      </div>
+  <div class="ig-galeri-item" data-kat="visa" data-url="https://www.instagram.com/p/DPSjVoVkhHL/" onclick="bukaIgModal('https://www.instagram.com/p/DPSjVoVkhHL/')">
+    <div class="ig-galeri-placeholder"><span>🇮🇩</span><small>Enter with all Indonesia</small></div>
+    <div class="ig-galeri-kaca">▶</div>
+  </div>
 
-      <div class="ig-galeri-item" data-kat="visa" onclick="bukaIgModal('https://www.instagram.com/p/DQYF0R2D3vc/')">
-        <div class="ig-galeri-placeholder"><span>🎓</span><small>Visa education</small></div>
-        <div class="ig-galeri-kaca">▶</div>
-      </div>
+  <div class="ig-galeri-item" data-kat="visa" data-url="https://www.instagram.com/p/DQYF0R2D3vc/" onclick="bukaIgModal('https://www.instagram.com/p/DQYF0R2D3vc/')">
+    <div class="ig-galeri-placeholder"><span>🎓</span><small>Visa education</small></div>
+    <div class="ig-galeri-kaca">▶</div>
+  </div>
 
-      <div class="ig-galeri-item" data-kat="visa" onclick="bukaIgModal('https://www.instagram.com/p/DQ8acCfj8fk/')">
-        <div class="ig-galeri-placeholder"><span>🎭</span><small>Visa performer / artist edition</small></div>
-        <div class="ig-galeri-kaca">▶</div>
-      </div>
+  <div class="ig-galeri-item" data-kat="visa" data-url="https://www.instagram.com/p/DQ8acCfj8fk/" onclick="bukaIgModal('https://www.instagram.com/p/DQ8acCfj8fk/')">
+    <div class="ig-galeri-placeholder"><span>🎭</span><small>Visa performer / artist edition</small></div>
+    <div class="ig-galeri-kaca">▶</div>
+  </div>
 
-      <div class="ig-galeri-item" data-kat="visa" onclick="bukaIgModal('https://www.instagram.com/p/DRgbBK3D6kc/')">
-        <div class="ig-galeri-placeholder"><span>💎</span><small>Visa investment edition</small></div>
-        <div class="ig-galeri-kaca">▶</div>
-      </div>
+  <div class="ig-galeri-item" data-kat="visa" data-url="https://www.instagram.com/p/DRgbBK3D6kc/" onclick="bukaIgModal('https://www.instagram.com/p/DRgbBK3D6kc/')">
+    <div class="ig-galeri-placeholder"><span>💎</span><small>Visa investment edition</small></div>
+    <div class="ig-galeri-kaca">▶</div>
+  </div>
 
-      <div class="ig-galeri-item" data-kat="visa" onclick="bukaIgModal('https://www.instagram.com/p/DTM6YuRjzMZ/')">
-        <div class="ig-galeri-placeholder"><span>💼</span><small>Business visa</small></div>
-        <div class="ig-galeri-kaca">▶</div>
-      </div>
+  <div class="ig-galeri-item" data-kat="visa" data-url="https://www.instagram.com/p/DTM6YuRjzMZ/" onclick="bukaIgModal('https://www.instagram.com/p/DTM6YuRjzMZ/')">
+    <div class="ig-galeri-placeholder"><span>💼</span><small>Business visa</small></div>
+    <div class="ig-galeri-kaca">▶</div>
+  </div>
 
-      <div class="ig-galeri-item" data-kat="visa" onclick="bukaIgModal('https://www.instagram.com/p/DTwq1UbDyx_/')">
-        <div class="ig-galeri-placeholder"><span>👷</span><small>Working visa</small></div>
-        <div class="ig-galeri-kaca">▶</div>
-      </div>
+  <div class="ig-galeri-item" data-kat="visa" data-url="https://www.instagram.com/p/DTwq1UbDyx_/" onclick="bukaIgModal('https://www.instagram.com/p/DTwq1UbDyx_/')">
+    <div class="ig-galeri-placeholder"><span>👷</span><small>Working visa</small></div>
+    <div class="ig-galeri-kaca">▶</div>
+  </div>
 
-      <div class="ig-galeri-item" data-kat="visa" onclick="bukaIgModal('https://www.instagram.com/p/DV-ow9WD_v4/')">
-        <div class="ig-galeri-placeholder"><span>🔔</span><small>Penutupan layanan visa</small></div>
-        <div class="ig-galeri-kaca">▶</div>
-      </div>
+  <div class="ig-galeri-item" data-kat="visa" data-url="https://www.instagram.com/p/DV-ow9WD_v4/" onclick="bukaIgModal('https://www.instagram.com/p/DV-ow9WD_v4/')">
+    <div class="ig-galeri-placeholder"><span>🔔</span><small>Penutupan layanan visa</small></div>
+    <div class="ig-galeri-kaca">▶</div>
+  </div>
 
-      <div class="ig-galeri-item" data-kat="visa" onclick="bukaIgModal('https://www.instagram.com/p/DW2p0B_j7rq/')">
-        <div class="ig-galeri-placeholder"><span>🏘️</span><small>Penjelasan desa binaan</small></div>
-        <div class="ig-galeri-kaca">▶</div>
-      </div>
+  <div class="ig-galeri-item" data-kat="visa" data-url="https://www.instagram.com/p/DW2p0B_j7rq/" onclick="bukaIgModal('https://www.instagram.com/p/DW2p0B_j7rq/')">
+    <div class="ig-galeri-placeholder"><span>🏘️</span><small>Penjelasan desa binaan</small></div>
+    <div class="ig-galeri-kaca">▶</div>
+  </div>
 
-      <div class="ig-galeri-item" data-kat="visa" onclick="bukaIgModal('https://www.instagram.com/p/DXIhuuCk_V1/')">
-        <div class="ig-galeri-placeholder"><span>🚫</span><small>Immigration violation &amp; deportation</small></div>
-        <div class="ig-galeri-kaca">▶</div>
-      </div>
+  <div class="ig-galeri-item" data-kat="visa" data-url="https://www.instagram.com/p/DXIhuuCk_V1/" onclick="bukaIgModal('https://www.instagram.com/p/DXIhuuCk_V1/')">
+    <div class="ig-galeri-placeholder"><span>🚫</span><small>Immigration violation &amp; deportation</small></div>
+    <div class="ig-galeri-kaca">▶</div>
+  </div>
 
-      <div class="ig-galeri-item" data-kat="visa" onclick="bukaIgModal('https://www.instagram.com/p/DXszCmUj2jp/')">
-        <div class="ig-galeri-placeholder"><span>🤝</span><small>What sponsor mean for foreigners</small></div>
-        <div class="ig-galeri-kaca">▶</div>
-      </div>
+  <div class="ig-galeri-item" data-kat="visa" data-url="https://www.instagram.com/p/DXszCmUj2jp/" onclick="bukaIgModal('https://www.instagram.com/p/DXszCmUj2jp/')">
+    <div class="ig-galeri-placeholder"><span>🤝</span><small>What sponsor mean for foreigners</small></div>
+    <div class="ig-galeri-kaca">▶</div>
+  </div>
 
-      <div class="ig-galeri-item" data-kat="visa" onclick="bukaIgModal('https://www.instagram.com/p/DZGsyx0jwzD/')">
-        <div class="ig-galeri-placeholder"><span>💰</span><small>Biaya PNBP visa &amp; izin tinggal</small></div>
-        <div class="ig-galeri-kaca">▶</div>
-      </div>
+  <div class="ig-galeri-item" data-kat="visa" data-url="https://www.instagram.com/p/DZGsyx0jwzD/" onclick="bukaIgModal('https://www.instagram.com/p/DZGsyx0jwzD/')">
+    <div class="ig-galeri-placeholder"><span>💰</span><small>Biaya PNBP visa &amp; izin tinggal</small></div>
+    <div class="ig-galeri-kaca">▶</div>
+  </div>
 
-      <!-- ── WASDAKIM & OPERASI ── -->
-      <div class="ig-galeri-item" data-kat="wasdakim" onclick="bukaIgModal('https://www.instagram.com/p/DYmHag8GjSu/')">
-        <div class="ig-galeri-placeholder"><span>🏛️</span><small>Imigrasi Balikpapan perkuat peran PIMPASA</small></div>
-        <div class="ig-galeri-kaca">▶</div>
-      </div>
+  <div class="ig-galeri-item" data-kat="wasdakim" data-url="https://www.instagram.com/p/DYmHag8GjSu/" onclick="bukaIgModal('https://www.instagram.com/p/DYmHag8GjSu/')">
+    <div class="ig-galeri-placeholder"><span>🏛️</span><small>Imigrasi Balikpapan perkuat PIMPASA</small></div>
+    <div class="ig-galeri-kaca">▶</div>
+  </div>
 
-      <div class="ig-galeri-item" data-kat="wasdakim" onclick="bukaIgModal('https://www.instagram.com/p/DYwTvkkmtl0/')">
-        <div class="ig-galeri-placeholder"><span>📡</span><small>Permenimipas 7 — intelijen keimigrasian</small></div>
-        <div class="ig-galeri-kaca">▶</div>
-      </div>
+  <div class="ig-galeri-item" data-kat="wasdakim" data-url="https://www.instagram.com/p/DYwTvkkmtl0/" onclick="bukaIgModal('https://www.instagram.com/p/DYwTvkkmtl0/')">
+    <div class="ig-galeri-placeholder"><span>📡</span><small>Permenimipas 7 — intelijen keimigrasian</small></div>
+    <div class="ig-galeri-kaca">▶</div>
+  </div>
 
-      <div class="ig-galeri-item" data-kat="wasdakim" onclick="bukaIgModal('https://www.instagram.com/p/DRy_ve-D-mr/')">
-        <div class="ig-galeri-placeholder"><span>👮</span><small>Operasi gabungan Timpora Balikpapan</small></div>
-        <div class="ig-galeri-kaca">▶</div>
-      </div>
+  <div class="ig-galeri-item" data-kat="wasdakim" data-url="https://www.instagram.com/p/DRy_ve-D-mr/" onclick="bukaIgModal('https://www.instagram.com/p/DRy_ve-D-mr/')">
+    <div class="ig-galeri-placeholder"><span>👮</span><small>Operasi gabungan Timpora Balikpapan</small></div>
+    <div class="ig-galeri-kaca">▶</div>
+  </div>
 
-      <div class="ig-galeri-item" data-kat="wasdakim" onclick="bukaIgModal('https://www.instagram.com/p/DXEk7DIGlyV/')">
-        <div class="ig-galeri-placeholder"><span>🔍</span><small>Operasi Wirawaspada</small></div>
-        <div class="ig-galeri-kaca">▶</div>
-      </div>
+  <div class="ig-galeri-item" data-kat="wasdakim" data-url="https://www.instagram.com/p/DXEk7DIGlyV/" onclick="bukaIgModal('https://www.instagram.com/p/DXEk7DIGlyV/')">
+    <div class="ig-galeri-placeholder"><span>🔍</span><small>Operasi Wirawaspada</small></div>
+    <div class="ig-galeri-kaca">▶</div>
+  </div>
 
-      <!-- ── PENINDAKAN & DEPORTASI ── -->
-      <div class="ig-galeri-item" data-kat="deportasi" onclick="bukaIgModal('https://www.instagram.com/p/DQ6eKcbjy4z/')">
-        <div class="ig-galeri-placeholder"><span>🇦🇺</span><small>Deportasi WNA asal Australia</small></div>
-        <div class="ig-galeri-kaca">▶</div>
-      </div>
+  <div class="ig-galeri-item" data-kat="deportasi" data-url="https://www.instagram.com/p/DQ6eKcbjy4z/" onclick="bukaIgModal('https://www.instagram.com/p/DQ6eKcbjy4z/')">
+    <div class="ig-galeri-placeholder"><span>🇦🇺</span><small>Deportasi WNA asal Australia</small></div>
+    <div class="ig-galeri-kaca">▶</div>
+  </div>
 
-      <div class="ig-galeri-item" data-kat="deportasi" onclick="bukaIgModal('https://www.instagram.com/p/DRjPRPjj2Hv/')">
-        <div class="ig-galeri-placeholder"><span>🇨🇳</span><small>Deportasi dua WN RRT</small></div>
-        <div class="ig-galeri-kaca">▶</div>
-      </div>
+  <div class="ig-galeri-item" data-kat="deportasi" data-url="https://www.instagram.com/p/DRjPRPjj2Hv/" onclick="bukaIgModal('https://www.instagram.com/p/DRjPRPjj2Hv/')">
+    <div class="ig-galeri-placeholder"><span>🇨🇳</span><small>Deportasi dua WN RRT</small></div>
+    <div class="ig-galeri-kaca">▶</div>
+  </div>
 
-      <div class="ig-galeri-item" data-kat="deportasi" onclick="bukaIgModal('https://www.instagram.com/p/DR1VO83D4RI/')">
-        <div class="ig-galeri-placeholder"><span>🇹🇭</span><small>Deportasi WN Thailand</small></div>
-        <div class="ig-galeri-kaca">▶</div>
-      </div>
+  <div class="ig-galeri-item" data-kat="deportasi" data-url="https://www.instagram.com/p/DR1VO83D4RI/" onclick="bukaIgModal('https://www.instagram.com/p/DR1VO83D4RI/')">
+    <div class="ig-galeri-placeholder"><span>🇹🇭</span><small>Deportasi WN Thailand</small></div>
+    <div class="ig-galeri-kaca">▶</div>
+  </div>
 
-      <div class="ig-galeri-item" data-kat="deportasi" onclick="bukaIgModal('https://www.instagram.com/p/DSCzOKaj_pG/')">
-        <div class="ig-galeri-placeholder"><span>🇰🇷</span><small>Pemindahan WN Korea ke Rudenim</small></div>
-        <div class="ig-galeri-kaca">▶</div>
-      </div>
+  <div class="ig-galeri-item" data-kat="deportasi" data-url="https://www.instagram.com/p/DSCzOKaj_pG/" onclick="bukaIgModal('https://www.instagram.com/p/DSCzOKaj_pG/')">
+    <div class="ig-galeri-placeholder"><span>🇰🇷</span><small>Pemindahan WN Korea ke Rudenim</small></div>
+    <div class="ig-galeri-kaca">▶</div>
+  </div>
 
-      <div class="ig-galeri-item" data-kat="deportasi" onclick="bukaIgModal('https://www.instagram.com/p/DXEjFM5mrQf/')">
-        <div class="ig-galeri-placeholder"><span>🤲</span><small>Penanganan WNA secara humanis</small></div>
-        <div class="ig-galeri-kaca">▶</div>
-      </div>
+  <div class="ig-galeri-item" data-kat="deportasi" data-url="https://www.instagram.com/p/DXEjFM5mrQf/" onclick="bukaIgModal('https://www.instagram.com/p/DXEjFM5mrQf/')">
+    <div class="ig-galeri-placeholder"><span>🤲</span><small>Penanganan WNA secara humanis</small></div>
+    <div class="ig-galeri-kaca">▶</div>
+  </div>
 
-      <div class="ig-galeri-item" data-kat="deportasi" onclick="bukaIgModal('https://www.instagram.com/p/DXNqlDyjw_a/')">
-        <div class="ig-galeri-placeholder"><span>🇨🇳</span><small>Deportasi WNA asal Tiongkok</small></div>
-        <div class="ig-galeri-kaca">▶</div>
-      </div>
+  <div class="ig-galeri-item" data-kat="deportasi" data-url="https://www.instagram.com/p/DXNqlDyjw_a/" onclick="bukaIgModal('https://www.instagram.com/p/DXNqlDyjw_a/')">
+    <div class="ig-galeri-placeholder"><span>🇨🇳</span><small>Deportasi WNA asal Tiongkok</small></div>
+    <div class="ig-galeri-kaca">▶</div>
+  </div>
 
-    </div><!-- /ig-galeri-grid -->
+</div><!-- /ig-galeri-grid -->
 
   </div>
 </section>
@@ -1680,7 +1748,8 @@ function buka(id) {
   document.querySelectorAll('.nb-btn').forEach(b => b.classList.remove('aktif'));
 
   const target = document.getElementById(id);
-  if (target) { target.classList.add('tampil'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  iif (target) { target.classList.add('tampil');
+    if (id === 'media') muatThumbnail(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
   const i = petaNav.indexOf(id);
   const btns = document.querySelectorAll('.nb-btn');
