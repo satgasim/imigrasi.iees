@@ -500,6 +500,29 @@ footer .em { color: var(--emas); }
 .flow-2kol { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
 .flow-2kol .sub-judul { color: var(--emas); font-size: 15px; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
 
+/* ─── SLIDESHOW ─────────────────────────────────────────── */
+.slide-bg { position: absolute; inset: 0; z-index: 0; }
+.slide-item {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  opacity: 0; transition: opacity 1.2s ease-in-out;
+}
+.slide-item.aktif { opacity: 1; }
+.slide-overlay {
+  position: absolute; inset: 0;
+  background: rgba(10,20,38,.62); z-index: 1;
+}
+.slide-dots {
+  position: absolute; bottom: 156px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; gap: 10px; z-index: 3;
+}
+.slide-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: rgba(255,255,255,.35); border: none; cursor: pointer;
+  transition: all .3s;
+}
+.slide-dot.aktif { background: var(--emas); transform: scale(1.4); }
 /* ─── RESPONSIF ──────────────────────────────────────────── */
 @media (max-width: 900px) {
   .nb-links { display: none; }
@@ -581,8 +604,28 @@ footer .em { color: var(--emas); }
 ════════════════════════════════════════════════════════════ -->
 <section id="beranda" class="halaman tampil">
   <div class="hero">
-    <div class="hero-kisi"></div>
-    <div class="hero-cahaya"></div>
+    <!-- ═══ SLIDESHOW BERANDA ═══════════════════════════════════
+     Cara ganti gambar:
+     1. Upload foto ke Google Drive → set sharing publik
+     2. Ambil FILE_ID dari URL Drive
+     3. Tempel di: url('https://drive.google.com/thumbnail?id=FILE_ID&sz=w1920')
+     4. Tambah slide baru dengan copy blok .slide-item
+     ══════════════════════════════════════════════════════ -->
+<div class="slide-bg" id="slideBg">
+  <div class="slide-item aktif" style="background-image:url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80')"></div>
+  <div class="slide-item" style="background-image:url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=80')"></div>
+  <div class="slide-item" style="background-image:url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1920&q=80')"></div>
+  <div class="slide-item" style="background-image:url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&q=80')"></div>
+</div>
+<div class="slide-overlay"></div>
+<div class="hero-kisi" style="z-index:1;"></div>
+
+<div class="slide-dots" id="slideDots">
+  <button class="slide-dot aktif" onclick="gantiSlide(0)"></button>
+  <button class="slide-dot" onclick="gantiSlide(1)"></button>
+  <button class="slide-dot" onclick="gantiSlide(2)"></button>
+  <button class="slide-dot" onclick="gantiSlide(3)"></button>
+</div>
     <div class="hero-isi">
       <div class="hero-badge">⚡ Indonesia Energy &amp; Engineering Series 2026</div>
       <div class="hero-logo">🛂</div>
@@ -1415,6 +1458,22 @@ const dataLb = {
   ]
 };
 
+/* ══════════════════════════════════════════════════════════
+   SLIDESHOW BERANDA
+   Ganti angka 5000 untuk ubah kecepatan (dalam milidetik)
+   5000 = 5 detik, 3000 = 3 detik, 7000 = 7 detik
+   ══════════════════════════════════════════════════════════ */
+let slideIdx = 0;
+function gantiSlide(idx) {
+  const items = document.querySelectorAll('.slide-item');
+  const dots  = document.querySelectorAll('.slide-dot');
+  slideIdx = (idx + items.length) % items.length;
+  items.forEach(s => s.classList.remove('aktif'));
+  dots.forEach(d  => d.classList.remove('aktif'));
+  items[slideIdx].classList.add('aktif');
+  if (dots[slideIdx]) dots[slideIdx].classList.add('aktif');
+}
+setInterval(() => gantiSlide(slideIdx + 1), 5000);
 /* ══════════════════════════════════════════════════════════
    PETA NAV BUTTON  (urutan sesuai tampilan navbar)
    ══════════════════════════════════════════════════════════ */
