@@ -534,6 +534,32 @@ footer .em { color: var(--emas); }
   transition: all .3s;
 }
 .slide-dot.aktif { background: var(--emas); transform: scale(1.4); }
+
+/* ─── MODAL INSTAGRAM ───────────────────────────────────── */
+#ig-modal {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.88); z-index: 8000;
+  align-items: center; justify-content: center;
+}
+#ig-modal.buka { display: flex; }
+.ig-modal-box {
+  position: relative;
+  width: min(480px, 92vw);
+}
+.ig-modal-tutup {
+  position: absolute; top: -44px; right: 0;
+  background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.3);
+  color: white; width: 38px; height: 38px; border-radius: 50%;
+  cursor: pointer; font-size: 18px; display: flex;
+  align-items: center; justify-content: center; transition: all .2s;
+}
+.ig-modal-tutup:hover { background: var(--merah); border-color: var(--merah); }
+#ig-iframe {
+  width: 100%; height: 680px; border: none;
+  border-radius: 14px; background: white;
+  display: block;
+}
+
 /* ─── RESPONSIF ──────────────────────────────────────────── */
 @media (max-width: 900px) {
   .nb-links { display: none; }
@@ -1119,38 +1145,38 @@ footer .em { color: var(--emas); }
     <div class="ig-grid">
 
       <!-- Post 1 — [GANTI_INI] ganti [LINK_IG_POST_1] dengan URL post Instagram -->
-      <a class="ig-post" href="https://instagram.com/p/[LINK_IG_POST_1]" target="_blank">
+      <a class="ig-post" onclick="bukaIgModal('https://www.instagram.com/p/DZMUBjzvEwM/')">
         <!-- Tambahkan tag img di sini setelah upload screenshot -->
         <span class="ig-post-ikon">📋</span>
         <span class="ig-post-label">Info Visa Terbaru</span>
       </a>
 
       <!-- Post 2 — [GANTI_INI] -->
-      <a class="ig-post" href="https://instagram.com/p/[LINK_IG_POST_2]" target="_blank">
+      <a class="ig-post" onclick="bukaIgModal('https://www.instagram.com/p/POST_ID/')">
         <span class="ig-post-ikon">🌐</span>
         <span class="ig-post-label">Layanan Online Imigrasi</span>
       </a>
 
       <!-- Post 3 — [GANTI_INI] -->
-      <a class="ig-post" href="https://instagram.com/p/[LINK_IG_POST_3]" target="_blank">
+      <a class="ig-post" onclick="bukaIgModal('https://www.instagram.com/p/DZAFACmzm_J/')">
         <span class="ig-post-ikon">📍</span>
         <span class="ig-post-label">Pelaporan Orang Asing</span>
       </a>
 
       <!-- Post 4 — [GANTI_INI] -->
-      <a class="ig-post" href="https://instagram.com/p/[LINK_IG_POST_4]" target="_blank">
+      <a class="ig-post" onclick="bukaIgModal('https://www.instagram.com/p/POST_ID/')">
         <span class="ig-post-ikon">✈️</span>
         <span class="ig-post-label">Tips Permohonan Visa</span>
       </a>
 
       <!-- Post 5 — [GANTI_INI] -->
-      <a class="ig-post" href="https://instagram.com/p/[LINK_IG_POST_5]" target="_blank">
+      <a class="ig-post" onclick="bukaIgModal('https://www.instagram.com/p/DZGsyx0jwzD/')">
         <span class="ig-post-ikon">🏆</span>
         <span class="ig-post-label">Prestasi &amp; Inovasi</span>
       </a>
 
       <!-- Post 6 — [GANTI_INI] -->
-      <a class="ig-post" href="https://instagram.com/p/[LINK_IG_POST_6]" target="_blank">
+      <a class="ig-post" onclick="bukaIgModal('https://www.instagram.com/p/POST_ID/')">
         <span class="ig-post-ikon">📢</span>
         <span class="ig-post-label">Pengumuman Penting</span>
       </a>
@@ -1325,6 +1351,14 @@ footer .em { color: var(--emas); }
   </div>
 </section>
 
+<!-- MODAL INSTAGRAM -->
+<div id="ig-modal" onclick="tutupIgModal(event)">
+  <div class="ig-modal-box">
+    <button class="ig-modal-tutup" onclick="tutupIgModal()">✕</button>
+    <iframe id="ig-iframe" src="" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+  </div>
+</div>
+   
 <!-- ═══════════════════════════════════════════════════════════
      JAVASCRIPT
 ════════════════════════════════════════════════════════════ -->
@@ -1379,6 +1413,27 @@ function gantiSlide(idx) {
   if (dots[slideIdx]) dots[slideIdx].classList.add('aktif');
 }
 setInterval(() => gantiSlide(slideIdx + 1), 5000);
+
+/* ══════════════════════════════════════════════════════════
+   MODAL INSTAGRAM
+   Cara pakai: ganti href di setiap .ig-post dengan
+   onclick="bukaIgModal('https://www.instagram.com/p/POST_ID/')"
+   Untuk Reels gunakan: https://www.instagram.com/reel/REEL_ID/
+   ══════════════════════════════════════════════════════════ */
+function bukaIgModal(url) {
+  const embedUrl = url.replace(/\/$/, '') + '/embed';
+  document.getElementById('ig-iframe').src = embedUrl;
+  document.getElementById('ig-modal').classList.add('buka');
+  document.body.style.overflow = 'hidden';
+}
+function tutupIgModal(e) {
+  if (!e || e.target.id === 'ig-modal') {
+    document.getElementById('ig-iframe').src = '';
+    document.getElementById('ig-modal').classList.remove('buka');
+    document.body.style.overflow = '';
+  }
+}
+   
 /* ══════════════════════════════════════════════════════════
    PETA NAV BUTTON  (urutan sesuai tampilan navbar)
    ══════════════════════════════════════════════════════════ */
