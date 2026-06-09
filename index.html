@@ -150,13 +150,20 @@ body {
 }
 
 .menu-utama {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 14px;
   max-width: 1020px;
   margin: 0 auto;
   padding: 0 40px 64px;
   position: relative; z-index: 1;
+}
+.menu-btn {
+  flex: 0 0 calc(25% - 14px);
+}
+@media (max-width: 900px) {
+  .menu-btn { flex: 0 0 calc(50% - 14px); }
 }
 .menu-btn {
   background: rgba(26,46,71,.85);
