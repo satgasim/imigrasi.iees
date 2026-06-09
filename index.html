@@ -722,8 +722,9 @@ async function muatThumbnail() {
 .ig-galeri-item[data-kat="deportasi"] .ig-galeri-placeholder { background: linear-gradient(135deg, #4a1010, #aa2020); }
 .ig-galeri-placeholder span { font-size: 24px; }
 .ig-galeri-placeholder small {
-  font-size: 10px; color: rgba(255,255,255,.85);
-  text-align: center; line-height: 1.3;
+  font-size: 15px; color: rgba(255,255,255,.95);
+  text-align: center; line-height: 1.4;
+  font-weight: 600; padding: 0 8px;
 }
 .ig-galeri-kaca {
   position: absolute; inset: 0;
@@ -1307,13 +1308,13 @@ async function muatThumbnail() {
   <div class="hal-header">
     <button class="kembali" onclick="buka('beranda')">← Kembali ke Beranda</button>
     <h2>🎬 MEDIA</h2>
-    <p>Konten informasi keimigrasian dari Instagram resmi @imigrasi_balikpapan · Klik untuk melihat</p>
+    <p>Materi informasi keimigrasian pad kanal Instagram resmi @imigrasi_balikpapan</p>
   </div>
   <div class="ktr">
 
     <div class="filter-row">
       <button class="filter-btn aktif" onclick="filterMedia(this,'semua')">Semua</button>
-      <button class="filter-btn" onclick="filterMedia(this,'visa')">Konten Visa</button>
+      <button class="filter-btn" onclick="filterMedia(this,'visa')">Visa dan Izin Tinggal</button>
       <button class="filter-btn" onclick="filterMedia(this,'wasdakim')">Wasdakim &amp; Operasi</button>
       <button class="filter-btn" onclick="filterMedia(this,'deportasi')">Penindakan &amp; Deportasi</button>
     </div>
@@ -1372,11 +1373,6 @@ async function muatThumbnail() {
 
   <div class="ig-galeri-item" data-kat="visa" data-url="https://www.instagram.com/p/DTwq1UbDyx_/" onclick="bukaIgModal('https://www.instagram.com/p/DTwq1UbDyx_/')">
     <div class="ig-galeri-placeholder"><span>👷</span><small>Working visa</small></div>
-    <div class="ig-galeri-kaca">▶</div>
-  </div>
-
-  <div class="ig-galeri-item" data-kat="visa" data-url="https://www.instagram.com/p/DV-ow9WD_v4/" onclick="bukaIgModal('https://www.instagram.com/p/DV-ow9WD_v4/')">
-    <div class="ig-galeri-placeholder"><span>🔔</span><small>Penutupan layanan visa</small></div>
     <div class="ig-galeri-kaca">▶</div>
   </div>
 
