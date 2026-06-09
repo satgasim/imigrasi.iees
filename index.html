@@ -577,6 +577,15 @@ footer .em { color: var(--emas); }
   display: block;
 }
 
+/* ── FILTER MEDIA ───────────────────────────────────────── */
+function filterMedia(btn, kat) {
+  document.querySelectorAll('.filter-row .filter-btn').forEach(b => b.classList.remove('aktif'));
+  btn.classList.add('aktif');
+  document.querySelectorAll('.ig-galeri-grid .ig-galeri-item').forEach(item => {
+    item.style.display = (kat === 'semua' || item.dataset.kat === kat) ? '' : 'none';
+  });
+}
+   
 /* ─── MODAL WEB ─────────────────────────────────────────── */
 #web-modal {
   display: none; position: fixed; inset: 0;
@@ -693,8 +702,7 @@ footer .em { color: var(--emas); }
     <button class="nb-btn" onclick="buka('visa')">✈️ Visa</button>
     <button class="nb-btn" onclick="buka('izin')">📋 Izin Tinggal</button>
     <button class="nb-btn" onclick="buka('pelaporan')">📍 Pelaporan OA</button>
-    <button class="nb-btn" onclick="buka('galeri')">📷 Galeri</button>
-    <button class="nb-btn" onclick="buka('medsos')">📱 Media Sosial</button>
+    <button class="nb-btn" onclick="buka('media')">🎬 Media</button>
     <button class="nb-btn" onclick="buka('unduh')">⬇️ Unduh</button>
   </div>
 </nav>
@@ -780,13 +788,9 @@ footer .em { color: var(--emas); }
       <span class="menu-ikon">📍</span>
       <span>PELAPORAN ORANG ASING</span>
     </button>
-    <button class="menu-btn" onclick="buka('galeri')">
-      <span class="menu-ikon">📸</span>
-      <span>GALERI INFORMASI</span>
-    </button>
-    <button class="menu-btn" onclick="buka('medsos')">
-      <span class="menu-ikon">📱</span>
-      <span>MEDIA SOSIAL</span>
+    <button class="menu-btn" onclick="buka('media')">
+      <span class="menu-ikon">🎬</span>
+      <span>MEDIA</span>
     </button>
     <button class="menu-btn" onclick="buka('unduh')">
       <span class="menu-ikon">⬇️</span>
@@ -1211,180 +1215,159 @@ footer .em { color: var(--emas); }
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════
-     GALERI INFORMASI
+     MEDIA
 ════════════════════════════════════════════════════════════ -->
-<section id="galeri" class="halaman">
+<section id="media" class="halaman">
   <div class="hal-header">
     <button class="kembali" onclick="buka('beranda')">← Kembali ke Beranda</button>
-    <h2>📸 GALERI INFORMASI</h2>
-    <p>Konten informasi keimigrasian · Klik untuk melihat</p>
+    <h2>🎬 MEDIA</h2>
+    <p>Konten informasi keimigrasian dari Instagram resmi @imigrasi_balikpapan · Klik untuk melihat</p>
   </div>
   <div class="ktr">
-    <div class="chips" style="margin-bottom:20px">
-      <span class="chip e">IEE Series Balikpapan 2026</span>
-      <span class="chip">Layanan Migas &amp; Tambang</span>
-      <span class="chip">Edukasi Keimigrasian</span>
+
+    <div class="filter-row">
+      <button class="filter-btn aktif" onclick="filterMedia(this,'semua')">Semua</button>
+      <button class="filter-btn" onclick="filterMedia(this,'visa')">Konten Visa</button>
+      <button class="filter-btn" onclick="filterMedia(this,'wasdakim')">Wasdakim &amp; Operasi</button>
+      <button class="filter-btn" onclick="filterMedia(this,'deportasi')">Penindakan &amp; Deportasi</button>
     </div>
 
-    <!--
-      CARA UPDATE GALERI INFORMASI:
-      Setiap item butuh 2 hal:
-      1. Thumbnail → screenshot post IG, upload Drive, ambil FILE_ID
-         Ganti div.ig-galeri-placeholder dengan:
-         <img src="https://drive.google.com/thumbnail?id=FILE_ID&sz=w400" alt="">
-      2. Link post Instagram di onclick:
-         onclick="bukaIgModal('https://www.instagram.com/p/POST_ID/')"
-         onclick="bukaIgModal('https://www.instagram.com/reel/REEL_ID/')"
-    -->
     <div class="ig-galeri-grid">
 
-      <div class="ig-galeri-item" onclick="bukaIgModal('https://www.instagram.com/p/[POST_ID_1]/')">
-        <div class="ig-galeri-placeholder"><span>📋</span><small>Layanan Visa TKA</small></div>
+      <!-- ── KONTEN VISA ── -->
+      <div class="ig-galeri-item" data-kat="visa" onclick="bukaIgModal('https://www.instagram.com/p/DP0GWWlEhar/')">
+        <div class="ig-galeri-placeholder"><span>✈️</span><small>5 types of tourism visa</small></div>
         <div class="ig-galeri-kaca">▶</div>
       </div>
 
-      <div class="ig-galeri-item" onclick="bukaIgModal('https://www.instagram.com/p/[POST_ID_2]/')">
-        <div class="ig-galeri-placeholder"><span>⚓</span><small>Visa Lepas Pantai</small></div>
+      <div class="ig-galeri-item" data-kat="visa" onclick="bukaIgModal('https://www.instagram.com/p/DGzbIShPKbi/')">
+        <div class="ig-galeri-placeholder"><span>🌏</span><small>97 countries eligible for VoA</small></div>
         <div class="ig-galeri-kaca">▶</div>
       </div>
 
-      <div class="ig-galeri-item" onclick="bukaIgModal('https://www.instagram.com/p/[POST_ID_3]/')">
-        <div class="ig-galeri-placeholder"><span>💎</span><small>Golden Visa Investor</small></div>
+      <div class="ig-galeri-item" data-kat="visa" onclick="bukaIgModal('https://www.instagram.com/p/DIQE6lhvb-E/')">
+        <div class="ig-galeri-placeholder"><span>🛬</span><small>Visa on Arrival</small></div>
         <div class="ig-galeri-kaca">▶</div>
       </div>
 
-      <div class="ig-galeri-item" onclick="bukaIgModal('https://www.instagram.com/p/[POST_ID_4]/')">
-        <div class="ig-galeri-placeholder"><span>🔵</span><small>Prosedur ITAS</small></div>
+      <div class="ig-galeri-item" data-kat="visa" onclick="bukaIgModal('https://www.instagram.com/p/DKYeA1iPsUp/')">
+        <div class="ig-galeri-placeholder"><span>🖥️</span><small>Online registration office verification</small></div>
         <div class="ig-galeri-kaca">▶</div>
       </div>
 
-      <div class="ig-galeri-item" onclick="bukaIgModal('https://www.instagram.com/p/[POST_ID_5]/')">
-        <div class="ig-galeri-placeholder"><span>🔄</span><small>Perpanjangan Izin</small></div>
+      <div class="ig-galeri-item" data-kat="visa" onclick="bukaIgModal('https://www.instagram.com/p/DLgoNjmRhRY/')">
+        <div class="ig-galeri-placeholder"><span>📋</span><small>Indonesia new visa classifications</small></div>
         <div class="ig-galeri-kaca">▶</div>
       </div>
 
-      <div class="ig-galeri-item" onclick="bukaIgModal('https://www.instagram.com/p/[POST_ID_6]/')">
-        <div class="ig-galeri-placeholder"><span>📍</span><small>Pelaporan via APOA</small></div>
+      <div class="ig-galeri-item" data-kat="visa" onclick="bukaIgModal('https://www.instagram.com/p/DPSjVoVkhHL/')">
+        <div class="ig-galeri-placeholder"><span>🇮🇩</span><small>Enter with all Indonesia</small></div>
         <div class="ig-galeri-kaca">▶</div>
       </div>
 
-      <div class="ig-galeri-item" onclick="bukaIgModal('https://www.instagram.com/p/[POST_ID_7]/')">
-        <div class="ig-galeri-placeholder"><span>🏢</span><small>Kewajiban Perusahaan</small></div>
+      <div class="ig-galeri-item" data-kat="visa" onclick="bukaIgModal('https://www.instagram.com/p/DQYF0R2D3vc/')">
+        <div class="ig-galeri-placeholder"><span>🎓</span><small>Visa education</small></div>
         <div class="ig-galeri-kaca">▶</div>
       </div>
 
-      <div class="ig-galeri-item" onclick="bukaIgModal('https://www.instagram.com/p/[POST_ID_8]/')">
-        <div class="ig-galeri-placeholder"><span>💼</span><small>Visa Kunjungan Bisnis</small></div>
+      <div class="ig-galeri-item" data-kat="visa" onclick="bukaIgModal('https://www.instagram.com/p/DQ8acCfj8fk/')">
+        <div class="ig-galeri-placeholder"><span>🎭</span><small>Visa performer / artist edition</small></div>
         <div class="ig-galeri-kaca">▶</div>
       </div>
 
-      <div class="ig-galeri-item" onclick="bukaIgModal('https://www.instagram.com/p/[POST_ID_9]/')">
-        <div class="ig-galeri-placeholder"><span>🔧</span><small>Visa Pemasangan Mesin</small></div>
+      <div class="ig-galeri-item" data-kat="visa" onclick="bukaIgModal('https://www.instagram.com/p/DRgbBK3D6kc/')">
+        <div class="ig-galeri-placeholder"><span>💎</span><small>Visa investment edition</small></div>
         <div class="ig-galeri-kaca">▶</div>
       </div>
 
-      <div class="ig-galeri-item" onclick="bukaIgModal('https://www.instagram.com/p/[POST_ID_10]/')">
-        <div class="ig-galeri-placeholder"><span>⚠️</span><small>Sanksi Overstay</small></div>
+      <div class="ig-galeri-item" data-kat="visa" onclick="bukaIgModal('https://www.instagram.com/p/DTM6YuRjzMZ/')">
+        <div class="ig-galeri-placeholder"><span>💼</span><small>Business visa</small></div>
         <div class="ig-galeri-kaca">▶</div>
       </div>
 
-      <!-- Copy blok di atas untuk tambah item baru -->
+      <div class="ig-galeri-item" data-kat="visa" onclick="bukaIgModal('https://www.instagram.com/p/DTwq1UbDyx_/')">
+        <div class="ig-galeri-placeholder"><span>👷</span><small>Working visa</small></div>
+        <div class="ig-galeri-kaca">▶</div>
+      </div>
+
+      <div class="ig-galeri-item" data-kat="visa" onclick="bukaIgModal('https://www.instagram.com/p/DV-ow9WD_v4/')">
+        <div class="ig-galeri-placeholder"><span>🔔</span><small>Penutupan layanan visa</small></div>
+        <div class="ig-galeri-kaca">▶</div>
+      </div>
+
+      <div class="ig-galeri-item" data-kat="visa" onclick="bukaIgModal('https://www.instagram.com/p/DW2p0B_j7rq/')">
+        <div class="ig-galeri-placeholder"><span>🏘️</span><small>Penjelasan desa binaan</small></div>
+        <div class="ig-galeri-kaca">▶</div>
+      </div>
+
+      <div class="ig-galeri-item" data-kat="visa" onclick="bukaIgModal('https://www.instagram.com/p/DXIhuuCk_V1/')">
+        <div class="ig-galeri-placeholder"><span>🚫</span><small>Immigration violation &amp; deportation</small></div>
+        <div class="ig-galeri-kaca">▶</div>
+      </div>
+
+      <div class="ig-galeri-item" data-kat="visa" onclick="bukaIgModal('https://www.instagram.com/p/DXszCmUj2jp/')">
+        <div class="ig-galeri-placeholder"><span>🤝</span><small>What sponsor mean for foreigners</small></div>
+        <div class="ig-galeri-kaca">▶</div>
+      </div>
+
+      <div class="ig-galeri-item" data-kat="visa" onclick="bukaIgModal('https://www.instagram.com/p/DZGsyx0jwzD/')">
+        <div class="ig-galeri-placeholder"><span>💰</span><small>Biaya PNBP visa &amp; izin tinggal</small></div>
+        <div class="ig-galeri-kaca">▶</div>
+      </div>
+
+      <!-- ── WASDAKIM & OPERASI ── -->
+      <div class="ig-galeri-item" data-kat="wasdakim" onclick="bukaIgModal('https://www.instagram.com/p/DYmHag8GjSu/')">
+        <div class="ig-galeri-placeholder"><span>🏛️</span><small>Imigrasi Balikpapan perkuat peran PIMPASA</small></div>
+        <div class="ig-galeri-kaca">▶</div>
+      </div>
+
+      <div class="ig-galeri-item" data-kat="wasdakim" onclick="bukaIgModal('https://www.instagram.com/p/DYwTvkkmtl0/')">
+        <div class="ig-galeri-placeholder"><span>📡</span><small>Permenimipas 7 — intelijen keimigrasian</small></div>
+        <div class="ig-galeri-kaca">▶</div>
+      </div>
+
+      <div class="ig-galeri-item" data-kat="wasdakim" onclick="bukaIgModal('https://www.instagram.com/p/DRy_ve-D-mr/')">
+        <div class="ig-galeri-placeholder"><span>👮</span><small>Operasi gabungan Timpora Balikpapan</small></div>
+        <div class="ig-galeri-kaca">▶</div>
+      </div>
+
+      <div class="ig-galeri-item" data-kat="wasdakim" onclick="bukaIgModal('https://www.instagram.com/p/DXEk7DIGlyV/')">
+        <div class="ig-galeri-placeholder"><span>🔍</span><small>Operasi Wirawaspada</small></div>
+        <div class="ig-galeri-kaca">▶</div>
+      </div>
+
+      <!-- ── PENINDAKAN & DEPORTASI ── -->
+      <div class="ig-galeri-item" data-kat="deportasi" onclick="bukaIgModal('https://www.instagram.com/p/DQ6eKcbjy4z/')">
+        <div class="ig-galeri-placeholder"><span>🇦🇺</span><small>Deportasi WNA asal Australia</small></div>
+        <div class="ig-galeri-kaca">▶</div>
+      </div>
+
+      <div class="ig-galeri-item" data-kat="deportasi" onclick="bukaIgModal('https://www.instagram.com/p/DRjPRPjj2Hv/')">
+        <div class="ig-galeri-placeholder"><span>🇨🇳</span><small>Deportasi dua WN RRT</small></div>
+        <div class="ig-galeri-kaca">▶</div>
+      </div>
+
+      <div class="ig-galeri-item" data-kat="deportasi" onclick="bukaIgModal('https://www.instagram.com/p/DR1VO83D4RI/')">
+        <div class="ig-galeri-placeholder"><span>🇹🇭</span><small>Deportasi WN Thailand</small></div>
+        <div class="ig-galeri-kaca">▶</div>
+      </div>
+
+      <div class="ig-galeri-item" data-kat="deportasi" onclick="bukaIgModal('https://www.instagram.com/p/DSCzOKaj_pG/')">
+        <div class="ig-galeri-placeholder"><span>🇰🇷</span><small>Pemindahan WN Korea ke Rudenim</small></div>
+        <div class="ig-galeri-kaca">▶</div>
+      </div>
+
+      <div class="ig-galeri-item" data-kat="deportasi" onclick="bukaIgModal('https://www.instagram.com/p/DXEjFM5mrQf/')">
+        <div class="ig-galeri-placeholder"><span>🤲</span><small>Penanganan WNA secara humanis</small></div>
+        <div class="ig-galeri-kaca">▶</div>
+      </div>
+
+      <div class="ig-galeri-item" data-kat="deportasi" onclick="bukaIgModal('https://www.instagram.com/p/DXNqlDyjw_a/')">
+        <div class="ig-galeri-placeholder"><span>🇨🇳</span><small>Deportasi WNA asal Tiongkok</small></div>
+        <div class="ig-galeri-kaca">▶</div>
+      </div>
 
     </div><!-- /ig-galeri-grid -->
-
-    <div class="panduan-box">
-      <p>💡 <strong>Cara update:</strong> Screenshot post Instagram → upload ke Google Drive → ambil FILE_ID → ganti <code>div.ig-galeri-placeholder</code> dengan <code>&lt;img src="https://drive.google.com/thumbnail?id=FILE_ID&sz=w400"&gt;</code>. Ganti <code>[POST_ID]</code> di onclick dengan ID post Instagram yang sesuai.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════
-     MEDIA SOSIAL
-════════════════════════════════════════════════════════════ -->
-<section id="medsos" class="halaman">
-  <div class="hal-header">
-    <button class="kembali" onclick="buka('beranda')">← Kembali ke Beranda</button>
-    <h2>📱 MEDIA SOSIAL</h2>
-    <p>Konten terbaru dari akun Instagram resmi kami</p>
-  </div>
-  <div class="ktr">
-
-    <div class="ig-profil">
-      <div class="ig-avatar">📸</div>
-      <div class="ig-profil-info">
-        <!-- [GANTI_INI] Nama akun dan deskripsi -->
-        <h3>@imigrasi_balikpapan</h3>
-        <p>Kantor Imigrasi Kelas I TPI Balikpapan</p>
-        <p>Ikuti kami untuk info layanan, kebijakan terbaru, dan konten edukasi keimigrasian.</p>
-      </div>
-      <!-- [GANTI_INI] Ganti [nama_akun_instagram] dengan username tanpa @ -->
-      <a class="btn-ig" href="https://instagram.com/imigrasi_balikpapan" target="_blank">Buka Instagram ↗</a>
-    </div>
-
-    <h3 class="judul-seksi">Konten Terbaru</h3>
-    <!--
-      ════════════════════════════════════════════════════
-      CARA UPDATE POST INSTAGRAM (tanpa coding):
-      
-      Untuk setiap kotak ig-post:
-      1. Screenshot konten Instagram terbaru
-      2. Upload screenshot ke Google Drive, set publik
-      3. Ambil FILE_ID dari URL Google Drive
-      4. Tambahkan tag img di dalam .ig-post:
-         <img src="https://drive.google.com/thumbnail?id=[FILE_ID]&sz=w400" alt="Post IG">
-      5. Ubah href ke URL post Instagram yang sesuai:
-         https://www.instagram.com/p/[POST_ID]/
-      ════════════════════════════════════════════════════
-    -->
-    <div class="ig-grid">
-
-      <!-- Post 1 — [GANTI_INI] ganti [LINK_IG_POST_1] dengan URL post Instagram -->
-      <a class="ig-post" onclick="bukaIgModal('https://www.instagram.com/p/DZMUBjzvEwM/')">
-        <!-- Tambahkan tag img di sini setelah upload screenshot -->
-        <span class="ig-post-ikon">📋</span>
-        <span class="ig-post-label">Info Visa Terbaru</span>
-      </a>
-
-      <!-- Post 2 — [GANTI_INI] -->
-      <a class="ig-post" onclick="bukaIgModal('https://www.instagram.com/p/POST_ID/')">
-        <span class="ig-post-ikon">🌐</span>
-        <span class="ig-post-label">Layanan Online Imigrasi</span>
-      </a>
-
-      <!-- Post 3 — [GANTI_INI] -->
-      <a class="ig-post" onclick="bukaIgModal('https://www.instagram.com/p/DZAFACmzm_J/')">
-        <span class="ig-post-ikon">📍</span>
-        <span class="ig-post-label">Pelaporan Orang Asing</span>
-      </a>
-
-      <!-- Post 4 — [GANTI_INI] -->
-      <a class="ig-post" onclick="bukaIgModal('https://www.instagram.com/p/POST_ID/')">
-        <span class="ig-post-ikon">✈️</span>
-        <span class="ig-post-label">Tips Permohonan Visa</span>
-      </a>
-
-      <!-- Post 5 — [GANTI_INI] -->
-      <a class="ig-post" onclick="bukaIgModal('https://www.instagram.com/p/DZGsyx0jwzD/')">
-        <span class="ig-post-ikon">🏆</span>
-        <span class="ig-post-label">Prestasi &amp; Inovasi</span>
-      </a>
-
-      <!-- Post 6 — [GANTI_INI] -->
-      <a class="ig-post" onclick="bukaIgModal('https://www.instagram.com/p/POST_ID/')">
-        <span class="ig-post-ikon">📢</span>
-        <span class="ig-post-label">Pengumuman Penting</span>
-      </a>
-
-    </div><!-- /ig-grid -->
-
-    <div class="panduan-box">
-      <p>💡 <strong>Cara update post Instagram:</strong><br>
-      1. Screenshot konten IG terbaru (Ctrl+PrtScr atau screenshot HP)<br>
-      2. Upload ke Google Drive → klik kanan → <strong>Get link</strong> → set Anyone with link<br>
-      3. Copy FILE_ID dari URL → tempel di <code>src="...id=FILE_ID..."</code> di dalam tag <code>.ig-post</code><br>
-      4. Ganti <code>href</code> ke link post Instagram yang sesuai<br>
-      5. Simpan file → refresh browser. Selesai.</p>
-    </div>
 
   </div>
 </section>
@@ -1688,7 +1671,7 @@ function tutupIgModal(e) {
 /* ══════════════════════════════════════════════════════════
    PETA NAV BUTTON  (urutan sesuai tampilan navbar)
    ══════════════════════════════════════════════════════════ */
-const petaNav = ['beranda','visa','izin','pelaporan','galeri','medsos','unduh'];
+const petaNav = ['beranda','visa','izin','pelaporan','media','unduh'];
 let sesiLbAktif = [], idxLb = 0;
 
 /* ─── NAVIGASI HALAMAN ───────────────────────────────────── */
