@@ -559,7 +559,6 @@ footer .em { color: var(--emas); }
     <button class="nb-btn" onclick="buka('visa')">✈️ Visa</button>
     <button class="nb-btn" onclick="buka('izin')">📋 Izin Tinggal</button>
     <button class="nb-btn" onclick="buka('pelaporan')">📍 Pelaporan OA</button>
-    <button class="nb-btn" onclick="buka('infografis')">📊 Infografis</button>
     <button class="nb-btn" onclick="buka('galeri')">📷 Galeri</button>
     <button class="nb-btn" onclick="buka('medsos')">📱 Media Sosial</button>
     <button class="nb-btn" onclick="buka('unduh')">⬇️ Unduh</button>
@@ -648,10 +647,6 @@ footer .em { color: var(--emas); }
     <button class="menu-btn" onclick="buka('pelaporan')">
       <span class="menu-ikon">📍</span>
       <span>PELAPORAN ORANG ASING</span>
-    </button>
-    <button class="menu-btn" onclick="buka('infografis')">
-      <span class="menu-ikon">📊</span>
-      <span>INFOGRAFIS</span>
     </button>
     <button class="menu-btn" onclick="buka('galeri')">
       <span class="menu-ikon">📷</span>
@@ -986,108 +981,6 @@ footer .em { color: var(--emas); }
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════
-     INFOGRAFIS
-════════════════════════════════════════════════════════════ -->
-<section id="infografis" class="halaman">
-  <div class="hal-header">
-    <button class="kembali" onclick="buka('beranda')">← Kembali ke Beranda</button>
-    <h2>📊 INFOGRAFIS</h2>
-    <p>Materi visual keimigrasian · Klik gambar untuk memperbesar</p>
-  </div>
-  <div class="ktr">
-    <div class="filter-row">
-      <button class="filter-btn aktif" onclick="filterInfogr(this,'semua')">Semua</button>
-      <button class="filter-btn" onclick="filterInfogr(this,'visa')">Visa</button>
-      <button class="filter-btn" onclick="filterInfogr(this,'izin')">Izin Tinggal</button>
-      <button class="filter-btn" onclick="filterInfogr(this,'pelaporan')">Pelaporan OA</button>
-    </div>
-
-    <div class="grid-infogr" id="grid-infogr">
-      <!--
-        ════════════════════════════════════════════════════
-        CARA UPDATE INFOGRAFIS (tanpa coding):
-        
-        Untuk setiap item:
-        1. Upload gambar infografis ke Google Drive
-        2. Set sharing: "Anyone with the link can view"
-        3. Ambil FILE_ID dari URL:
-           drive.google.com/file/d/  →→FILE_ID←←  /view
-        4. Ganti bagian <img> di infogr-thumb:
-           Ganti: <span>📋</span>
-           Dengan: <img src="https://drive.google.com/thumbnail?id=FILE_ID&sz=w600" alt="nama">
-        5. Ganti teks label dan kategori (data-kat)
-        ════════════════════════════════════════════════════
-      -->
-
-      <!-- Infografis 1 — [GANTI_INI] -->
-      <div class="infogr-item" data-kat="visa" onclick="bukaLb(0,'infogr')">
-        <div class="infogr-thumb">
-          <span>📋</span>
-          <!-- Ganti span di atas dengan: <img src="https://drive.google.com/thumbnail?id=[FILE_ID]&sz=w600" alt="Infografis"> -->
-          <div class="infogr-kaca">🔍</div>
-        </div>
-        <div class="infogr-label"><span>VISA</span><h4>Alur Permohonan Visa Tinggal Terbatas</h4></div>
-      </div>
-
-      <!-- Infografis 2 — [GANTI_INI] -->
-      <div class="infogr-item" data-kat="visa" onclick="bukaLb(1,'infogr')">
-        <div class="infogr-thumb"><span>✈️</span><div class="infogr-kaca">🔍</div></div>
-        <div class="infogr-label"><span>VISA</span><h4>Jenis-Jenis Visa Indonesia</h4></div>
-      </div>
-
-      <!-- Infografis 3 — [GANTI_INI] -->
-      <div class="infogr-item" data-kat="visa" onclick="bukaLb(2,'infogr')">
-        <div class="infogr-thumb"><span>📝</span><div class="infogr-kaca">🔍</div></div>
-        <div class="infogr-label"><span>VISA</span><h4>Persyaratan Visa on Arrival (VoA)</h4></div>
-      </div>
-
-      <!-- Infografis 4 — [GANTI_INI] -->
-      <div class="infogr-item" data-kat="izin" onclick="bukaLb(3,'infogr')">
-        <div class="infogr-thumb"><span>🔵</span><div class="infogr-kaca">🔍</div></div>
-        <div class="infogr-label"><span>IZIN TINGGAL</span><h4>Persyaratan ITAS Tenaga Kerja Asing</h4></div>
-      </div>
-
-      <!-- Infografis 5 — [GANTI_INI] -->
-      <div class="infogr-item" data-kat="izin" onclick="bukaLb(4,'infogr')">
-        <div class="infogr-thumb"><span>🟡</span><div class="infogr-kaca">🔍</div></div>
-        <div class="infogr-label"><span>IZIN TINGGAL</span><h4>Perbedaan ITAS dan ITAP</h4></div>
-      </div>
-
-      <!-- Infografis 6 — [GANTI_INI] -->
-      <div class="infogr-item" data-kat="izin" onclick="bukaLb(5,'infogr')">
-        <div class="infogr-thumb"><span>🔄</span><div class="infogr-kaca">🔍</div></div>
-        <div class="infogr-label"><span>IZIN TINGGAL</span><h4>Alur Perpanjangan Izin Tinggal</h4></div>
-      </div>
-
-      <!-- Infografis 7 — [GANTI_INI] -->
-      <div class="infogr-item" data-kat="pelaporan" onclick="bukaLb(6,'infogr')">
-        <div class="infogr-thumb"><span>📍</span><div class="infogr-kaca">🔍</div></div>
-        <div class="infogr-label"><span>PELAPORAN OA</span><h4>Siapa Saja yang Wajib Melapor?</h4></div>
-      </div>
-
-      <!-- Infografis 8 — [GANTI_INI] -->
-      <div class="infogr-item" data-kat="pelaporan" onclick="bukaLb(7,'infogr')">
-        <div class="infogr-thumb"><span>🌐</span><div class="infogr-kaca">🔍</div></div>
-        <div class="infogr-label"><span>PELAPORAN OA</span><h4>Cara Melapor via Aplikasi APOA</h4></div>
-      </div>
-
-      <!-- Infografis 9 — [GANTI_INI] -->
-      <div class="infogr-item" data-kat="pelaporan" onclick="bukaLb(8,'infogr')">
-        <div class="infogr-thumb"><span>⚠️</span><div class="infogr-kaca">🔍</div></div>
-        <div class="infogr-label"><span>PELAPORAN OA</span><h4>Sanksi Pelanggaran Keimigrasian</h4></div>
-      </div>
-
-      <!-- Tambah infografis baru dengan meng-copy salah satu blok di atas dan mengganti kontennya -->
-
-    </div><!-- /grid-infogr -->
-
-    <div class="panduan-box">
-      <p>💡 <strong>Cara menambah infografis:</strong> Copy salah satu blok <code>&lt;div class="infogr-item"&gt;</code> di atas. Ubah <code>data-kat</code> (visa / izin / pelaporan), judul, dan ganti emoji dengan tag <code>&lt;img src="..."&gt;</code> menggunakan link thumbnail Google Drive. Tambah angka index di <code>onclick="bukaLb(X,'infogr')"</code>, lalu tambah entri baru di array <code>dataLb.infogr</code> di bagian JavaScript.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════
      GALERI KEGIATAN
 ════════════════════════════════════════════════════════════ -->
 <section id="galeri" class="halaman">
@@ -1271,7 +1164,7 @@ footer .em { color: var(--emas); }
   <div class="hal-header">
     <button class="kembali" onclick="buka('beranda')">← Kembali ke Beranda</button>
     <h2>⬇️ UNDUH MATERI</h2>
-    <p>Dokumen, brosur, dan infografis resmi Kantor Imigrasi · Dapat dibaca langsung di browser</p>
+    <p>Dokumen resmi Kantor Imigrasi · Dapat dibaca langsung di browser</p>
   </div>
   <div class="ktr">
     <!--
@@ -1477,7 +1370,7 @@ setInterval(() => gantiSlide(slideIdx + 1), 5000);
 /* ══════════════════════════════════════════════════════════
    PETA NAV BUTTON  (urutan sesuai tampilan navbar)
    ══════════════════════════════════════════════════════════ */
-const petaNav = ['beranda','visa','izin','pelaporan','infografis','galeri','medsos','unduh'];
+const petaNav = ['beranda','visa','izin','pelaporan','galeri','medsos','unduh'];
 let sesiLbAktif = [], idxLb = 0;
 
 /* ─── NAVIGASI HALAMAN ───────────────────────────────────── */
