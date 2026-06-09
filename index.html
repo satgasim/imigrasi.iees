@@ -745,6 +745,12 @@ async function muatThumbnail() {
 @media (max-width: 900px) {
   .ig-galeri-grid { grid-template-columns: repeat(3, 1fr); }
 }
+
+/* ─── SISTEM BAHASA ─────────────────────────────────────── */
+.lang-toggle { display: none; }
+body.bilingual .lang-toggle { display: flex; }
+.goog-te-banner-frame, .goog-te-gadget { display: none !important; }
+body { top: 0 !important; }
    
 /* ─── RESPONSIF ──────────────────────────────────────────── */
 @media (max-width: 900px) {
@@ -1688,9 +1694,50 @@ async function muatThumbnail() {
   }
 }
 
+/* ═══════════════════════════════════════════════════════════
+   PENGATURAN BAHASA
+   ▶ Aktifkan  : ubah false → true
+   ▶ Nonaktifkan : ubah true → false
+   ═══════════════════════════════════════════════════════════ */
+const BAHASA_AKTIF = true;
+
+let langAktif = 'id';
+
+function googleTranslateElementInit() {
+  if (!BAHASA_AKTIF) return;
+  new google.translate.TranslateElement({
+    pageLanguage: 'id',
+    includedLanguages: 'en',
+    autoDisplay: false
+  }, 'gt-container');
+}
+
+function gantiBahasa(lang) {
+  if (!BAHASA_AKTIF) return;
+  langAktif = lang;
+  if (lang === 'en') {
+    const sel = document.querySelector('.goog-te-combo');
+    if (sel) { sel.value = 'en'; sel.dispatchEvent(new Event('change')); }
+  } else {
+    try {
+      document.querySelector('.goog-te-banner-frame')
+        ?.contentDocument.querySelector('#\\:1\\.restore')?.click();
+    } catch(e) { window.location.reload(); }
+  }
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('aktif'));
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    if (b.getAttribute('onclick') === `gantiBahasa('${lang}')`) b.classList.add('aktif');
+  });
+}
+
+if (BAHASA_AKTIF) document.body.classList.add('bilingual');
+   
 /* ── INIT ───────────────────────────────────────────────── */
 buka('beranda');
 </script>
 
+<div id="gt-container" style="display:none"></div>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+   
 </body>
 </html>
