@@ -934,31 +934,57 @@ footer .em { color: var(--emas); }
   <div class="hal-header">
     <button class="kembali" onclick="buka('beranda')">← Kembali ke Beranda</button>
     <h2>📋 IZIN TINGGAL</h2>
-    <p>ITAS, ITAP, dan perpanjangan izin tinggal untuk warga negara asing di Indonesia</p>
+    <p>ITK, ITAS, ITAP, dan alih status izin tinggal untuk warga negara asing di Indonesia</p>
   </div>
   <div class="ktr">
     <div class="kartu-grid">
+
+      <!-- ITK -->
+      <div class="kartu">
+        <div class="ikon">🟢</div>
+        <h3>ITK</h3>
+        <p class="sub">Izin Tinggal Kunjungan</p>
+        <p>Diberikan kepada WNA pemegang visa kunjungan, VoA, atau bebas visa untuk tinggal sementara di Indonesia.</p>
+        <div class="chips">
+          <span class="chip">30–180 hari</span>
+          <span class="chip e">Dapat diperpanjang</span>
+        </div>
+        <ul>
+          <li>Paspor atau dokumen perjalanan berlaku</li>
+          <li>Surat bukti penjaminan dari Penjamin</li>
+          <li>Surat pernyataan tujuan berada di Indonesia</li>
+        </ul>
+        <div style="margin-top:12px;font-size:12px;color:var(--redup)">
+          💰 ITK 30 hari: <strong style="color:var(--emas)">Rp500.000</strong> &nbsp;·&nbsp;
+          ITK 60 hari: <strong style="color:var(--emas)">Rp2.000.000</strong> &nbsp;·&nbsp;
+          ITK 180 hari: <strong style="color:var(--emas)">Rp6.000.000</strong>
+        </div>
+      </div>
+
+      <!-- ITAS -->
       <div class="kartu">
         <div class="ikon">🔵</div>
         <h3>ITAS</h3>
         <p class="sub">Izin Tinggal Terbatas</p>
-        <p>Diberikan kepada WNA yang tinggal sementara untuk tujuan tertentu: bekerja, berinvestasi, atau penyatuan keluarga.</p>
+        <p>Diberikan kepada TKA sektor migas, pertambangan, dan konstruksi yang bekerja atau berinvestasi di Indonesia.</p>
         <div class="chips">
           <span class="chip">Maks. 2 tahun</span>
           <span class="chip e">Dapat diperpanjang</span>
         </div>
         <ul>
-          <li>Sponsor perusahaan / instansi</li>
-          <li>Izin dari K/L terkait (KITAS)</li>
-          <li>Paspor berlaku min. 1,5 tahun</li>
+          <li>Sponsor perusahaan berbadan hukum</li>
+          <li>Izin dari Kementerian terkait</li>
+          <li>Paspor berlaku min. 18 bulan</li>
           <li>Foto biometrik</li>
         </ul>
       </div>
+
+      <!-- ITAP -->
       <div class="kartu">
         <div class="ikon">🟡</div>
         <h3>ITAP</h3>
         <p class="sub">Izin Tinggal Tetap</p>
-        <p>Diberikan kepada WNA yang telah tinggal secara terus-menerus dan memenuhi syarat untuk tinggal permanen.</p>
+        <p>Diberikan kepada WNA yang telah memegang ITAS minimal 3 tahun berturut-turut dan memenuhi syarat tinggal permanen.</p>
         <div class="chips">
           <span class="chip">5 tahun</span>
           <span class="chip e">Dapat diperpanjang</span>
@@ -970,62 +996,60 @@ footer .em { color: var(--emas); }
           <li>Wawancara petugas imigrasi</li>
         </ul>
       </div>
+
+      <!-- ALIH STATUS -->
       <div class="kartu">
         <div class="ikon">🔄</div>
-        <h3>Perpanjangan</h3>
-        <p class="sub">ITAS / ITAP / Kunjungan</p>
-        <p>Wajib diajukan sebelum izin tinggal habis masa berlakunya untuk menghindari denda overstay.</p>
+        <h3>Alih Status</h3>
+        <p class="sub">ITK → ITAS → ITAP</p>
+        <p>WNA dapat mengajukan alih status izin tinggal sesuai perubahan tujuan dan kebutuhan selama berada di Indonesia.</p>
         <div class="chips">
-          <span class="chip m">Paling lambat H-30</span>
+          <span class="chip">Sesuai permohonan</span>
+          <span class="chip e">Via Kantor Imigrasi</span>
         </div>
         <ul>
-          <li>Izin tinggal aktif</li>
-          <li>Paspor masih berlaku min. 6 bulan</li>
-          <li>Surat sponsor (jika ada)</li>
-          <li>Bukti pembayaran biaya PNBP</li>
+          <li>ITK → ITAS: perubahan tujuan ke kerja/investasi</li>
+          <li>ITAS → ITAP: tinggal min. 3 tahun berturut-turut</li>
+          <li>ITAP tanpa alih status: syarat khusus berlaku</li>
+          <li>Diajukan di Kantor Imigrasi setempat</li>
         </ul>
       </div>
+
     </div>
 
     <div class="pemisah"></div>
 
-    <h3 class="judul-seksi">Alur Perpanjangan ITAS</h3>
+    <h3 class="judul-seksi">Alur Perpanjangan Izin Tinggal</h3>
     <div class="flow">
       <div class="flow-step">
         <div class="flow-kiri"><div class="flow-lingkaran">1</div><div class="flow-garis"></div></div>
-        <div class="flow-isi"><h4>Ajukan Online via SIOLA</h4><p>Login ke sistem.imigrasi.go.id → pilih layanan perpanjangan ITAS → isi formulir → upload dokumen.</p></div>
+        <div class="flow-isi"><h4>Ajukan Permohonan</h4><p>Diajukan paling cepat 14 hari dan paling lambat sebelum izin tinggal berakhir melalui Kantor Imigrasi atau sistem elektronik.</p></div>
       </div>
       <div class="flow-step">
         <div class="flow-kiri"><div class="flow-lingkaran">2</div><div class="flow-garis"></div></div>
-        <div class="flow-isi"><h4>Pembayaran PNBP</h4><p>Bayar biaya negara bukan pajak sesuai tarif berlaku melalui bank atau e-payment yang tersedia.</p></div>
+        <div class="flow-isi"><h4>Pengambilan Foto Biometrik</h4><p>Pemohon hadir di Kantor Imigrasi untuk pengambilan foto dan data biometrik.</p></div>
       </div>
       <div class="flow-step">
         <div class="flow-kiri"><div class="flow-lingkaran">3</div><div class="flow-garis"></div></div>
-        <div class="flow-isi"><h4>Verifikasi Dokumen</h4><p>Petugas imigrasi memverifikasi kelengkapan dan keaslian dokumen yang diunggah.</p></div>
+        <div class="flow-isi"><h4>Pembayaran PNBP</h4><p>Bayar biaya imigrasi sesuai jenis izin tinggal melalui bank atau e-payment. Masa tinggal dihitung sejak pembayaran diterima.</p></div>
       </div>
       <div class="flow-step">
-        <div class="flow-kiri"><div class="flow-lingkaran">4</div></div>
-        <div class="flow-isi" style="margin-bottom:0"><h4>Pengambilan Kartu ITAS Baru</h4><p>Ambil kartu ITAS baru di loket Kantor Imigrasi dengan membawa bukti permohonan.</p></div>
+        <div class="flow-kiri"><div class="flow-lingkaran">4</div><div class="flow-garis"></div></div>
+        <div class="flow-isi"><h4>Verifikasi &amp; Persetujuan</h4><p>Kepala Kantor Imigrasi atau pejabat yang ditunjuk memverifikasi dan menyetujui permohonan. Proses maks. 3 hari kerja.</p></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-kiri"><div class="flow-lingkaran">5</div></div>
+        <div class="flow-isi" style="margin-bottom:0"><h4>Penerbitan Izin Tinggal</h4><p>Izin tinggal diterbitkan dan dikirimkan secara elektronik atau dapat diambil langsung di Kantor Imigrasi.</p></div>
       </div>
     </div>
 
     <div class="kotak-merah" style="margin-top:16px;">
-      <p>⚠️ <strong>Denda Overstay:</strong> WNA yang melampaui batas waktu izin tinggal dikenakan denda <strong>Rp 1.000.000 per hari</strong> dan dapat dikenakan tindakan deportasi serta penangkalan masuk kembali.</p>
+      <p>⚠️ <strong>Denda Overstay:</strong> WNA yang melampaui batas waktu izin tinggal dikenakan denda <strong>Rp1.000.000 per hari</strong> dan dapat dikenakan tindakan deportasi serta penangkalan masuk kembali ke Indonesia.</p>
     </div>
 
     <div class="pemisah"></div>
 
-    <h3 class="judul-seksi">FAQ Izin Tinggal</h3>
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-q">Apa perbedaan ITAS dan ITAP? <span class="ikon">+</span></div>
-      <div class="faq-a">ITAS (terbatas) berlaku hingga 2 tahun untuk tinggal sementara, sedangkan ITAP (tetap) berlaku hingga 5 tahun untuk tinggal jangka panjang dan membutuhkan syarat yang lebih ketat, termasuk minimal 3 tahun memegang ITAS secara berturut-turut.</div>
-    </div>
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-q">Kapan batas waktu mengajukan perpanjangan? <span class="ikon">+</span></div>
-      <div class="faq-a">Paling lambat 30 hari sebelum masa berlaku izin tinggal berakhir (H-30). Pengajuan setelah jatuh tempo akan langsung dikenakan denda overstay per hari.</div>
-    </div>
-  </div>
-</section>
+    <h3 class="judul-seksi">Dasar Hu
 
 <!-- ═══════════════════════════════════════════════════════════
      PELAPORAN ORANG ASING
