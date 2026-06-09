@@ -1645,26 +1645,7 @@ async function muatThumbnail() {
      JAVASCRIPT
 ════════════════════════════════════════════════════════════ -->
 <script>
-/* ══════════════════════════════════════════════════════════
-   DATA LIGHTBOX
-   Tambah atau ubah entri di sini sesuai konten Anda.
-   - judul : teks judul yang tampil di lightbox
-   - deskripsi : teks deskripsi singkat
-   - gambar : URL gambar atau '' untuk tampilan placeholder
-   ══════════════════════════════════════════════════════════ */
 const dataLb = {
-  infogr: [
-    { ikon: '📋', judul: 'Alur Permohonan Visa Tinggal Terbatas',    gambar: '' },
-    { ikon: '✈️', judul: 'Jenis-Jenis Visa Indonesia',               gambar: '' },
-    { ikon: '📝', judul: 'Persyaratan Visa on Arrival (VoA)',         gambar: '' },
-    { ikon: '🔵', judul: 'Persyaratan ITAS Tenaga Kerja Asing',       gambar: '' },
-    { ikon: '🟡', judul: 'Perbedaan ITAS dan ITAP',                   gambar: '' },
-    { ikon: '🔄', judul: 'Alur Perpanjangan Izin Tinggal',            gambar: '' },
-    { ikon: '📍', judul: 'Siapa Saja yang Wajib Melapor?',            gambar: '' },
-    { ikon: '🌐', judul: 'Cara Melapor via Aplikasi APOA',            gambar: '' },
-    { ikon: '⚠️', judul: 'Sanksi Pelanggaran Keimigrasian',           gambar: '' },
-    // Tambah entri baru: { ikon: '📊', judul: 'Judul Baru', gambar: 'https://...' }
-  ],
   galeri: [
     { ikon: '📸', judul: 'Indonesia Energy & Engineering Series 2026', gambar: '' },
     { ikon: '🤝', judul: 'Pelayanan Publik Booth Imigrasi',            gambar: '' },
@@ -1675,16 +1656,13 @@ const dataLb = {
     { ikon: '📋', judul: 'Konsultasi Izin Tinggal',                    gambar: '' },
     { ikon: '⚡', judul: 'Booth Interaktif',                           gambar: '' },
     { ikon: '🎯', judul: 'Sesi Tanya Jawab',                           gambar: '' },
-    // Tambah entri baru di sini
   ]
 };
 
-/* ══════════════════════════════════════════════════════════
-   SLIDESHOW BERANDA
-   Ganti angka 5000 untuk ubah kecepatan (dalam milidetik)
-   5000 = 5 detik, 3000 = 3 detik, 7000 = 7 detik
-   ══════════════════════════════════════════════════════════ */
+/* ── SLIDESHOW ──────────────────────────────────────────── */
 let slideIdx = 0;
+let slideTimer = setInterval(() => gantiSlide(slideIdx + 1), 5000);
+
 function gantiSlide(idx) {
   const items = document.querySelectorAll('.slide-item');
   const dots  = document.querySelectorAll('.slide-dot');
@@ -1694,91 +1672,44 @@ function gantiSlide(idx) {
   items[slideIdx].classList.add('aktif');
   if (dots[slideIdx]) dots[slideIdx].classList.add('aktif');
 }
-setInterval(() => gantiSlide(slideIdx + 1), 5000);
 
-/* ══════════════════════════════════════════════════════════
-   MODAL WEB
-   Cara pakai di link manapun:
-   Ganti: href="https://..." target="_blank"
-   Dengan: onclick="bukaWebModal('https://...','Nama Tampilan')"
-   ══════════════════════════════════════════════════════════ */
-let urlWebAktif = '';
-function bukaWebModal(url, judul) {
-  urlWebAktif = url;
-  document.getElementById('web-modal-judul').textContent = judul || url;
-  document.getElementById('web-iframe').src = url;
-  document.getElementById('web-gagal').classList.remove('tampil');
-  document.getElementById('web-modal').classList.add('buka');
-  document.body.style.overflow = 'hidden';
+function jedaSlide() {
+  clearInterval(slideTimer);
+  slideTimer = setInterval(() => gantiSlide(slideIdx + 1), 5000);
 }
-function tutupWebModal() {
-  document.getElementById('web-iframe').src = '';
-  document.getElementById('web-modal').classList.remove('buka');
-  document.body.style.overflow = '';
-  urlWebAktif = '';
-}
-function bukaTabBaru() {
-  if (urlWebAktif) window.open(urlWebAktif, '_blank');
-}
-function cekIframe(el) {
-  try {
-    const doc = el.contentDocument || el.contentWindow.document;
-    if (!doc || doc.URL === 'about:blank') tampilGagal();
-  } catch(e) { tampilGagal(); }
-}
-function tampilGagal() {
-  document.getElementById('web-iframe').style.display = 'none';
-  document.getElementById('web-gagal').classList.add('tampil');
-}
-   
-/* ══════════════════════════════════════════════════════════
-   MODAL INSTAGRAM
-   Cara pakai: ganti href di setiap .ig-post dengan
-   onclick="bukaIgModal('https://www.instagram.com/p/POST_ID/')"
-   Untuk Reels gunakan: https://www.instagram.com/reel/REEL_ID/
-   ══════════════════════════════════════════════════════════ */
-function bukaIgModal(url) {
-  const embedUrl = url.replace(/\/$/, '') + '/embed';
-  document.getElementById('ig-iframe').src = embedUrl;
-  document.getElementById('ig-modal').classList.add('buka');
-  document.body.style.overflow = 'hidden';
-}
-function tutupIgModal(e) {
-  if (!e || e.target.id === 'ig-modal') {
-    document.getElementById('ig-iframe').src = '';
-    document.getElementById('ig-modal').classList.remove('buka');
-    document.body.style.overflow = '';
-  }
-}
-   
-/* ══════════════════════════════════════════════════════════
-   PETA NAV BUTTON  (urutan sesuai tampilan navbar)
-   ══════════════════════════════════════════════════════════ */
+
+document.addEventListener('DOMContentLoaded', () => {
+  const bg = document.getElementById('slideBg');
+  if (bg) bg.addEventListener('click', jedaSlide);
+});
+
+/* ── NAVIGASI ───────────────────────────────────────────── */
 const petaNav = ['beranda','visa','izin','pelaporan','media','unduh'];
 let sesiLbAktif = [], idxLb = 0;
 
-/* ─── NAVIGASI HALAMAN ───────────────────────────────────── */
 function buka(id) {
   document.querySelectorAll('.halaman').forEach(h => h.classList.remove('tampil'));
   document.querySelectorAll('.nb-btn').forEach(b => b.classList.remove('aktif'));
 
   const target = document.getElementById(id);
-  iif (target) { target.classList.add('tampil');
-    if (id === 'media') muatThumbnail(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  if (target) {
+    target.classList.add('tampil');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (id === 'media') muatThumbnail();
+  }
 
   const i = petaNav.indexOf(id);
   const btns = document.querySelectorAll('.nb-btn');
   if (i >= 0 && btns[i]) btns[i].classList.add('aktif');
 
-  // Tampilkan QR sudut di semua halaman selain beranda
   const qr = document.getElementById('qr-sudut');
   if (qr) qr.style.display = id === 'beranda' ? 'none' : 'block';
 }
 
-/* ─── FAQ TOGGLE ─────────────────────────────────────────── */
+/* ── FAQ ────────────────────────────────────────────────── */
 function toggleFaq(el) { el.classList.toggle('buka'); }
 
-/* ─── LIGHTBOX ───────────────────────────────────────────── */
+/* ── LIGHTBOX ───────────────────────────────────────────── */
 function bukaLb(idx, tipe) {
   sesiLbAktif = dataLb[tipe] || [];
   idxLb = idx;
@@ -1790,29 +1721,26 @@ function bukaLb(idx, tipe) {
 function renderLb() {
   const item = sesiLbAktif[idxLb];
   if (!item) return;
-
   const isi = document.getElementById('lb-isi');
   if (item.gambar) {
     isi.innerHTML = `<img src="${item.gambar}" alt="${item.judul}">`;
   } else {
-    document.getElementById('lb-ikon').textContent       = item.ikon  || '🖼️';
-    document.getElementById('lb-judul').textContent      = item.judul  || '';
-    document.getElementById('lb-deskripsi').textContent  = 'Belum ada gambar. Tambahkan URL gambar di array dataLb pada bagian JavaScript.';
+    document.getElementById('lb-ikon').textContent      = item.ikon  || '🖼️';
+    document.getElementById('lb-judul').textContent     = item.judul || '';
+    document.getElementById('lb-deskripsi').textContent = 'Belum ada gambar.';
   }
   document.getElementById('lb-hitung').textContent = `${idxLb + 1} / ${sesiLbAktif.length}`;
 }
 
 function navLb(arah) {
   idxLb = (idxLb + arah + sesiLbAktif.length) % sesiLbAktif.length;
-  // reset placeholder jika ada
   const isi = document.getElementById('lb-isi');
   if (!sesiLbAktif[idxLb]?.gambar) {
-    isi.innerHTML = `
-      <div class="lb-placeholder">
-        <span class="besar" id="lb-ikon"></span>
-        <h3 id="lb-judul"></h3>
-        <p id="lb-deskripsi"></p>
-      </div>`;
+    isi.innerHTML = `<div class="lb-placeholder">
+      <span class="besar" id="lb-ikon"></span>
+      <h3 id="lb-judul"></h3>
+      <p id="lb-deskripsi"></p>
+    </div>`;
   }
   renderLb();
 }
@@ -1831,16 +1759,88 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape')     tutupLb({ target: { id: 'lightbox' } });
 });
 
-/* ─── FILTER INFOGRAFIS ──────────────────────────────────── */
-function filterInfogr(btn, kat) {
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('aktif'));
+/* ── MODAL INSTAGRAM ────────────────────────────────────── */
+function bukaIgModal(url) {
+  const embedUrl = url.replace(/\/$/, '') + '/embed';
+  document.getElementById('ig-iframe').src = embedUrl;
+  document.getElementById('ig-modal').classList.add('buka');
+  document.body.style.overflow = 'hidden';
+}
+
+function tutupIgModal(e) {
+  if (!e || e.target.id === 'ig-modal') {
+    document.getElementById('ig-iframe').src = '';
+    document.getElementById('ig-modal').classList.remove('buka');
+    document.body.style.overflow = '';
+  }
+}
+
+/* ── MODAL WEB ──────────────────────────────────────────── */
+let urlWebAktif = '';
+function bukaWebModal(url, judul) {
+  urlWebAktif = url;
+  document.getElementById('web-modal-judul').textContent = judul || url;
+  document.getElementById('web-iframe').src = url;
+  document.getElementById('web-gagal').classList.remove('tampil');
+  document.getElementById('web-modal').classList.add('buka');
+  document.body.style.overflow = 'hidden';
+}
+function tutupWebModal() {
+  document.getElementById('web-iframe').src = '';
+  document.getElementById('web-modal').classList.remove('buka');
+  document.body.style.overflow = '';
+  urlWebAktif = '';
+}
+function bukaTabBaru() { if (urlWebAktif) window.open(urlWebAktif, '_blank'); }
+function cekIframe(el) {
+  try {
+    const doc = el.contentDocument || el.contentWindow.document;
+    if (!doc || doc.URL === 'about:blank') tampilGagal();
+  } catch(e) { tampilGagal(); }
+}
+function tampilGagal() {
+  document.getElementById('web-iframe').style.display = 'none';
+  document.getElementById('web-gagal').classList.add('tampil');
+}
+
+/* ── FILTER MEDIA ───────────────────────────────────────── */
+function filterMedia(btn, kat) {
+  document.querySelectorAll('.filter-row .filter-btn').forEach(b => b.classList.remove('aktif'));
   btn.classList.add('aktif');
-  document.querySelectorAll('#grid-infogr .infogr-item').forEach(item => {
-    item.style.display = (kat === 'semua' || item.dataset.kat === kat) ? '' : 'none';
+  document.querySelectorAll('.ig-galeri-grid .ig-galeri-item').forEach(item => {
+    if (kat === 'semua' || item.dataset.kat === kat) {
+      item.classList.remove('sembunyi');
+    } else {
+      item.classList.add('sembunyi');
+    }
   });
 }
 
-/* ─── INIT ───────────────────────────────────────────────── */
+/* ── THUMBNAIL INSTAGRAM OTOMATIS ───────────────────────── */
+let thumbnailDimuat = false;
+async function muatThumbnail() {
+  if (thumbnailDimuat) return;
+  thumbnailDimuat = true;
+  const items = document.querySelectorAll('.ig-galeri-item[data-url]');
+  for (const item of items) {
+    const url = item.dataset.url;
+    try {
+      const res = await fetch(
+        `https://api.allorigins.win/get?url=${encodeURIComponent('https://api.instagram.com/oembed/?url=' + url)}`
+      );
+      const data = await res.json();
+      const oembed = JSON.parse(data.contents);
+      if (oembed.thumbnail_url) {
+        const img = document.createElement('img');
+        img.src = oembed.thumbnail_url;
+        img.alt = oembed.title || '';
+        item.prepend(img);
+      }
+    } catch (e) { /* tampilkan placeholder */ }
+  }
+}
+
+/* ── INIT ───────────────────────────────────────────────── */
 buka('beranda');
 </script>
 
