@@ -1378,14 +1378,7 @@ function gantiSlide(idx) {
   items[slideIdx].classList.add('aktif');
   if (dots[slideIdx]) dots[slideIdx].classList.add('aktif');
 }
-let slideTimer = setInterval(() => gantiSlide(slideIdx + 1), 5000);
-
-function jedaSlide() {
-  clearInterval(slideTimer);
-  slideTimer = setInterval(() => gantiSlide(slideIdx + 1), 10000);
-}
-
-document.getElementById('slideBg').addEventListener('click', jedaSlide);
+setInterval(() => gantiSlide(slideIdx + 1), 5000);
 /* ══════════════════════════════════════════════════════════
    PETA NAV BUTTON  (urutan sesuai tampilan navbar)
    ══════════════════════════════════════════════════════════ */
