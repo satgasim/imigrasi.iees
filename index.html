@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pameran Digital Keimigrasian — Indonesia Energy & Engineering Series</title>
+   <link rel="icon" type="image/png" href="https://drive.google.com/thumbnail?id=13ODcDpGbr_L8UJwNA-L2AYgiN-KGeUtL&sz=w64">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
@@ -749,8 +750,43 @@ async function muatThumbnail() {
 /* ─── SISTEM BAHASA ─────────────────────────────────────── */
 .lang-toggle { display: none; }
 body.bilingual .lang-toggle { display: flex; }
-.goog-te-banner-frame, .goog-te-gadget { display: none !important; }
-body { top: 0 !important; }
+.goog-te-banner-frame,
+.goog-te-gadget,
+.skiptranslate,
+#goog-gt-tt,
+.goog-te-balloon-frame { display: none !important; }
+body { top: 0 !important; position: static !important; }
+iframe.skiptranslate { display: none !important; }
+.lang-toggle {
+  display: none;
+  gap: 4px;
+  background: rgba(255,255,255,.08);
+  border-radius: 8px;
+  padding: 4px;
+  flex-shrink: 0;
+}
+body.bilingual .lang-toggle { display: flex; }
+.lang-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,.5);
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  transition: all .2s;
+}
+.lang-btn.aktif {
+  background: var(--emas);
+  color: var(--gelap);
+  box-shadow: 0 2px 10px rgba(201,168,76,.4);
+}
+.lang-btn:hover:not(.aktif) {
+  color: white;
+  background: rgba(255,255,255,.15);
+}
    
 /* ─── RESPONSIF ──────────────────────────────────────────── */
 @media (max-width: 900px) {
