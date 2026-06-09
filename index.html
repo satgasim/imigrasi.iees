@@ -560,6 +560,52 @@ footer .em { color: var(--emas); }
   display: block;
 }
 
+/* ─── MODAL WEB ─────────────────────────────────────────── */
+#web-modal {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.88); z-index: 8000;
+  align-items: center; justify-content: center;
+}
+#web-modal.buka { display: flex; }
+.web-modal-box {
+  width: min(960px, 95vw); height: 88vh;
+  background: white; border-radius: 14px;
+  overflow: hidden; display: flex; flex-direction: column;
+}
+.web-modal-bar {
+  background: var(--biru); padding: 10px 16px;
+  display: flex; align-items: center; gap: 12px; flex-shrink: 0;
+}
+.web-modal-judul {
+  font-size: 13px; color: rgba(255,255,255,.75);
+  flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.web-modal-aksi { display: flex; gap: 8px; }
+.wb-btn {
+  background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3);
+  color: white; padding: 7px 16px; border-radius: 7px;
+  cursor: pointer; font-family: 'Poppins', sans-serif;
+  font-size: 12px; font-weight: 600; white-space: nowrap; transition: all .2s;
+}
+.wb-btn:hover { background: rgba(255,255,255,.28); }
+.wb-btn.merah { background: rgba(206,17,38,.6); border-color: transparent; }
+.wb-btn.merah:hover { background: var(--merah); }
+#web-iframe { width: 100%; flex: 1; border: none; }
+.web-gagal {
+  display: none; flex: 1; flex-direction: column;
+  align-items: center; justify-content: center; gap: 14px;
+  padding: 40px; background: var(--gelap); text-align: center;
+}
+.web-gagal.tampil { display: flex; }
+.web-gagal p { color: var(--redup); font-size: 14px; line-height: 1.7; }
+.web-gagal .wb-btn { font-size: 14px; padding: 12px 28px; }
+
+.link-popup {
+  color: var(--emas); text-decoration: underline;
+  cursor: pointer; font-weight: 600;
+}
+.link-popup:hover { opacity: .8; }
+   
 /* ─── RESPONSIF ──────────────────────────────────────────── */
 @media (max-width: 900px) {
   .nb-links { display: none; }
@@ -983,19 +1029,10 @@ footer .em { color: var(--emas); }
       <div>
         <div class="sub-judul">🌐 Via Online (APOA)</div>
         <div class="flow">
-          <div class="flow-step"><div class="flow-kiri"><div class="flow-lingkaran" style="width:38px;height:38px;font-size:14px">1</div><div class="flow-garis"></div></div><div class="flow-isi"><h4>Buka APOA</h4><p>Akses apoa.imigrasi.go.id atau unduh app APOA</p></div></div>
+          <div class="flow-step"><div class="flow-kiri"><div class="flow-lingkaran" style="width:38px;height:38px;font-size:14px">1</div><div class="flow-garis"></div></div><div class="flow-isi"><h4>Buka APOA</h4><p>Akses <span class="link-popup" onclick="bukaWebModal('https://apoa.imigrasi.go.id','APOA — Aplikasi Pelaporan Orang Asing')">apoa.imigrasi.go.id</span> atau unduh app APOA</p></div></div>
           <div class="flow-step"><div class="flow-kiri"><div class="flow-lingkaran" style="width:38px;height:38px;font-size:14px">2</div><div class="flow-garis"></div></div><div class="flow-isi"><h4>Daftar / Login</h4><p>Buat akun baru atau masuk dengan akun yang sudah ada</p></div></div>
           <div class="flow-step"><div class="flow-kiri"><div class="flow-lingkaran" style="width:38px;height:38px;font-size:14px">3</div><div class="flow-garis"></div></div><div class="flow-isi"><h4>Isi Formulir</h4><p>Lengkapi data WNA dan unggah dokumen pendukung</p></div></div>
           <div class="flow-step"><div class="flow-kiri"><div class="flow-lingkaran" style="width:38px;height:38px;font-size:14px">4</div></div><div class="flow-isi" style="margin-bottom:0"><h4>Simpan Bukti</h4><p>Unduh atau screenshot tanda terima laporan</p></div></div>
-        </div>
-      </div>
-      <div>
-        <div class="sub-judul">🏢 Via Kantor Imigrasi</div>
-        <div class="flow">
-          <div class="flow-step"><div class="flow-kiri"><div class="flow-lingkaran" style="width:38px;height:38px;font-size:14px">1</div><div class="flow-garis"></div></div><div class="flow-isi"><h4>Siapkan Dokumen</h4><p>Paspor WNA, izin tinggal, KTP pelapor, surat keterangan</p></div></div>
-          <div class="flow-step"><div class="flow-kiri"><div class="flow-lingkaran" style="width:38px;height:38px;font-size:14px">2</div><div class="flow-garis"></div></div><div class="flow-isi"><h4>Ambil Nomor Antrean</h4><p>Datang ke Kantor Imigrasi, ambil nomor layanan pelaporan</p></div></div>
-          <div class="flow-step"><div class="flow-kiri"><div class="flow-lingkaran" style="width:38px;height:38px;font-size:14px">3</div><div class="flow-garis"></div></div><div class="flow-isi"><h4>Serahkan Dokumen</h4><p>Berikan berkas ke petugas loket pelaporan WNA</p></div></div>
-          <div class="flow-step"><div class="flow-kiri"><div class="flow-lingkaran" style="width:38px;height:38px;font-size:14px">4</div></div><div class="flow-isi" style="margin-bottom:0"><h4>Terima Bukti</h4><p>Terima tanda terima laporan dan simpan dengan baik</p></div></div>
         </div>
       </div>
     </div>
@@ -1013,7 +1050,7 @@ footer .em { color: var(--emas); }
     </div>
     <div class="faq-item" onclick="toggleFaq(this)">
       <div class="faq-q">Di mana mengakses layanan APOA? <span class="ikon">+</span></div>
-      <div class="faq-a">Akses melalui website apoa.imigrasi.go.id atau aplikasi APOA yang tersedia di Play Store dan App Store secara gratis.</div>
+      <div class="faq-a">Akses melalui website <span class="link-popup" onclick="bukaWebModal('https://apoa.imigrasi.go.id','APOA — Aplikasi Pelaporan Orang Asing')">apoa.imigrasi.go.id</span> atau aplikasi APOA yang tersedia di Play Store dan App Store secara gratis.</div>
     </div>
   </div>
 </section>
@@ -1351,6 +1388,28 @@ footer .em { color: var(--emas); }
   </div>
 </section>
 
+<!-- MODAL WEB -->
+<div id="web-modal">
+  <div class="web-modal-box">
+    <div class="web-modal-bar">
+      <span class="web-modal-judul" id="web-modal-judul">Loading...</span>
+      <div class="web-modal-aksi">
+        <button class="wb-btn" onclick="bukaTabBaru()">↗ Buka di Tab Baru</button>
+        <button class="wb-btn merah" onclick="tutupWebModal()">✕ Tutup</button>
+      </div>
+    </div>
+    <iframe id="web-iframe" src=""
+      onload="cekIframe(this)"
+      onerror="tampilGagal()">
+    </iframe>
+    <div class="web-gagal" id="web-gagal">
+      <span style="font-size:48px">🔒</span>
+      <p>Situs ini tidak mengizinkan tampil di dalam popup.<br>Gunakan tombol di bawah untuk membukanya.</p>
+      <button class="wb-btn" style="background:var(--biru);border-color:var(--biru);" onclick="bukaTabBaru()">↗ Buka di Tab Baru</button>
+    </div>
+  </div>
+</div>
+   
 <!-- MODAL INSTAGRAM -->
 <div id="ig-modal" onclick="tutupIgModal(event)">
   <div class="ig-modal-box">
@@ -1414,6 +1473,41 @@ function gantiSlide(idx) {
 }
 setInterval(() => gantiSlide(slideIdx + 1), 5000);
 
+/* ══════════════════════════════════════════════════════════
+   MODAL WEB
+   Cara pakai di link manapun:
+   Ganti: href="https://..." target="_blank"
+   Dengan: onclick="bukaWebModal('https://...','Nama Tampilan')"
+   ══════════════════════════════════════════════════════════ */
+let urlWebAktif = '';
+function bukaWebModal(url, judul) {
+  urlWebAktif = url;
+  document.getElementById('web-modal-judul').textContent = judul || url;
+  document.getElementById('web-iframe').src = url;
+  document.getElementById('web-gagal').classList.remove('tampil');
+  document.getElementById('web-modal').classList.add('buka');
+  document.body.style.overflow = 'hidden';
+}
+function tutupWebModal() {
+  document.getElementById('web-iframe').src = '';
+  document.getElementById('web-modal').classList.remove('buka');
+  document.body.style.overflow = '';
+  urlWebAktif = '';
+}
+function bukaTabBaru() {
+  if (urlWebAktif) window.open(urlWebAktif, '_blank');
+}
+function cekIframe(el) {
+  try {
+    const doc = el.contentDocument || el.contentWindow.document;
+    if (!doc || doc.URL === 'about:blank') tampilGagal();
+  } catch(e) { tampilGagal(); }
+}
+function tampilGagal() {
+  document.getElementById('web-iframe').style.display = 'none';
+  document.getElementById('web-gagal').classList.add('tampil');
+}
+   
 /* ══════════════════════════════════════════════════════════
    MODAL INSTAGRAM
    Cara pakai: ganti href di setiap .ig-post dengan
