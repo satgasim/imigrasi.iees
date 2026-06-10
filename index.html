@@ -906,6 +906,7 @@ body.bilingual .lang-toggle { display: flex; }
     <button class="nb-btn" onclick="buka('visa')">✈️ Visa</button>
     <button class="nb-btn" onclick="buka('izin')">📋 Izin Tinggal</button>
     <button class="nb-btn" onclick="buka('pelaporan')">📍 Pelaporan OA</button>
+    <button class="nb-btn" onclick="buka('paspor')">🛂 Paspor</button>
     <button class="nb-btn" onclick="buka('media')">🎬 Media</button>
     <button class="nb-btn" onclick="buka('unduh')">⬇️ Unduh</button>
   </div>
@@ -1010,6 +1011,10 @@ body.bilingual .lang-toggle { display: flex; }
     <button class="menu-btn" onclick="buka('pelaporan')">
       <span class="menu-ikon">📍</span>
       <span>PELAPORAN ORANG ASING</span>
+    </button>
+     <button class="menu-btn" onclick="buka('paspor')">
+      <span class="menu-ikon">🛂</span>
+      <span>PASPOR</span>
     </button>
     <button class="menu-btn" onclick="buka('media')">
       <span class="menu-ikon">🎬</span>
@@ -1333,6 +1338,266 @@ body.bilingual .lang-toggle { display: flex; }
   </div>
 </section>
 
+<!-- ═══════════════════════════════════════════════════════════
+     PASPOR
+════════════════════════════════════════════════════════════ -->
+<section id="paspor" class="halaman">
+  <div class="hal-header">
+    <button class="kembali" onclick="buka('beranda')">← Kembali ke Beranda</button>
+    <h2>🛂 PASPOR</h2>
+    <p>Layanan paspor Republik Indonesia untuk warga negara Indonesia</p>
+  </div>
+  <div class="ktr">
+
+    <!-- JENIS PASPOR -->
+    <h3 class="judul-seksi">Jenis Paspor</h3>
+    <div class="kartu-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+      <div class="kartu">
+        <div class="ikon">💳</div>
+        <h3>Paspor Biasa Non-Elektronik</h3>
+        <p>Paspor standar tanpa chip elektronik. Cocok untuk perjalanan ke negara-negara yang tidak mensyaratkan e-Paspor.</p>
+        <div class="chips">
+          <span class="chip">5 tahun — Rp350.000</span>
+        </div>
+        <div class="chips">
+          <span class="chip">10 tahun — Rp650.000</span>
+        </div>
+      </div>
+      <div class="kartu">
+        <div class="ikon">🔷</div>
+        <h3>e-Paspor (Elektronik)</h3>
+        <p>Paspor dengan chip elektronik berisi data biometrik pemegang. Memberikan kemudahan akses di negara-negara yang mendukung e-Gate.</p>
+        <div class="chips">
+          <span class="chip">5 tahun — Rp650.000</span>
+        </div>
+        <div class="chips">
+          <span class="chip">10 tahun — Rp950.000</span>
+        </div>
+      </div>
+      <div class="kartu" style="border-color:rgba(201,168,76,.5)">
+        <div class="ikon">⚡</div>
+        <h3>Layanan Percepatan</h3>
+        <p>Paspor selesai pada hari yang sama. Tersedia untuk kondisi mendesak dengan biaya tambahan di luar biaya paspor.</p>
+        <div class="chips">
+          <span class="chip e">Selesai hari yang sama</span>
+        </div>
+        <div class="chips">
+          <span class="chip">Biaya tambahan Rp1.000.000</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pemisah"></div>
+
+    <!-- KATEGORI PEMOHON -->
+    <h3 class="judul-seksi">Kategori Pemohon</h3>
+    <div class="kartu-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+      <div class="kartu">
+        <div class="ikon">👤</div>
+        <h3>Masyarakat Umum</h3>
+        <p>WNI dewasa usia 17 tahun ke atas yang mengajukan paspor baru pertama kali atau penggantian.</p>
+      </div>
+      <div class="kartu">
+        <div class="ikon">👶</div>
+        <h3>Anak di Bawah 17 Tahun</h3>
+        <p>Permohonan paspor untuk anak yang belum memiliki KTP, didampingi orang tua atau wali.</p>
+      </div>
+      <div class="kartu">
+        <div class="ikon">🌐</div>
+        <h3>Anak Dwikewarganegaraan</h3>
+        <p>Anak hasil perkawinan campuran WNI-WNA yang memiliki dua kewarganegaraan sesuai ketentuan.</p>
+      </div>
+      <div class="kartu">
+        <div class="ikon">✈️</div>
+        <h3>Calon Pekerja Migran Indonesia</h3>
+        <p>WNI yang akan bekerja di luar negeri sebagai Pekerja Migran Indonesia (PMI).</p>
+      </div>
+      <div class="kartu">
+        <div class="ikon">🕌</div>
+        <h3>Haji &amp; Umroh</h3>
+        <p>Permohonan paspor khusus untuk keperluan ibadah haji atau umroh ke Arab Saudi.</p>
+      </div>
+      <div class="kartu">
+        <div class="ikon">🌍</div>
+        <h3>Anak Lahir di Luar Negeri</h3>
+        <p>Anak WNI yang lahir di luar negeri dan belum memiliki paspor Indonesia.</p>
+      </div>
+    </div>
+
+    <div class="pemisah"></div>
+
+    <!-- PERSYARATAN -->
+    <h3 class="judul-seksi">Persyaratan Permohonan Baru</h3>
+    <div class="kartu" style="max-width:700px">
+      <ul>
+        <li>Kartu Tanda Penduduk (KTP) yang masih berlaku atau surat keterangan pindah ke luar negeri</li>
+        <li>Kartu Keluarga (KK)</li>
+        <li>Dokumen pendukung: akta kelahiran, akta perkawinan, buku nikah, ijazah, atau surat baptis <em>(nama, tempat/tanggal lahir, dan nama orang tua harus tercantum)</em></li>
+        <li>Surat pewarganegaraan Indonesia <em>(bagi WNA yang memperoleh kewarganegaraan RI)</em></li>
+        <li>Surat penetapan ganti nama dari pejabat berwenang <em>(bagi yang telah mengganti nama)</em></li>
+      </ul>
+    </div>
+
+    <div class="pemisah"></div>
+
+    <!-- ALUR -->
+    <h3 class="judul-seksi">Alur Permohonan</h3>
+    <div class="flow-2kol">
+      <div>
+        <div class="sub-judul">📱 Via Aplikasi M-Paspor</div>
+        <div class="flow">
+          <div class="flow-step">
+            <div class="flow-kiri"><div class="flow-lingkaran" style="width:38px;height:38px;font-size:14px">1</div><div class="flow-garis"></div></div>
+            <div class="flow-isi"><h4>Unduh M-Paspor</h4><p>Tersedia di App Store dan Google Play. Daftar akun dan login.</p></div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-kiri"><div class="flow-lingkaran" style="width:38px;height:38px;font-size:14px">2</div><div class="flow-garis"></div></div>
+            <div class="flow-isi"><h4>Isi Permohonan</h4><p>Lengkapi data diri, unggah dokumen persyaratan, pilih jadwal kedatangan.</p></div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-kiri"><div class="flow-lingkaran" style="width:38px;height:38px;font-size:14px">3</div><div class="flow-garis"></div></div>
+            <div class="flow-isi"><h4>Bayar PNBP</h4><p>Lakukan pembayaran biaya paspor sesuai jenis yang dipilih.</p></div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-kiri"><div class="flow-lingkaran" style="width:38px;height:38px;font-size:14px">4</div></div>
+            <div class="flow-isi" style="margin-bottom:0"><h4>Datang ke Kantor Imigrasi</h4><p>Hadir sesuai jadwal untuk foto, sidik jari, dan wawancara.</p></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="sub-judul">🏢 Via Loket Kantor Imigrasi</div>
+        <div class="flow">
+          <div class="flow-step">
+            <div class="flow-kiri"><div class="flow-lingkaran" style="width:38px;height:38px;font-size:14px">1</div><div class="flow-garis"></div></div>
+            <div class="flow-isi"><h4>Isi Formulir Loket</h4><p>Isi data di aplikasi loket permohonan dan lampirkan dokumen persyaratan.</p></div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-kiri"><div class="flow-lingkaran" style="width:38px;height:38px;font-size:14px">2</div><div class="flow-garis"></div></div>
+            <div class="flow-isi"><h4>Pemeriksaan Dokumen</h4><p>Petugas imigrasi memeriksa kelengkapan dan keabsahan dokumen.</p></div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-kiri"><div class="flow-lingkaran" style="width:38px;height:38px;font-size:14px">3</div><div class="flow-garis"></div></div>
+            <div class="flow-isi"><h4>Terima Kode Pembayaran</h4><p>Dapatkan tanda terima dan kode pembayaran setelah dokumen dinyatakan lengkap.</p></div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-kiri"><div class="flow-lingkaran" style="width:38px;height:38px;font-size:14px">4</div></div>
+            <div class="flow-isi" style="margin-bottom:0"><h4>Foto, Sidik Jari &amp; Wawancara</h4><p>Proses biometrik dan verifikasi data dilakukan di kantor imigrasi.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pemisah"></div>
+
+    <!-- MEKANISME PENERBITAN -->
+    <h3 class="judul-seksi">Mekanisme Penerbitan</h3>
+    <div class="flow" style="max-width:600px">
+      <div class="flow-step">
+        <div class="flow-kiri"><div class="flow-lingkaran">1</div><div class="flow-garis"></div></div>
+        <div class="flow-isi"><h4>Pemeriksaan Kelengkapan &amp; Keabsahan</h4><p>Verifikasi seluruh dokumen persyaratan yang dilampirkan pemohon.</p></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-kiri"><div class="flow-lingkaran">2</div><div class="flow-garis"></div></div>
+        <div class="flow-isi"><h4>Pembayaran Biaya Paspor</h4><p>Pembayaran PNBP sesuai jenis dan masa berlaku paspor yang dipilih.</p></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-kiri"><div class="flow-lingkaran">3</div><div class="flow-garis"></div></div>
+        <div class="flow-isi"><h4>Pengambilan Foto &amp; Sidik Jari</h4><p>Perekaman data biometrik pemohon oleh petugas imigrasi.</p></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-kiri"><div class="flow-lingkaran">4</div><div class="flow-garis"></div></div>
+        <div class="flow-isi"><h4>Wawancara</h4><p>Konfirmasi data dan tujuan permohonan paspor oleh pejabat imigrasi.</p></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-kiri"><div class="flow-lingkaran">5</div><div class="flow-garis"></div></div>
+        <div class="flow-isi"><h4>Verifikasi</h4><p>Pemeriksaan akhir data pemohon dalam sistem SIMKIM.</p></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-kiri"><div class="flow-lingkaran">6</div></div>
+        <div class="flow-isi" style="margin-bottom:0"><h4>Adjudikasi</h4><p>Penetapan dan penerbitan paspor oleh pejabat imigrasi yang berwenang.</p></div>
+      </div>
+    </div>
+
+    <div class="pemisah"></div>
+
+    <!-- BIAYA -->
+    <h3 class="judul-seksi">Biaya Resmi (PNBP)</h3>
+    <div class="kartu-grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+      <div class="kartu">
+        <h3 style="color:var(--putih)">Non-Elektronik</h3>
+        <p class="sub">Paspor Biasa</p>
+        <div style="margin-top:12px">
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:14px">
+            <span style="color:var(--redup)">5 tahun</span>
+            <span style="color:var(--emas);font-weight:700">Rp350.000</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;font-size:14px">
+            <span style="color:var(--redup)">10 tahun</span>
+            <span style="color:var(--emas);font-weight:700">Rp650.000</span>
+          </div>
+        </div>
+      </div>
+      <div class="kartu">
+        <h3 style="color:var(--putih)">Elektronik (e-Paspor)</h3>
+        <p class="sub">Dengan chip biometrik</p>
+        <div style="margin-top:12px">
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:14px">
+            <span style="color:var(--redup)">5 tahun</span>
+            <span style="color:var(--emas);font-weight:700">Rp650.000</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;font-size:14px">
+            <span style="color:var(--redup)">10 tahun</span>
+            <span style="color:var(--emas);font-weight:700">Rp950.000</span>
+          </div>
+        </div>
+      </div>
+      <div class="kartu">
+        <h3 style="color:var(--putih)">Layanan Percepatan</h3>
+        <p class="sub">Selesai hari yang sama</p>
+        <div style="margin-top:12px">
+          <div style="display:flex;justify-content:space-between;padding:8px 0;font-size:14px">
+            <span style="color:var(--redup)">Biaya tambahan</span>
+            <span style="color:var(--emas);font-weight:700">Rp1.000.000</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kotak-merah" style="margin-top:20px">
+      <p>⚠️ <strong>Denda Paspor Hilang / Rusak:</strong>
+      Hilang: <strong>Rp1.000.000</strong> &nbsp;·&nbsp;
+      Rusak: <strong>Rp500.000</strong> &nbsp;·&nbsp;
+      Hilang/rusak karena force majeure: <strong>Rp0</strong></p>
+    </div>
+
+    <div class="pemisah"></div>
+
+    <!-- FAQ -->
+    <h3 class="judul-seksi">FAQ Paspor</h3>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Apa perbedaan e-Paspor dan paspor biasa? <span class="ikon">+</span></div>
+      <div class="faq-a">e-Paspor dilengkapi chip elektronik yang menyimpan data biometrik pemegangnya. Keunggulan e-Paspor adalah dapat menggunakan jalur e-Gate di bandara internasional, mempercepat proses pemeriksaan imigrasi, dan lebih sulit dipalsukan. Paspor biasa tidak memiliki chip namun tetap berlaku untuk perjalanan internasional.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Bagaimana cara mendaftar antrian paspor? <span class="ikon">+</span></div>
+      <div class="faq-a">Pendaftaran antrian paspor dilakukan melalui aplikasi M-Paspor yang dapat diunduh di App Store atau Google Play. Pilih Kantor Imigrasi terdekat, tentukan tanggal dan waktu kedatangan, lalu konfirmasi jadwal. Datang sesuai jadwal dengan membawa dokumen asli.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Berapa lama proses penerbitan paspor? <span class="ikon">+</span></div>
+      <div class="faq-a">Proses penerbitan paspor reguler umumnya memakan waktu 3–4 hari kerja setelah proses foto dan wawancara selesai. Layanan percepatan dapat menyelesaikan paspor pada hari yang sama dengan biaya tambahan Rp1.000.000.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Apakah paspor bisa diperpanjang sebelum habis masa berlakunya? <span class="ikon">+</span></div>
+      <div class="faq-a">Ya. Paspor dapat diganti (diperpanjang) sebelum masa berlakunya habis. Banyak negara mensyaratkan paspor masih berlaku minimal 6 bulan dari tanggal kedatangan, sehingga disarankan mengganti paspor jauh sebelum perjalanan.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Apa yang harus dilakukan jika paspor hilang? <span class="ikon">+</span></div>
+      <div class="faq-a">Segera laporkan kehilangan ke kantor polisi dan minta Surat Keterangan Hilang. Kemudian datang ke Kantor Imigrasi terdekat untuk mengajukan penggantian paspor dengan membawa Surat Keterangan Hilang dan dokumen persyaratan. Akan dikenakan biaya beban sebesar Rp1.000.000.</div>
+    </div>
+
+  </div>
+</section>
+   
 <!-- ═══════════════════════════════════════════════════════════
      MEDIA
 ════════════════════════════════════════════════════════════ -->
@@ -1673,7 +1938,7 @@ function tutupVisaModal(e) {
 }
    
 /* ── NAVIGASI ───────────────────────────────────────────── */
-const petaNav = ['beranda','visa','izin','pelaporan','media','unduh'];
+const petaNav = ['beranda','visa','izin','pelaporan','paspor','media','unduh'];
 let sesiLbAktif = [], idxLb = 0;
 
 function buka(id) {
