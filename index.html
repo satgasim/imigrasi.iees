@@ -506,6 +506,13 @@ body {
   border-radius: 16px; padding: 14px; text-align: center;
   display: none;
 }
+#qr-sudut-kiri {
+  position: fixed; bottom: 22px; left: 22px; z-index: 400;
+  background: var(--kartu); border: 1px solid var(--border);
+  border-radius: 16px; padding: 14px; text-align: center;
+  display: none;
+}
+
 .qr-kotak {
   width: 76px; height: 76px; background: white; border-radius: 8px;
   display: flex; align-items: center; justify-content: center;
@@ -884,6 +891,7 @@ body.bilingual .lang-toggle { display: flex; }
   .lb-nav { display: none; }
   footer { padding: 24px 20px; }
   #qr-sudut { display: none !important; }
+  #qr-sudut-kiri { display: none !important; }
   .ig-profil { flex-direction: column; text-align: center; }
 }
 </style>
@@ -947,6 +955,19 @@ body.bilingual .lang-toggle { display: flex; }
     <img src="assets/qrcode.png" alt="QR Code" width="76" height="76">
   </div>
   <div class="qr-label">Kunjungi Saya</div>
+</div>
+
+<div id="qr-sudut-kiri">
+  <div class="qr-kotak">
+    <!--
+      [GANTI_INI] Untuk menampilkan QR Code nyata:
+      Buat QR Code di qrcode-monkey.com mengarah ke URL  ini,
+      upload ke Google Drive, lalu tempel link preview di bawah.
+      Atau ganti src dengan path lokal: src="qrcode.png"
+    -->
+    <img src="assets/qrcode2.png" alt="QR Code" width="76" height="76">
+  </div>
+  <div class="qr-label">Buku Tamu</div>
 </div>
    
 <!-- ═══════════════════════════════════════════════════════════
@@ -1897,6 +1918,9 @@ function buka(id) {
   if (i >= 0 && btns[i]) btns[i].classList.add('aktif');
 
   const qr = document.getElementById('qr-sudut');
+  if (qr) qr.style.display = id === 'beranda' ? 'none' : 'block';
+
+  const qr = document.getElementById('qr-sudut-kiri');
   if (qr) qr.style.display = id === 'beranda' ? 'none' : 'block';
 }
 
