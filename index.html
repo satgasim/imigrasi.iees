@@ -870,6 +870,13 @@ body.bilingual .lang-toggle { display: flex; }
   .visa-tile-grid { grid-template-columns: repeat(3, 1fr); }
   .vm-nav { display: none; }
 }
+
+#qr-sudut-kiri {
+  position: fixed; bottom: 22px; left: 22px; z-index: 400;
+  background: var(--kartu); border: 1px solid var(--border);
+  border-radius: 16px; padding: 14px; text-align: center;
+  display: none;
+}
    
 /* ─── RESPONSIF ──────────────────────────────────────────── */
 @media (max-width: 900px) {
@@ -948,7 +955,14 @@ body.bilingual .lang-toggle { display: flex; }
   </div>
   <div class="qr-label">Kunjungi Saya</div>
 </div>
-  
+
+<div id="qr-sudut-kiri">
+  <div class="qr-kotak">
+    <img src="assets/qrcode2.png" alt="QR Code Form" width="76" height="76">
+  </div>
+  <div class="qr-label">Buku Tamu</div>
+</div>
+   
 <!-- ═══════════════════════════════════════════════════════════
      BERANDA
 ════════════════════════════════════════════════════════════ -->
@@ -1898,6 +1912,8 @@ function buka(id) {
 
   const qr = document.getElementById('qr-sudut');
   if (qr) qr.style.display = id === 'beranda' ? 'none' : 'block';
+  const qrKiri = document.getElementById('qr-sudut-kiri');
+  if (qrKiri) qrKiri.style.display = id === 'beranda' ? 'none' : 'block';
 
 }
 
