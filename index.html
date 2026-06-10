@@ -514,6 +514,21 @@ body {
 .qr-kotak img { width: 100%; height: 100%; object-fit: contain; }
 .qr-label { font-size: 10px; color: var(--redup); line-height: 1.4; }
 
+/* ─── QR SUDUT KIRI───────────────────────────────────────────── */
+#qr-sudut {
+  position: fixed; bottom: 22px; left: 22px; z-index: 400;
+  background: var(--kartu); border: 1px solid var(--border);
+  border-radius: 16px; padding: 14px; text-align: center;
+  display: none;
+}
+.qr-kotak {
+  width: 76px; height: 76px; background: white; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 8px; overflow: hidden;
+}
+.qr-kotak img { width: 100%; height: 100%; object-fit: contain; }
+.qr-label { font-size: 10px; color: var(--redup); line-height: 1.4; }
+   
 /* ─── FOOTER ─────────────────────────────────────────────── */
 footer {
   background: #080F1A; border-top: 1px solid rgba(201,168,76,.18);
@@ -946,9 +961,25 @@ body.bilingual .lang-toggle { display: flex; }
     -->
     <img src="assets/qrcode.png" alt="QR Code" width="76" height="76">
   </div>
-  <div class="qr-label">Scan Me</div>
+  <div class="qr-label">Kunjungi Saya</div>
 </div>
 
+<!-- ═══════════════════════════════════════════════════════════
+     QR SUDUT KIRI (muncul di semua halaman kecuali Beranda)
+════════════════════════════════════════════════════════════ -->
+<div id="qr-sudut">
+  <div class="qr-kotak">
+    <!--
+      [GANTI_INI] Untuk menampilkan QR Code nyata:
+      Buat QR Code di qrcode-monkey.com mengarah ke URL  ini,
+      upload ke Google Drive, lalu tempel link preview di bawah.
+      Atau ganti src dengan path lokal: src="qrcode.png"
+    -->
+    <img src="assets/qrcode2.png" alt="QR Code" width="76" height="76">
+  </div>
+  <div class="qr-label">Buku Tamu</div>
+</div>
+   
 <!-- ═══════════════════════════════════════════════════════════
      BERANDA
 ════════════════════════════════════════════════════════════ -->
