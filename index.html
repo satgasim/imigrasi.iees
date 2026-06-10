@@ -788,26 +788,87 @@ body.bilingual .lang-toggle { display: flex; }
   background: rgba(255,255,255,.15);
 }
 
-/* ─── VISA 5 KOLOM ───────────────────────────────────────── */
-#visa .kartu-grid {
+/* ─── VISA TILE + MODAL ─────────────────────────────────── */
+.visa-tile-grid {
+  display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 12px;
+  gap: 8px; margin-top: 24px;
 }
-#visa .kartu { padding: 18px 14px; }
-#visa .kartu h3 { font-size: 13.5px; margin-bottom: 6px; }
-#visa .kartu p  { font-size: 12px; margin-bottom: 8px; line-height: 1.5; }
-#visa .kartu .chips { margin: 6px 0 8px; gap: 6px; }
-#visa .kartu .chip { font-size: 10px; padding: 3px 8px; }
-#visa .kartu ul { font-size: 11.5px; }
-#visa .kartu ul li { padding: 3px 0; gap: 6px; }
-.kartu-note {
-  font-size: 10px; color: var(--redup); font-style: italic;
-  margin-top: 10px; padding-top: 8px;
-  border-top: 1px solid rgba(255,255,255,.07);
-  line-height: 1.4;
+.visa-tile {
+  background: var(--kartu); border: 1px solid var(--border);
+  border-radius: 12px; padding: 14px 12px;
+  cursor: pointer; transition: all .25s;
+}
+.visa-tile:hover {
+  border-color: var(--emas); background: var(--kartu2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.3);
+}
+.vt-kode  { font-size: 14px; font-weight: 700; color: var(--emas); margin-bottom: 4px; }
+.vt-nama  { font-size: 12px; color: var(--putih); line-height: 1.35; margin-bottom: 6px; }
+.vt-durasi{ font-size: 11px; color: var(--redup); }
+#visa-modal {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.9); z-index: 8500;
+  align-items: center; justify-content: center;
+}
+#visa-modal.buka { display: flex; }
+.vm-box {
+  width: min(520px, 92vw);
+  background: var(--gelap2); border: 1px solid var(--border);
+  border-radius: 18px; overflow: hidden;
+}
+.vm-header {
+  background: var(--biru); padding: 22px 24px 18px; position: relative;
+}
+.vm-kode-label {
+  font-size: 12px; font-weight: 700; color: var(--emas);
+  letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px;
+}
+.vm-header h3 {
+  font-size: 18px; font-weight: 700; color: white;
+  margin-bottom: 6px; line-height: 1.3; padding-right: 44px;
+}
+.vm-header p { font-size: 13px; color: rgba(255,255,255,.65); line-height: 1.5; }
+.vm-tutup {
+  position: absolute; top: 16px; right: 16px;
+  background: rgba(255,255,255,.15); border: none; color: white;
+  width: 34px; height: 34px; border-radius: 50%; cursor: pointer;
+  font-size: 16px; display: flex; align-items: center; justify-content: center;
+  transition: all .2s;
+}
+.vm-tutup:hover { background: var(--merah); }
+.vm-body { padding: 20px 24px; }
+#vm-syarat { list-style: none; }
+#vm-syarat li {
+  padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,.05);
+  display: flex; align-items: flex-start; gap: 8px;
+  font-size: 14px; color: var(--redup);
+}
+#vm-syarat li::before { content: '✓'; color: var(--emas); flex-shrink: 0; }
+.vm-note {
+  font-size: 11px; color: var(--redup); font-style: italic;
+  margin-top: 14px; padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,.07); line-height: 1.5;
+}
+.vm-nav {
+  position: fixed; top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.25);
+  color: white; width: 52px; height: 52px; border-radius: 50%;
+  font-size: 28px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .2s; z-index: 8501;
+}
+.vm-nav:hover { background: var(--emas); color: var(--gelap); border-color: var(--emas); }
+.vm-kiri  { left: 16px; }
+.vm-kanan { right: 16px; }
+.vm-counter {
+  text-align: center; font-size: 12px; color: var(--redup);
+  padding: 12px 0 16px;
 }
 @media (max-width: 900px) {
-  #visa .kartu-grid { grid-template-columns: repeat(2, 1fr); }
+  .visa-tile-grid { grid-template-columns: repeat(3, 1fr); }
+  .vm-nav { display: none; }
 }
    
 /* ─── RESPONSIF ──────────────────────────────────────────── */
@@ -978,268 +1039,7 @@ body.bilingual .lang-toggle { display: flex; }
   </div>
   <div class="ktr">
     <h3 class="judul-seksi">Jenis-Jenis Visa</h3>
-    <div class="kartu-grid">
-
-      <div class="kartu">
-        <h3>B1 — Visa Kunjungan Wisata</h3>
-        <p>Visa on Arrival untuk wisata. Diperoleh langsung di bandara atau pelabuhan utama saat kedatangan.</p>
-        <div class="chips"><span class="chip">30 hari</span><span class="chip e">Perpanjang 1×</span></div>
-        <ul>
-          <li>Paspor berlaku min. 6 bulan</li>
-          <li>Biaya USD 35 atau setara</li>
-          <li>Tiket onward / pulang</li>
-          <li>Negara eligible VoA</li>
-        </ul>
-        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
-      </div>
-
-      <div class="kartu">
-        <h3>C2 — Visa Kunjungan Bisnis</h3>
-        <p>Untuk negosiasi, meeting, serta kunjungan kantor, pabrik, atau tempat produksi mitra bisnis di Indonesia.</p>
-        <div class="chips"><span class="chip">60 hari</span><span class="chip e">Dapat diperpanjang</span></div>
-        <ul>
-          <li>Surat undangan dari perusahaan Indonesia</li>
-          <li>Paspor berlaku min. 6 bulan</li>
-          <li>Bukti keuangan yang cukup</li>
-          <li>Tiket pulang pergi</li>
-        </ul>
-        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
-      </div>
-
-      <div class="kartu">
-        <h3>C9 — Visa Studi / Pelatihan Singkat</h3>
-        <p>Untuk pelatihan, kursus singkat, atau studi banding di lembaga pendidikan maupun industri di Indonesia.</p>
-        <div class="chips"><span class="chip">60 hari</span><span class="chip e">Dapat diperpanjang</span></div>
-        <ul>
-          <li>Surat penerimaan dari institusi</li>
-          <li>Jadwal kegiatan pelatihan</li>
-          <li>Paspor berlaku min. 6 bulan</li>
-          <li>Bukti keuangan</li>
-        </ul>
-        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
-      </div>
-
-      <div class="kartu">
-        <h3>C10 — Visa Narasumber Bisnis</h3>
-        <p>Untuk narasumber atau pembicara dalam kegiatan MICE (Meeting, Incentive, Convention, Exhibition).</p>
-        <div class="chips"><span class="chip">60 hari</span><span class="chip e">Dapat diperpanjang</span></div>
-        <ul>
-          <li>Surat undangan dari penyelenggara</li>
-          <li>Jadwal dan topik kegiatan</li>
-          <li>Paspor berlaku min. 6 bulan</li>
-          <li>Profil / CV narasumber</li>
-        </ul>
-        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
-      </div>
-
-      <div class="kartu">
-        <h3>C11 — Visa Promosi Produk &amp; Jasa</h3>
-        <p>Untuk exhibitor MICE — memasarkan dan mempromosikan produk atau jasa di pameran industri Indonesia.</p>
-        <div class="chips"><span class="chip">60 hari</span><span class="chip e">Dapat diperpanjang</span></div>
-        <ul>
-          <li>Surat undangan penyelenggara pameran</li>
-          <li>Profil perusahaan dan daftar produk</li>
-          <li>Paspor berlaku min. 6 bulan</li>
-          <li>Bukti keuangan</li>
-        </ul>
-        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
-      </div>
-
-      <div class="kartu">
-        <h3>C12 — Visa Pra-Investasi</h3>
-        <p>Untuk survey lapangan atau studi kelayakan oleh calon investor sebelum menanamkan modal di Indonesia.</p>
-        <div class="chips"><span class="chip">180 hari</span><span class="chip e">Perpanjang s/d 12 bulan</span></div>
-        <ul>
-          <li>Surat pernyataan rencana investasi</li>
-          <li>Profil dan dokumen perusahaan asal</li>
-          <li>Paspor berlaku min. 6 bulan</li>
-          <li>Bukti keuangan</li>
-        </ul>
-        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
-      </div>
-
-      <div class="kartu">
-        <h3>C15 — Visa Penanganan Darurat</h3>
-        <p>Untuk pekerjaan mendesak yang bersifat kritis dan hanya dapat ditangani oleh pemohon bersangkutan.</p>
-        <div class="chips"><span class="chip">60 hari</span><span class="chip m">Situasi darurat</span></div>
-        <ul>
-          <li>Surat keterangan kedaruratan</li>
-          <li>Bukti kompetensi unik pemohon</li>
-          <li>Sponsor dari perusahaan Indonesia</li>
-          <li>Paspor berlaku min. 6 bulan</li>
-        </ul>
-        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
-      </div>
-
-      <div class="kartu">
-        <h3>C16 — Visa Instruktur Industri</h3>
-        <p>Untuk trainer yang memberikan bimbingan atau pelatihan guna meningkatkan mutu dan desain produk industri.</p>
-        <div class="chips"><span class="chip">60 hari</span><span class="chip e">Dapat diperpanjang</span></div>
-        <ul>
-          <li>Surat penugasan dari perusahaan</li>
-          <li>Materi / modul pelatihan</li>
-          <li>Sertifikat keahlian instruktur</li>
-          <li>Paspor berlaku min. 6 bulan</li>
-        </ul>
-        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
-      </div>
-
-      <div class="kartu">
-        <h3>C17 — Visa Audit &amp; Inspeksi</h3>
-        <p>Untuk auditor, inspektur, atau tim kendali mutu (QC) yang melakukan pemeriksaan di perusahaan Indonesia.</p>
-        <div class="chips"><span class="chip">60 hari</span><span class="chip e">Dapat diperpanjang</span></div>
-        <ul>
-          <li>Surat penugasan audit / inspeksi</li>
-          <li>Ruang lingkup pekerjaan</li>
-          <li>Akreditasi / sertifikat auditor</li>
-          <li>Paspor berlaku min. 6 bulan</li>
-        </ul>
-        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
-      </div>
-
-      <div class="kartu">
-        <h3>C18 — Visa Uji Coba Kerja</h3>
-        <p>Untuk tenaga kerja asing yang menjalani uji kemampuan atau percobaan kerja sebelum direkrut secara resmi.</p>
-        <div class="chips"><span class="chip">90 hari</span><span class="chip m">Tidak dapat diperpanjang</span></div>
-        <ul>
-          <li>Surat perjanjian uji coba kerja</li>
-          <li>Deskripsi jabatan yang diuji</li>
-          <li>CV dan portofolio pemohon</li>
-          <li>Paspor berlaku min. 6 bulan</li>
-        </ul>
-        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
-      </div>
-
-      <div class="kartu">
-        <h3>C19 — Visa Layanan Purna Jual</h3>
-        <p>Untuk tenaga purna jual asing yang melayani konsumen terkait produk atau jasa yang telah dijual.</p>
-        <div class="chips"><span class="chip">60 hari</span><span class="chip e">Dapat diperpanjang</span></div>
-        <ul>
-          <li>Kontrak penjualan / garansi produk</li>
-          <li>Surat penugasan purna jual</li>
-          <li>Sertifikat teknis produk</li>
-          <li>Paspor berlaku min. 6 bulan</li>
-        </ul>
-        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
-      </div>
-
-      <div class="kartu">
-        <h3>C20 — Visa Pemasangan &amp; Reparasi Mesin</h3>
-        <p>Untuk teknisi asing yang melakukan instalasi, perawatan, atau perbaikan mesin dan alat berat industri.</p>
-        <div class="chips"><span class="chip">60 hari</span><span class="chip e">Dapat diperpanjang</span></div>
-        <ul>
-          <li>Surat penugasan dari perusahaan</li>
-          <li>Spesifikasi mesin yang dikerjakan</li>
-          <li>Sertifikat keahlian teknis</li>
-          <li>Paspor berlaku min. 6 bulan</li>
-        </ul>
-        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
-      </div>
-
-      <div class="kartu">
-        <h3>C22 — Visa Pemagangan</h3>
-        <p>Untuk warga negara asing yang menjalani program magang di perusahaan atau institusi di Indonesia.</p>
-        <div class="chips"><span class="chip">180 hari</span><span class="chip e">Perpanjang s/d 12 bulan</span></div>
-        <ul>
-          <li>Perjanjian magang dengan perusahaan</li>
-          <li>Program dan jadwal magang</li>
-          <li>Surat dari lembaga asal</li>
-          <li>Paspor berlaku min. 6 bulan</li>
-        </ul>
-        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
-      </div>
-
-      <div class="kartu">
-        <h3>D2 — Visa Kunjungan Bisnis (Multiple Entry)</h3>
-        <p>Versi multiple entry dari C2. Untuk pebisnis yang sering keluar-masuk Indonesia dalam kegiatan bisnis.</p>
-        <div class="chips"><span class="chip">60 hari/kunjungan</span><span class="chip e">Multiple Entry</span></div>
-        <ul>
-          <li>Surat undangan dari perusahaan Indonesia</li>
-          <li>Rekam jejak kunjungan bisnis</li>
-          <li>Paspor berlaku min. 6 bulan</li>
-          <li>Bukti keuangan</li>
-        </ul>
-        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
-      </div>
-
-      <div class="kartu">
-        <h3>D12 — Visa Pra-Investasi (Multiple Entry)</h3>
-        <p>Versi multiple entry dari C12. Untuk calon investor yang memerlukan kunjungan berulang dalam studi kelayakan.</p>
-        <div class="chips"><span class="chip">180 hari/kunjungan</span><span class="chip e">Multiple Entry</span></div>
-        <ul>
-          <li>Surat pernyataan rencana investasi</li>
-          <li>Profil dan dokumen perusahaan asal</li>
-          <li>Paspor berlaku min. 6 bulan</li>
-          <li>Bukti keuangan</li>
-        </ul>
-        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
-      </div>
-
-      <div class="kartu">
-        <h3>E23 — Visa Kerja</h3>
-        <p>Untuk tenaga kerja asing dan tenaga ahli yang dipekerjakan oleh perusahaan di sektor industri Indonesia.</p>
-        <div class="chips"><span class="chip">Maks. 2 tahun</span><span class="chip e">Dapat diperpanjang</span></div>
-        <ul>
-          <li>Izin dari Kementerian Ketenagakerjaan</li>
-          <li>Kontrak kerja dengan perusahaan sponsor</li>
-          <li>Paspor berlaku min. 18 bulan</li>
-          <li>Hasil pemeriksaan kesehatan</li>
-        </ul>
-        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
-      </div>
-
-      <div class="kartu">
-        <h3>E25 — Visa Kerja Komisaris &amp; Eksekutif</h3>
-        <p>Untuk komisaris, direktur, manajer umum, dan supervisor perusahaan asing yang beroperasi di Indonesia.</p>
-        <div class="chips"><span class="chip">Maks. 2 tahun</span><span class="chip e">Dapat diperpanjang</span></div>
-        <ul>
-          <li>SK pengangkatan jabatan</li>
-          <li>Dokumen perusahaan (akta, NPWP)</li>
-          <li>Rekomendasi dari BKPM</li>
-          <li>Paspor berlaku min. 18 bulan</li>
-        </ul>
-        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
-      </div>
-
-      <div class="kartu">
-        <h3>E26 — Visa Kerja Lepas Pantai</h3>
-        <p>Untuk awak kapal, alat apung, dan pekerja instalasi lepas pantai di industri minyak dan gas bumi.</p>
-        <div class="chips"><span class="chip">Sesuai kontrak</span><span class="chip e">Dapat diperpanjang</span></div>
-        <ul>
-          <li>Surat penugasan dari perusahaan migas</li>
-          <li>Sertifikat keahlian offshore</li>
-          <li>Asuransi kecelakaan kerja</li>
-          <li>Paspor berlaku min. 18 bulan</li>
-        </ul>
-        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
-      </div>
-
-      <div class="kartu">
-        <h3>E28 — Visa Investor / Golden Visa</h3>
-        <p>Untuk investor asing yang menanamkan modal di sektor energi, pertambangan, dan infrastruktur Indonesia.</p>
-        <div class="chips"><span class="chip">5 atau 10 tahun</span><span class="chip e">Golden Visa</span></div>
-        <ul>
-          <li>Bukti investasi sesuai threshold</li>
-          <li>Dokumen pendirian perusahaan</li>
-          <li>Rekomendasi BKPM / OSS</li>
-          <li>Paspor berlaku min. 18 bulan</li>
-        </ul>
-        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
-      </div>
-
-      <div class="kartu">
-        <h3>F1 — Visa Kunjungan Wisata</h3>
-        <p>Visa on Arrival khusus untuk negara ASEAN dan mitra tertentu. Masa tinggal sangat singkat, tidak dapat diperpanjang.</p>
-        <div class="chips"><span class="chip">7 hari</span><span class="chip m">Tidak dapat diperpanjang</span></div>
-        <ul>
-          <li>Paspor berlaku min. 6 bulan</li>
-          <li>Tiket pulang / onward</li>
-          <li>Negara eligible VoA F-series</li>
-        </ul>
-        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
-      </div>
-
-    </div><!-- /kartu-grid -->
+    <div class="visa-tile-grid" id="visa-tile-grid"></div>
 
     <div class="pemisah"></div>
 
@@ -1553,6 +1353,54 @@ body.bilingual .lang-toggle { display: flex; }
 
     <div class="ig-galeri-grid">
 
+<div class="ig-galeri-item" data-kat="visa" onclick="bukaWebModal('https://drive.google.com/file/d/1qNyvlcJ-slraHjdCEzaLxeNKQb8lOgg_/preview','Extend VoA')">
+  <img src="https://drive.google.com/thumbnail?id=1qNyvlcJ-slraHjdCEzaLxeNKQb8lOgg_&sz=w400" alt="" onerror="this.style.display='none'">
+  <div class="ig-galeri-placeholder"><span>🛂</span><small>Extend VoA</small></div>
+  <div class="ig-galeri-kaca">▶</div>
+</div>
+
+<div class="ig-galeri-item" data-kat="visa" onclick="bukaWebModal('https://drive.google.com/file/d/1GUJVW1Ly1we0wLM7fAbcU22afzr1cTvF/preview','Tutorial Buat Akun e-Visa')">
+  <img src="https://drive.google.com/thumbnail?id=1GUJVW1Ly1we0wLM7fAbcU22afzr1cTvF&sz=w400" alt="" onerror="this.style.display='none'">
+  <div class="ig-galeri-placeholder"><span>📱</span><small>Tutorial Buat Akun e-Visa</small></div>
+  <div class="ig-galeri-kaca">▶</div>
+</div>
+
+<div class="ig-galeri-item" data-kat="visa" onclick="bukaWebModal('https://drive.google.com/file/d/1IlK2uhR69srROhv3rpm3CCKIfCPVv-Dl/preview','Types of Visa')">
+  <img src="https://drive.google.com/thumbnail?id=1IlK2uhR69srROhv3rpm3CCKIfCPVv-Dl&sz=w400" alt="" onerror="this.style.display='none'">
+  <div class="ig-galeri-placeholder"><span>📋</span><small>Types of Visa</small></div>
+  <div class="ig-galeri-kaca">▶</div>
+</div>
+
+<div class="ig-galeri-item" data-kat="visa" onclick="bukaWebModal('https://drive.google.com/file/d/1esSgud_Ym3cQnSPBNP2foPYYFwRucBBF/preview','Types of Visa Simplified')">
+  <img src="https://drive.google.com/thumbnail?id=1esSgud_Ym3cQnSPBNP2foPYYFwRucBBF&sz=w400" alt="" onerror="this.style.display='none'">
+  <div class="ig-galeri-placeholder"><span>✈️</span><small>Types of Visa Simplified</small></div>
+  <div class="ig-galeri-kaca">▶</div>
+</div>
+
+<div class="ig-galeri-item" data-kat="visa" onclick="bukaWebModal('https://drive.google.com/file/d/1kkkWx96CdLOM2e3NbZZWSxp6D7N_ZdFD/preview','Visa on Arrival')">
+  <img src="https://drive.google.com/thumbnail?id=1kkkWx96CdLOM2e3NbZZWSxp6D7N_ZdFD&sz=w400" alt="" onerror="this.style.display='none'">
+  <div class="ig-galeri-placeholder"><span>⚡</span><small>Visa on Arrival</small></div>
+  <div class="ig-galeri-kaca">▶</div>
+</div>
+
+<div class="ig-galeri-item" data-kat="visa" onclick="bukaWebModal('https://drive.google.com/file/d/1wNNQZIoFD9lD2OUljrGoAKL6USSyLmKq/preview','Exit Permit Only')">
+  <img src="https://drive.google.com/thumbnail?id=1wNNQZIoFD9lD2OUljrGoAKL6USSyLmKq&sz=w400" alt="" onerror="this.style.display='none'">
+  <div class="ig-galeri-placeholder"><span>🚪</span><small>Exit Permit Only</small></div>
+  <div class="ig-galeri-kaca">▶</div>
+</div>
+
+<div class="ig-galeri-item" data-kat="visa" onclick="bukaWebModal('https://drive.google.com/file/d/1U06hdyHeDRswIWylYKNBUknmp94viefb/preview','Overstaying')">
+  <img src="https://drive.google.com/thumbnail?id=1U06hdyHeDRswIWylYKNBUknmp94viefb&sz=w400" alt="" onerror="this.style.display='none'">
+  <div class="ig-galeri-placeholder"><span>⚠️</span><small>Overstaying</small></div>
+  <div class="ig-galeri-kaca">▶</div>
+</div>
+
+<div class="ig-galeri-item" data-kat="visa" onclick="bukaWebModal('https://drive.google.com/file/d/1PtDUV5a762-gMG8XhT1xZD3zyz7nhlTq/preview','Permohonan SKIM')">
+  <img src="https://drive.google.com/thumbnail?id=1PtDUV5a762-gMG8XhT1xZD3zyz7nhlTq&sz=w400" alt="" onerror="this.style.display='none'">
+  <div class="ig-galeri-placeholder"><span>📝</span><small>Permohonan SKIM</small></div>
+  <div class="ig-galeri-kaca">▶</div>
+</div>
+       
   <div class="ig-galeri-item" data-kat="visa" data-url="https://www.instagram.com/p/DP0GWWlEhar/" onclick="bukaIgModal('https://www.instagram.com/p/DP0GWWlEhar/')">
     <div class="ig-galeri-placeholder"><span>✈️</span><small>5 types of tourism visa</small></div>
     <div class="ig-galeri-kaca">▶</div>
@@ -1633,6 +1481,18 @@ body.bilingual .lang-toggle { display: flex; }
     <div class="ig-galeri-kaca">▶</div>
   </div>
 
+<div class="ig-galeri-item" data-kat="deportasi" onclick="bukaWebModal('https://drive.google.com/file/d/1ihS--dp7zk6X3Hvjwn3w-ez_aBwveJ1d/preview','Operasi Mandiri')">
+  <img src="https://drive.google.com/thumbnail?id=1ihS--dp7zk6X3Hvjwn3w-ez_aBwveJ1d&sz=w400" alt="" onerror="this.style.display='none'">
+  <div class="ig-galeri-placeholder"><span>🚫</span><small>Operasi Mandiri</small></div>
+  <div class="ig-galeri-kaca">▶</div>
+</div>
+
+<div class="ig-galeri-item" data-kat="deportasi" onclick="bukaWebModal('https://drive.google.com/file/d/14np15ouJ24GJ95bYRm8seYol6RhYPDae/preview','Deportasi')">
+  <img src="https://drive.google.com/thumbnail?id=14np15ouJ24GJ95bYRm8seYol6RhYPDae&sz=w400" alt="" onerror="this.style.display='none'">
+  <div class="ig-galeri-placeholder"><span>🚨</span><small>Deportasi</small></div>
+  <div class="ig-galeri-kaca">▶</div>
+</div>
+       
   <div class="ig-galeri-item" data-kat="deportasi" data-url="https://www.instagram.com/p/DQ6eKcbjy4z/" onclick="bukaIgModal('https://www.instagram.com/p/DQ6eKcbjy4z/')">
     <div class="ig-galeri-placeholder"><span>🇦🇺</span><small>Deportasi WNA asal Australia</small></div>
     <div class="ig-galeri-kaca">▶</div>
@@ -1668,6 +1528,28 @@ body.bilingual .lang-toggle { display: flex; }
   </div>
 </section>
 
+<!-- MODAL VISA -->
+<div id="visa-modal" onclick="tutupVisaModal(event)">
+  <button class="vm-nav vm-kiri" onclick="navVisaModal(-1);event.stopPropagation()">‹</button>
+  <div class="vm-box">
+    <div class="vm-header">
+      <div class="vm-kode-label" id="vm-kode"></div>
+      <h3 id="vm-nama"></h3>
+      <p id="vm-deskripsi"></p>
+      <button class="vm-tutup" onclick="tutupVisaModal()">✕</button>
+    </div>
+    <div class="vm-body">
+      <div class="chips" style="margin-bottom:16px">
+        <span class="chip" id="vm-durasi"></span>
+        <span class="chip" id="vm-tipe"></span>
+      </div>
+      <ul id="vm-syarat"></ul>
+      <p class="vm-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
+    </div>
+    <div class="vm-counter" id="vm-counter"></div>
+  </div>
+  <button class="vm-nav vm-kanan" onclick="navVisaModal(1);event.stopPropagation()">›</button>
+</div>   
 
 <!-- MODAL WEB -->
 <div id="web-modal">
@@ -1741,6 +1623,115 @@ document.addEventListener('DOMContentLoaded', () => {
   if (bg) bg.addEventListener('click', jedaSlide);
 });
 
+/* ── DATA & MODAL VISA ──────────────────────────────────── */
+const dataVisa = [
+  { kode:'B1',  nama:'Visa Kunjungan Wisata',                  durasi:'30 hari',           tipe:'Perpanjang 1×',             tipekelas:'e',
+    deskripsi:'Visa on Arrival untuk wisata. Diperoleh langsung di bandara atau pelabuhan utama saat kedatangan.',
+    syarat:['Paspor berlaku min. 6 bulan','Biaya USD 35 atau setara','Tiket onward / pulang','Negara eligible VoA'] },
+  { kode:'C2',  nama:'Visa Kunjungan Bisnis',                  durasi:'60 hari',           tipe:'Dapat diperpanjang',         tipekelas:'e',
+    deskripsi:'Untuk negosiasi, meeting, serta kunjungan kantor, pabrik, atau tempat produksi mitra bisnis di Indonesia.',
+    syarat:['Surat undangan dari perusahaan Indonesia','Paspor berlaku min. 6 bulan','Bukti keuangan yang cukup','Tiket pulang pergi'] },
+  { kode:'C9',  nama:'Visa Studi / Pelatihan Singkat',         durasi:'60 hari',           tipe:'Dapat diperpanjang',         tipekelas:'e',
+    deskripsi:'Untuk pelatihan, kursus singkat, atau studi banding di lembaga pendidikan maupun industri di Indonesia.',
+    syarat:['Surat penerimaan dari institusi','Jadwal kegiatan pelatihan','Paspor berlaku min. 6 bulan','Bukti keuangan'] },
+  { kode:'C10', nama:'Visa Narasumber Bisnis',                 durasi:'60 hari',           tipe:'Dapat diperpanjang',         tipekelas:'e',
+    deskripsi:'Untuk narasumber atau pembicara dalam kegiatan MICE (Meeting, Incentive, Convention, Exhibition).',
+    syarat:['Surat undangan dari penyelenggara','Jadwal dan topik kegiatan','Paspor berlaku min. 6 bulan','Profil / CV narasumber'] },
+  { kode:'C11', nama:'Visa Promosi Produk & Jasa',             durasi:'60 hari',           tipe:'Dapat diperpanjang',         tipekelas:'e',
+    deskripsi:'Untuk exhibitor MICE — memasarkan dan mempromosikan produk atau jasa di pameran industri Indonesia.',
+    syarat:['Surat undangan penyelenggara pameran','Profil perusahaan dan daftar produk','Paspor berlaku min. 6 bulan','Bukti keuangan'] },
+  { kode:'C12', nama:'Visa Pra-Investasi',                     durasi:'180 hari',          tipe:'Perpanjang s/d 12 bulan',    tipekelas:'e',
+    deskripsi:'Untuk survey lapangan atau studi kelayakan oleh calon investor sebelum menanamkan modal di Indonesia.',
+    syarat:['Surat pernyataan rencana investasi','Profil dan dokumen perusahaan asal','Paspor berlaku min. 6 bulan','Bukti keuangan'] },
+  { kode:'C15', nama:'Visa Penanganan Darurat',                durasi:'60 hari',           tipe:'Situasi darurat',            tipekelas:'m',
+    deskripsi:'Untuk pekerjaan mendesak yang bersifat kritis dan hanya dapat ditangani oleh pemohon bersangkutan.',
+    syarat:['Surat keterangan kedaruratan','Bukti kompetensi unik pemohon','Sponsor dari perusahaan Indonesia','Paspor berlaku min. 6 bulan'] },
+  { kode:'C16', nama:'Visa Instruktur Industri',               durasi:'60 hari',           tipe:'Dapat diperpanjang',         tipekelas:'e',
+    deskripsi:'Untuk trainer yang memberikan bimbingan atau pelatihan guna meningkatkan mutu dan desain produk industri.',
+    syarat:['Surat penugasan dari perusahaan','Materi / modul pelatihan','Sertifikat keahlian instruktur','Paspor berlaku min. 6 bulan'] },
+  { kode:'C17', nama:'Visa Audit & Inspeksi',                  durasi:'60 hari',           tipe:'Dapat diperpanjang',         tipekelas:'e',
+    deskripsi:'Untuk auditor, inspektur, atau tim kendali mutu (QC) yang melakukan pemeriksaan di perusahaan Indonesia.',
+    syarat:['Surat penugasan audit / inspeksi','Ruang lingkup pekerjaan','Akreditasi / sertifikat auditor','Paspor berlaku min. 6 bulan'] },
+  { kode:'C18', nama:'Visa Uji Coba Kerja',                    durasi:'90 hari',           tipe:'Tidak dapat diperpanjang',   tipekelas:'m',
+    deskripsi:'Untuk tenaga kerja asing yang menjalani uji kemampuan atau percobaan kerja sebelum direkrut secara resmi.',
+    syarat:['Surat perjanjian uji coba kerja','Deskripsi jabatan yang diuji','CV dan portofolio pemohon','Paspor berlaku min. 6 bulan'] },
+  { kode:'C19', nama:'Visa Layanan Purna Jual',                durasi:'60 hari',           tipe:'Dapat diperpanjang',         tipekelas:'e',
+    deskripsi:'Untuk tenaga purna jual asing yang melayani konsumen terkait produk atau jasa yang telah dijual.',
+    syarat:['Kontrak penjualan / garansi produk','Surat penugasan purna jual','Sertifikat teknis produk','Paspor berlaku min. 6 bulan'] },
+  { kode:'C20', nama:'Visa Pemasangan & Reparasi Mesin',       durasi:'60 hari',           tipe:'Dapat diperpanjang',         tipekelas:'e',
+    deskripsi:'Untuk teknisi asing yang melakukan instalasi, perawatan, atau perbaikan mesin dan alat berat industri.',
+    syarat:['Surat penugasan dari perusahaan','Spesifikasi mesin yang dikerjakan','Sertifikat keahlian teknis','Paspor berlaku min. 6 bulan'] },
+  { kode:'C22', nama:'Visa Pemagangan',                        durasi:'180 hari',          tipe:'Perpanjang s/d 12 bulan',    tipekelas:'e',
+    deskripsi:'Untuk warga negara asing yang menjalani program magang di perusahaan atau institusi di Indonesia.',
+    syarat:['Perjanjian magang dengan perusahaan','Program dan jadwal magang','Surat dari lembaga asal','Paspor berlaku min. 6 bulan'] },
+  { kode:'D2',  nama:'Visa Kunjungan Bisnis (Multiple Entry)', durasi:'60 hari/kunjungan', tipe:'Multiple Entry',             tipekelas:'e',
+    deskripsi:'Versi multiple entry dari C2. Untuk pebisnis yang sering keluar-masuk Indonesia dalam kegiatan bisnis.',
+    syarat:['Surat undangan dari perusahaan Indonesia','Rekam jejak kunjungan bisnis','Paspor berlaku min. 6 bulan','Bukti keuangan'] },
+  { kode:'D12', nama:'Visa Pra-Investasi (Multiple Entry)',    durasi:'180 hari/kunjungan',tipe:'Multiple Entry',             tipekelas:'e',
+    deskripsi:'Versi multiple entry dari C12. Untuk calon investor yang memerlukan kunjungan berulang dalam studi kelayakan.',
+    syarat:['Surat pernyataan rencana investasi','Profil dan dokumen perusahaan asal','Paspor berlaku min. 6 bulan','Bukti keuangan'] },
+  { kode:'E23', nama:'Visa Kerja',                             durasi:'Maks. 2 tahun',     tipe:'Dapat diperpanjang',         tipekelas:'e',
+    deskripsi:'Untuk tenaga kerja asing dan tenaga ahli yang dipekerjakan oleh perusahaan di sektor industri Indonesia.',
+    syarat:['Izin dari Kementerian Ketenagakerjaan','Kontrak kerja dengan perusahaan sponsor','Paspor berlaku min. 18 bulan','Hasil pemeriksaan kesehatan'] },
+  { kode:'E25', nama:'Visa Kerja Komisaris & Eksekutif',       durasi:'Maks. 2 tahun',     tipe:'Dapat diperpanjang',         tipekelas:'e',
+    deskripsi:'Untuk komisaris, direktur, manajer umum, dan supervisor perusahaan asing yang beroperasi di Indonesia.',
+    syarat:['SK pengangkatan jabatan','Dokumen perusahaan (akta, NPWP)','Rekomendasi dari BKPM','Paspor berlaku min. 18 bulan'] },
+  { kode:'E26', nama:'Visa Kerja Lepas Pantai',                durasi:'Sesuai kontrak',    tipe:'Dapat diperpanjang',         tipekelas:'e',
+    deskripsi:'Untuk awak kapal, alat apung, dan pekerja instalasi lepas pantai di industri minyak dan gas bumi.',
+    syarat:['Surat penugasan dari perusahaan migas','Sertifikat keahlian offshore','Asuransi kecelakaan kerja','Paspor berlaku min. 18 bulan'] },
+  { kode:'E28', nama:'Visa Investor / Golden Visa',            durasi:'5 atau 10 tahun',   tipe:'Golden Visa',                tipekelas:'e',
+    deskripsi:'Untuk investor asing yang menanamkan modal di sektor energi, pertambangan, dan infrastruktur Indonesia.',
+    syarat:['Bukti investasi sesuai threshold','Dokumen pendirian perusahaan','Rekomendasi BKPM / OSS','Paspor berlaku min. 18 bulan'] },
+  { kode:'F1',  nama:'Visa Kunjungan Wisata (ASEAN/VoA)',      durasi:'7 hari',            tipe:'Tidak dapat diperpanjang',   tipekelas:'m',
+    deskripsi:'Visa on Arrival khusus untuk negara ASEAN dan mitra tertentu. Masa tinggal sangat singkat, tidak dapat diperpanjang.',
+    syarat:['Paspor berlaku min. 6 bulan','Tiket pulang / onward','Negara eligible VoA F-series'] },
+];
+
+let visaIdxAktif = 0;
+
+function initVisaTiles() {
+  const grid = document.getElementById('visa-tile-grid');
+  if (!grid) return;
+  grid.innerHTML = dataVisa.map((v, i) => `
+    <div class="visa-tile" onclick="bukaVisaModal(${i})">
+      <div class="vt-kode">${v.kode}</div>
+      <div class="vt-nama">${v.nama}</div>
+      <div class="vt-durasi">${v.durasi}</div>
+    </div>`).join('');
+}
+
+function bukaVisaModal(idx) {
+  visaIdxAktif = idx;
+  renderVisaModal();
+  document.getElementById('visa-modal').classList.add('buka');
+  document.body.style.overflow = 'hidden';
+}
+
+function renderVisaModal() {
+  const v = dataVisa[visaIdxAktif];
+  document.getElementById('vm-kode').textContent        = v.kode;
+  document.getElementById('vm-nama').textContent        = v.nama;
+  document.getElementById('vm-deskripsi').textContent   = v.deskripsi;
+  document.getElementById('vm-durasi').textContent      = v.durasi;
+  const tipeEl = document.getElementById('vm-tipe');
+  tipeEl.textContent  = v.tipe;
+  tipeEl.className    = 'chip ' + v.tipekelas;
+  document.getElementById('vm-syarat').innerHTML = v.syarat.map(s => `<li>${s}</li>`).join('');
+  document.getElementById('vm-counter').textContent = `${visaIdxAktif + 1} / ${dataVisa.length}`;
+}
+
+function navVisaModal(arah) {
+  visaIdxAktif = (visaIdxAktif + arah + dataVisa.length) % dataVisa.length;
+  renderVisaModal();
+}
+
+function tutupVisaModal(e) {
+  if (!e || e.target.id === 'visa-modal') {
+    document.getElementById('visa-modal').classList.remove('buka');
+    document.body.style.overflow = '';
+  }
+}
+   
 /* ── NAVIGASI ───────────────────────────────────────────── */
 const petaNav = ['beranda','visa','izin','pelaporan','media','unduh'];
 let sesiLbAktif = [], idxLb = 0;
@@ -1957,6 +1948,7 @@ if (BAHASA_AKTIF) document.body.classList.add('bilingual');
    
 /* ── INIT ───────────────────────────────────────────────── */
 buka('beranda');
+initVisaTiles();
 </script>
 
 <div id="gt-container" style="display:none"></div>
