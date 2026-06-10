@@ -787,6 +787,28 @@ body.bilingual .lang-toggle { display: flex; }
   color: white;
   background: rgba(255,255,255,.15);
 }
+
+/* ─── VISA 5 KOLOM ───────────────────────────────────────── */
+#visa .kartu-grid {
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+#visa .kartu { padding: 18px 14px; }
+#visa .kartu h3 { font-size: 13.5px; margin-bottom: 6px; }
+#visa .kartu p  { font-size: 12px; margin-bottom: 8px; line-height: 1.5; }
+#visa .kartu .chips { margin: 6px 0 8px; gap: 6px; }
+#visa .kartu .chip { font-size: 10px; padding: 3px 8px; }
+#visa .kartu ul { font-size: 11.5px; }
+#visa .kartu ul li { padding: 3px 0; gap: 6px; }
+.kartu-note {
+  font-size: 10px; color: var(--redup); font-style: italic;
+  margin-top: 10px; padding-top: 8px;
+  border-top: 1px solid rgba(255,255,255,.07);
+  line-height: 1.4;
+}
+@media (max-width: 900px) {
+  #visa .kartu-grid { grid-template-columns: repeat(2, 1fr); }
+}
    
 /* ─── RESPONSIF ──────────────────────────────────────────── */
 @media (max-width: 900px) {
@@ -958,106 +980,263 @@ body.bilingual .lang-toggle { display: flex; }
     <h3 class="judul-seksi">Jenis-Jenis Visa</h3>
     <div class="kartu-grid">
 
-      <!-- ── KARTU 1 ── -->
       <div class="kartu">
-        <div class="ikon">👷</div>
-        <h3>E23 — Visa Kerja</h3>
-        <p>Untuk tenaga kerja asing yang bekerja di sektor pertambangan, konstruksi, dan energi di Indonesia.</p>
-        <div class="chips">
-          <span class="chip">Maks. 2 tahun</span>
-          <span class="chip e">Dapat diperpanjang</span>
-        </div>
+        <h3>B1 — Visa Kunjungan Wisata</h3>
+        <p>Visa on Arrival untuk wisata. Diperoleh langsung di bandara atau pelabuhan utama saat kedatangan.</p>
+        <div class="chips"><span class="chip">30 hari</span><span class="chip e">Perpanjang 1×</span></div>
         <ul>
-          <li>Izin dari Kementerian Ketenagakerjaan</li>
-          <li>Kontrak kerja dengan perusahaan sponsor</li>
-          <li>Paspor berlaku min. 18 bulan</li>
-          <li>Hasil pemeriksaan kesehatan</li>
+          <li>Paspor berlaku min. 6 bulan</li>
+          <li>Biaya USD 35 atau setara</li>
+          <li>Tiket onward / pulang</li>
+          <li>Negara eligible VoA</li>
         </ul>
+        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
       </div>
 
-      <!-- ── KARTU 2 ── -->
       <div class="kartu">
-        <div class="ikon">⚓</div>
-        <h3>E26 — Visa Kerja Lepas Pantai</h3>
-        <p>Untuk awak kapal, alat apung, dan pekerja instalasi lepas pantai di industri minyak dan gas bumi.</p>
-        <div class="chips">
-          <span class="chip">Sesuai kontrak</span>
-          <span class="chip e">Dapat diperpanjang</span>
-        </div>
-        <ul>
-          <li>Surat penugasan dari perusahaan migas</li>
-          <li>Sertifikat keahlian pelayaran / offshore</li>
-          <li>Paspor berlaku min. 18 bulan</li>
-          <li>Asuransi kecelakaan kerja</li>
-        </ul>
-      </div>
-
-      <!-- ── KARTU 3 ── -->
-      <div class="kartu">
-        <div class="ikon">💎</div>
-        <h3>E28 — Visa Investor / Golden Visa</h3>
-        <p>Untuk investor asing yang menanamkan modal di sektor energi, pertambangan, dan infrastruktur Indonesia.</p>
-        <div class="chips">
-          <span class="chip">5 atau 10 tahun</span>
-          <span class="chip e">Golden Visa</span>
-        </div>
-        <ul>
-          <li>Bukti investasi sesuai threshold</li>
-          <li>Dokumen pendirian perusahaan</li>
-          <li>Rekomendasi BKPM / OSS</li>
-          <li>Paspor berlaku min. 18 bulan</li>
-        </ul>
-      </div>
-
-      <!-- ── KARTU 4 ── -->
-      <div class="kartu">
-        <div class="ikon">💼</div>
         <h3>C2 — Visa Kunjungan Bisnis</h3>
-        <p>Untuk pelaku bisnis asing yang menghadiri pameran, pertemuan, atau negosiasi di Indonesia.</p>
-        <div class="chips">
-          <span class="chip">60 hari</span>
-          <span class="chip e">Dapat diperpanjang</span>
-        </div>
+        <p>Untuk negosiasi, meeting, serta kunjungan kantor, pabrik, atau tempat produksi mitra bisnis di Indonesia.</p>
+        <div class="chips"><span class="chip">60 hari</span><span class="chip e">Dapat diperpanjang</span></div>
         <ul>
           <li>Surat undangan dari perusahaan Indonesia</li>
           <li>Paspor berlaku min. 6 bulan</li>
           <li>Bukti keuangan yang cukup</li>
           <li>Tiket pulang pergi</li>
         </ul>
+        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
       </div>
 
-      <!-- ── KARTU 5 ── -->
       <div class="kartu">
-        <div class="ikon">🔍</div>
-        <h3>C12 — Visa Kunjungan Pra-Investasi</h3>
-        <p>Untuk calon investor asing yang melakukan survei dan penjajakan peluang investasi di sektor energi Kalimantan.</p>
-        <div class="chips">
-          <span class="chip">60 hari</span>
-          <span class="chip e">Dapat diperpanjang</span>
-        </div>
+        <h3>C9 — Visa Studi / Pelatihan Singkat</h3>
+        <p>Untuk pelatihan, kursus singkat, atau studi banding di lembaga pendidikan maupun industri di Indonesia.</p>
+        <div class="chips"><span class="chip">60 hari</span><span class="chip e">Dapat diperpanjang</span></div>
+        <ul>
+          <li>Surat penerimaan dari institusi</li>
+          <li>Jadwal kegiatan pelatihan</li>
+          <li>Paspor berlaku min. 6 bulan</li>
+          <li>Bukti keuangan</li>
+        </ul>
+        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
+      </div>
+
+      <div class="kartu">
+        <h3>C10 — Visa Narasumber Bisnis</h3>
+        <p>Untuk narasumber atau pembicara dalam kegiatan MICE (Meeting, Incentive, Convention, Exhibition).</p>
+        <div class="chips"><span class="chip">60 hari</span><span class="chip e">Dapat diperpanjang</span></div>
+        <ul>
+          <li>Surat undangan dari penyelenggara</li>
+          <li>Jadwal dan topik kegiatan</li>
+          <li>Paspor berlaku min. 6 bulan</li>
+          <li>Profil / CV narasumber</li>
+        </ul>
+        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
+      </div>
+
+      <div class="kartu">
+        <h3>C11 — Visa Promosi Produk &amp; Jasa</h3>
+        <p>Untuk exhibitor MICE — memasarkan dan mempromosikan produk atau jasa di pameran industri Indonesia.</p>
+        <div class="chips"><span class="chip">60 hari</span><span class="chip e">Dapat diperpanjang</span></div>
+        <ul>
+          <li>Surat undangan penyelenggara pameran</li>
+          <li>Profil perusahaan dan daftar produk</li>
+          <li>Paspor berlaku min. 6 bulan</li>
+          <li>Bukti keuangan</li>
+        </ul>
+        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
+      </div>
+
+      <div class="kartu">
+        <h3>C12 — Visa Pra-Investasi</h3>
+        <p>Untuk survey lapangan atau studi kelayakan oleh calon investor sebelum menanamkan modal di Indonesia.</p>
+        <div class="chips"><span class="chip">180 hari</span><span class="chip e">Perpanjang s/d 12 bulan</span></div>
         <ul>
           <li>Surat pernyataan rencana investasi</li>
-          <li>Profil perusahaan asal</li>
+          <li>Profil dan dokumen perusahaan asal</li>
           <li>Paspor berlaku min. 6 bulan</li>
-          <li>Bukti keuangan yang cukup</li>
+          <li>Bukti keuangan</li>
         </ul>
+        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
       </div>
 
-      <!-- ── KARTU 6 ── -->
       <div class="kartu">
-        <div class="ikon">🔧</div>
-        <h3>C20 — Visa Pemasangan dan Perbaikan Mesin</h3>
-        <p>Untuk teknisi asing yang melakukan instalasi, perawatan, atau perbaikan alat berat dan mesin industri tambang.</p>
-        <div class="chips">
-          <span class="chip">60 hari</span>
-          <span class="chip e">Dapat diperpanjang</span>
-        </div>
+        <h3>C15 — Visa Penanganan Darurat</h3>
+        <p>Untuk pekerjaan mendesak yang bersifat kritis dan hanya dapat ditangani oleh pemohon bersangkutan.</p>
+        <div class="chips"><span class="chip">60 hari</span><span class="chip m">Situasi darurat</span></div>
+        <ul>
+          <li>Surat keterangan kedaruratan</li>
+          <li>Bukti kompetensi unik pemohon</li>
+          <li>Sponsor dari perusahaan Indonesia</li>
+          <li>Paspor berlaku min. 6 bulan</li>
+        </ul>
+        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
+      </div>
+
+      <div class="kartu">
+        <h3>C16 — Visa Instruktur Industri</h3>
+        <p>Untuk trainer yang memberikan bimbingan atau pelatihan guna meningkatkan mutu dan desain produk industri.</p>
+        <div class="chips"><span class="chip">60 hari</span><span class="chip e">Dapat diperpanjang</span></div>
+        <ul>
+          <li>Surat penugasan dari perusahaan</li>
+          <li>Materi / modul pelatihan</li>
+          <li>Sertifikat keahlian instruktur</li>
+          <li>Paspor berlaku min. 6 bulan</li>
+        </ul>
+        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
+      </div>
+
+      <div class="kartu">
+        <h3>C17 — Visa Audit &amp; Inspeksi</h3>
+        <p>Untuk auditor, inspektur, atau tim kendali mutu (QC) yang melakukan pemeriksaan di perusahaan Indonesia.</p>
+        <div class="chips"><span class="chip">60 hari</span><span class="chip e">Dapat diperpanjang</span></div>
+        <ul>
+          <li>Surat penugasan audit / inspeksi</li>
+          <li>Ruang lingkup pekerjaan</li>
+          <li>Akreditasi / sertifikat auditor</li>
+          <li>Paspor berlaku min. 6 bulan</li>
+        </ul>
+        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
+      </div>
+
+      <div class="kartu">
+        <h3>C18 — Visa Uji Coba Kerja</h3>
+        <p>Untuk tenaga kerja asing yang menjalani uji kemampuan atau percobaan kerja sebelum direkrut secara resmi.</p>
+        <div class="chips"><span class="chip">60 hari</span><span class="chip">Maks. 120 hari total</span></div>
+        <ul>
+          <li>Surat perjanjian uji coba kerja</li>
+          <li>Deskripsi jabatan yang diuji</li>
+          <li>CV dan portofolio pemohon</li>
+          <li>Paspor berlaku min. 6 bulan</li>
+        </ul>
+        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
+      </div>
+
+      <div class="kartu">
+        <h3>C19 — Visa Layanan Purna Jual</h3>
+        <p>Untuk tenaga purna jual asing yang melayani konsumen terkait produk atau jasa yang telah dijual.</p>
+        <div class="chips"><span class="chip">60 hari</span><span class="chip e">Dapat diperpanjang</span></div>
+        <ul>
+          <li>Kontrak penjualan / garansi produk</li>
+          <li>Surat penugasan purna jual</li>
+          <li>Sertifikat teknis produk</li>
+          <li>Paspor berlaku min. 6 bulan</li>
+        </ul>
+        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
+      </div>
+
+      <div class="kartu">
+        <h3>C20 — Visa Pemasangan &amp; Reparasi Mesin</h3>
+        <p>Untuk teknisi asing yang melakukan instalasi, perawatan, atau perbaikan mesin dan alat berat industri.</p>
+        <div class="chips"><span class="chip">60 hari</span><span class="chip e">Dapat diperpanjang</span></div>
         <ul>
           <li>Surat penugasan dari perusahaan</li>
           <li>Spesifikasi mesin yang dikerjakan</li>
           <li>Sertifikat keahlian teknis</li>
           <li>Paspor berlaku min. 6 bulan</li>
         </ul>
+        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
+      </div>
+
+      <div class="kartu">
+        <h3>C22 — Visa Pemagangan</h3>
+        <p>Untuk warga negara asing yang menjalani program magang di perusahaan atau institusi di Indonesia.</p>
+        <div class="chips"><span class="chip">180 hari</span><span class="chip e">Perpanjang s/d 12 bulan</span></div>
+        <ul>
+          <li>Perjanjian magang dengan perusahaan</li>
+          <li>Program dan jadwal magang</li>
+          <li>Surat dari lembaga asal</li>
+          <li>Paspor berlaku min. 6 bulan</li>
+        </ul>
+        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
+      </div>
+
+      <div class="kartu">
+        <h3>D2 — Visa Kunjungan Bisnis (Multiple Entry)</h3>
+        <p>Versi multiple entry dari C2. Untuk pebisnis yang sering keluar-masuk Indonesia dalam kegiatan bisnis.</p>
+        <div class="chips"><span class="chip">60 hari/kunjungan</span><span class="chip e">Multiple Entry</span></div>
+        <ul>
+          <li>Surat undangan dari perusahaan Indonesia</li>
+          <li>Rekam jejak kunjungan bisnis</li>
+          <li>Paspor berlaku min. 6 bulan</li>
+          <li>Bukti keuangan</li>
+        </ul>
+        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
+      </div>
+
+      <div class="kartu">
+        <h3>D12 — Visa Pra-Investasi (Multiple Entry)</h3>
+        <p>Versi multiple entry dari C12. Untuk calon investor yang memerlukan kunjungan berulang dalam studi kelayakan.</p>
+        <div class="chips"><span class="chip">180 hari/kunjungan</span><span class="chip e">Multiple Entry</span></div>
+        <ul>
+          <li>Surat pernyataan rencana investasi</li>
+          <li>Profil dan dokumen perusahaan asal</li>
+          <li>Paspor berlaku min. 6 bulan</li>
+          <li>Bukti keuangan</li>
+        </ul>
+        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
+      </div>
+
+      <div class="kartu">
+        <h3>E23 — Visa Kerja</h3>
+        <p>Untuk tenaga kerja asing dan tenaga ahli yang dipekerjakan oleh perusahaan di sektor industri Indonesia.</p>
+        <div class="chips"><span class="chip">Maks. 2 tahun</span><span class="chip e">Dapat diperpanjang</span></div>
+        <ul>
+          <li>Izin dari Kementerian Ketenagakerjaan</li>
+          <li>Kontrak kerja dengan perusahaan sponsor</li>
+          <li>Paspor berlaku min. 18 bulan</li>
+          <li>Hasil pemeriksaan kesehatan</li>
+        </ul>
+        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
+      </div>
+
+      <div class="kartu">
+        <h3>E25 — Visa Kerja Komisaris &amp; Eksekutif</h3>
+        <p>Untuk komisaris, direktur, manajer umum, dan supervisor perusahaan asing yang beroperasi di Indonesia.</p>
+        <div class="chips"><span class="chip">Maks. 2 tahun</span><span class="chip e">Dapat diperpanjang</span></div>
+        <ul>
+          <li>SK pengangkatan jabatan</li>
+          <li>Dokumen perusahaan (akta, NPWP)</li>
+          <li>Rekomendasi dari BKPM</li>
+          <li>Paspor berlaku min. 18 bulan</li>
+        </ul>
+        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
+      </div>
+
+      <div class="kartu">
+        <h3>E26 — Visa Kerja Lepas Pantai</h3>
+        <p>Untuk awak kapal, alat apung, dan pekerja instalasi lepas pantai di industri minyak dan gas bumi.</p>
+        <div class="chips"><span class="chip">Sesuai kontrak</span><span class="chip e">Dapat diperpanjang</span></div>
+        <ul>
+          <li>Surat penugasan dari perusahaan migas</li>
+          <li>Sertifikat keahlian offshore</li>
+          <li>Asuransi kecelakaan kerja</li>
+          <li>Paspor berlaku min. 18 bulan</li>
+        </ul>
+        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
+      </div>
+
+      <div class="kartu">
+        <h3>E28 — Visa Investor / Golden Visa</h3>
+        <p>Untuk investor asing yang menanamkan modal di sektor energi, pertambangan, dan infrastruktur Indonesia.</p>
+        <div class="chips"><span class="chip">5 atau 10 tahun</span><span class="chip e">Golden Visa</span></div>
+        <ul>
+          <li>Bukti investasi sesuai threshold</li>
+          <li>Dokumen pendirian perusahaan</li>
+          <li>Rekomendasi BKPM / OSS</li>
+          <li>Paspor berlaku min. 18 bulan</li>
+        </ul>
+        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
+      </div>
+
+      <div class="kartu">
+        <h3>F1 — Visa Kunjungan Wisata</h3>
+        <p>Visa on Arrival khusus untuk negara ASEAN dan mitra tertentu. Masa tinggal sangat singkat, tidak dapat diperpanjang.</p>
+        <div class="chips"><span class="chip">7 hari</span><span class="chip m">Tidak dapat diperpanjang</span></div>
+        <ul>
+          <li>Paspor berlaku min. 6 bulan</li>
+          <li>Tiket pulang / onward</li>
+          <li>Negara eligible VoA F-series</li>
+        </ul>
+        <p class="kartu-note">⚠️ Persyaratan dapat berubah sewaktu-waktu. Verifikasi melalui evisa.imigrasi.go.id</p>
       </div>
 
     </div><!-- /kartu-grid -->
