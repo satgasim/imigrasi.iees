@@ -874,6 +874,92 @@ body.bilingual .lang-toggle { display: flex; }
   border-radius: 16px; padding: 14px; text-align: center;
   display: none;
 }
+
+/* ─── PASPOR TILE + MODAL ───────────────────────────────── */
+.paspor-tile-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 10px; margin-bottom: 4px;
+}
+.paspor-tile {
+  background: var(--biru2); border: 1px solid var(--border);
+  border-radius: 14px; padding: 20px 16px; cursor: pointer;
+  transition: all .25s; display: flex; flex-direction: column;
+  align-items: center; gap: 10px; text-align: center;
+  font-family: 'Poppins', sans-serif;
+}
+.paspor-tile:hover {
+  border-color: var(--emas); background: var(--biru);
+  transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.3);
+}
+.pt-ikon { font-size: 28px; }
+.pt-nama { font-size: 13px; font-weight: 700; color: var(--putih); line-height: 1.3; }
+#paspor-modal {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.92); z-index: 8600;
+  align-items: center; justify-content: center;
+}
+#paspor-modal.buka { display: flex; }
+.pm-box {
+  width: min(600px, 94vw); max-height: 88vh;
+  background: var(--biru2); border: 1px solid var(--border);
+  border-radius: 18px; overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.pm-header { background: var(--biru); padding: 20px 24px 16px; position: relative; flex-shrink: 0; }
+.pm-set { font-size: 11px; font-weight: 700; color: var(--emas); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+.pm-header h3 { font-size: 17px; font-weight: 700; color: var(--emas-terang); padding-right: 40px; line-height: 1.3; }
+.pm-tutup {
+  position: absolute; top: 16px; right: 16px;
+  background: rgba(255,255,255,.15); border: none; color: var(--putih);
+  width: 34px; height: 34px; border-radius: 50%; cursor: pointer;
+  font-size: 16px; display: flex; align-items: center; justify-content: center; transition: all .2s;
+}
+.pm-tutup:hover { background: var(--merah); }
+.pm-tabs { display: flex; background: var(--hitam); flex-shrink: 0; overflow-x: auto; }
+.pm-tab {
+  padding: 10px 14px; font-size: 11.5px; font-weight: 600;
+  color: var(--emas); white-space: nowrap; cursor: pointer;
+  border-bottom: 2px solid transparent; transition: all .2s;
+  font-family: 'Poppins', sans-serif; background: transparent;
+  border-top: none; border-left: none; border-right: none;
+}
+.pm-tab.aktif { color: var(--emas-terang); border-bottom-color: var(--emas); }
+.pm-tab:hover:not(.aktif) { color: var(--putih); }
+.pm-body { padding: 20px 24px; overflow-y: auto; flex: 1; }
+.pm-list { list-style: none; }
+.pm-list li {
+  padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,.05);
+  display: flex; align-items: flex-start; gap: 8px;
+  font-size: 13.5px; color: var(--emas-terang); line-height: 1.6;
+}
+.pm-list li::before { content: '→'; color: var(--emas); flex-shrink: 0; margin-top: 2px; }
+.pm-list li:last-child { border-bottom: none; }
+.pm-ol { list-style: none; counter-reset: pm-c; }
+.pm-ol li { counter-increment: pm-c; }
+.pm-ol li::before { content: counter(pm-c); color: var(--emas); font-weight: 700; flex-shrink: 0; width: 20px; text-align: center; min-width: 20px; }
+.pm-note { font-size: 13px; color: var(--emas-terang); margin-bottom: 14px; line-height: 1.6; padding: 10px 14px; background: rgba(3,53,102,.5); border-radius: 8px; }
+.pm-catatan { font-size: 12px; color: var(--emas); font-style: italic; margin-top: 12px; padding: 10px 14px; background: rgba(189,147,76,.1); border-radius: 8px; border-left: 3px solid var(--emas); }
+.pm-subjudul { font-size: 12px; font-weight: 700; color: var(--emas); text-transform: uppercase; letter-spacing: .5px; margin: 14px 0 8px; }
+.pm-tabel { width: 100%; border-collapse: collapse; font-size: 13px; }
+.pm-tabel th { background: var(--biru); color: var(--emas-terang); padding: 8px 12px; text-align: left; font-weight: 600; }
+.pm-tabel td { padding: 8px 12px; border-bottom: 1px solid rgba(255,255,255,.05); color: var(--emas-terang); }
+.pm-tabel tr:last-child td { border-bottom: none; }
+.pm-tabel td:last-child { font-weight: 700; color: var(--emas); white-space: nowrap; }
+.pm-nav {
+  position: fixed; top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.25);
+  color: var(--putih); width: 48px; height: 48px; border-radius: 50%;
+  font-size: 26px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: all .2s; z-index: 8601;
+}
+.pm-nav:hover { background: var(--emas); color: var(--hitam); border-color: var(--emas); }
+.pm-kiri { left: 16px; }
+.pm-kanan { right: 16px; }
+.pm-counter { text-align: center; font-size: 11px; color: var(--emas); padding: 8px 0 14px; flex-shrink: 0; }
+@media (max-width: 900px) {
+  .paspor-tile-grid { grid-template-columns: repeat(2, 1fr); }
+  .pm-nav { display: none; }
+}
    
 /* ─── RESPONSIF ──────────────────────────────────────────── */
 @media (max-width: 900px) {
@@ -1132,7 +1218,6 @@ body.bilingual .lang-toggle { display: flex; }
 
       <!-- ITAS -->
       <div class="kartu">
-        <div class="ikon">🔵</div>
         <h3>ITAS</h3>
         <p class="sub">Izin Tinggal Terbatas</p>
         <p>Diberikan kepada TKA sektor migas, pertambangan, dan konstruksi yang bekerja atau berinvestasi di Indonesia.</p>
@@ -1150,7 +1235,6 @@ body.bilingual .lang-toggle { display: flex; }
 
       <!-- ITAP -->
       <div class="kartu">
-        <div class="ikon">🟡</div>
         <h3>ITAP</h3>
         <p class="sub">Izin Tinggal Tetap</p>
         <p>Diberikan kepada WNA yang telah memegang ITAS minimal 3 tahun berturut-turut dan memenuhi syarat tinggal permanen.</p>
@@ -1168,7 +1252,6 @@ body.bilingual .lang-toggle { display: flex; }
 
       <!-- ALIH STATUS -->
       <div class="kartu">
-        <div class="ikon">🔄</div>
         <h3>Alih Status</h3>
         <p class="sub">ITK → ITAS → ITAP</p>
         <p>WNA dapat mengajukan alih status izin tinggal sesuai perubahan tujuan dan kebutuhan selama berada di Indonesia.</p>
@@ -1243,7 +1326,6 @@ body.bilingual .lang-toggle { display: flex; }
     <h3 class="judul-seksi">Siapa yang Wajib Melapor?</h3>
     <div class="kartu-grid" style="grid-template-columns:repeat(auto-fit,minmax(230px,1fr))">
       <div class="kartu">
-        <div class="ikon">🏨</div>
         <h3>Pengelola Penginapan</h3>
         <p>Hotel, kos, villa, camp perusahaan, atau akomodasi lain yang menampung WNA wajib melaporkan tamu asing yang check-in.</p>
         <div class="chips"><span class="chip m">Wajib 1×24 jam</span></div>
@@ -1254,7 +1336,6 @@ body.bilingual .lang-toggle { display: flex; }
         </ul>
       </div>
       <div class="kartu">
-        <div class="ikon">🏢</div>
         <h3>Perusahaan Sponsor / TKA</h3>
         <p>Perusahaan kontraktor, subkontraktor, atau instansi yang mengundang atau mempekerjakan TKA di sektor energi dan tambang.</p>
         <div class="chips"><span class="chip m">Wajib dalam 14 hari</span></div>
@@ -1265,7 +1346,6 @@ body.bilingual .lang-toggle { display: flex; }
         </ul>
       </div>
       <div class="kartu">
-        <div class="ikon">🌍</div>
         <h3>Warga Negara Asing (WNA)</h3>
         <p>WNA pemegang ITAS/ITAP yang berpindah alamat tinggal atau domisili di wilayah Indonesia.</p>
         <div class="chips"><span class="chip m">Wajib dalam 30 hari</span></div>
@@ -1396,112 +1476,56 @@ body.bilingual .lang-toggle { display: flex; }
     <div class="pemisah"></div>
 
     <!-- KATEGORI PEMOHON -->
-    <h3 class="judul-seksi">Kategori Pemohon</h3>
-    <div class="kartu-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
-      <div class="kartu">
-        <div class="ikon">👤</div>
-        <h3>Masyarakat Umum</h3>
-        <p>WNI dewasa usia 17 tahun ke atas yang mengajukan paspor baru pertama kali atau penggantian.</p>
+    <h3 class="judul-seksi">Permohonan Baru</h3>
+    <div class="paspor-tile-grid">
+      <div class="paspor-tile" onclick="bukaPasporModal('baru',0)">
+        <span class="pt-ikon">👤</span><span class="pt-nama">Masyarakat Umum</span>
       </div>
-      <div class="kartu">
-        <div class="ikon">👶</div>
-        <h3>Anak di Bawah 17 Tahun</h3>
-        <p>Permohonan paspor untuk anak yang belum memiliki KTP, didampingi orang tua atau wali.</p>
+      <div class="paspor-tile" onclick="bukaPasporModal('baru',1)">
+        <span class="pt-ikon">👶</span><span class="pt-nama">Anak di Bawah 17 Tahun</span>
       </div>
-      <div class="kartu">
-        <div class="ikon">🌐</div>
-        <h3>Anak Dwikewarganegaraan</h3>
-        <p>Anak hasil perkawinan campuran WNI-WNA yang memiliki dua kewarganegaraan sesuai ketentuan.</p>
+      <div class="paspor-tile" onclick="bukaPasporModal('baru',2)">
+        <span class="pt-ikon">🌐</span><span class="pt-nama">Anak Dwikewarganegaraan</span>
       </div>
-      <div class="kartu">
-        <div class="ikon">✈️</div>
-        <h3>Calon Pekerja Migran Indonesia</h3>
-        <p>WNI yang akan bekerja di luar negeri sebagai Pekerja Migran Indonesia (PMI).</p>
+      <div class="paspor-tile" onclick="bukaPasporModal('baru',3)">
+        <span class="pt-ikon">✈️</span><span class="pt-nama">Calon Pekerja Migran Indonesia</span>
       </div>
-      <div class="kartu">
-        <div class="ikon">🕌</div>
-        <h3>Haji &amp; Umroh</h3>
-        <p>Permohonan paspor untuk keperluan ibadah haji atau umroh ke Arab Saudi.</p>
+      <div class="paspor-tile" onclick="bukaPasporModal('baru',4)">
+        <span class="pt-ikon">🕌</span><span class="pt-nama">Haji &amp; Umroh</span>
       </div>
-      <div class="kartu">
-        <div class="ikon">🌍</div>
-        <h3>Anak Lahir di Luar Negeri</h3>
-        <p>Anak WNI yang lahir di luar negeri dan belum memiliki paspor Indonesia.</p>
+      <div class="paspor-tile" onclick="bukaPasporModal('baru',5)">
+        <span class="pt-ikon">🌍</span><span class="pt-nama">Anak Lahir di Luar Negeri</span>
       </div>
     </div>
 
     <div class="pemisah"></div>
 
-    <!-- PERSYARATAN -->
-    <h3 class="judul-seksi">Persyaratan Permohonan Baru</h3>
-    <div class="kartu" style="max-width:700px">
-      <ul>
-        <li>Kartu Tanda Penduduk Elektronik (E-KTP) yang masih berlaku atau surat keterangan pindah ke luar negeri</li>
-        <li>Kartu Keluarga (KK)</li>
-        <li>Dokumen pendukung: akta kelahiran/akta perkawinan/buku nikah/ijazah/surat baptis <em>(nama, tempat lahir, tanggal lahir, dan nama orang tua harus tercantum)</em></li>
-        <li>Surat pewarganegaraan Indonesia <em>(bagi WNA yang memperoleh kewarganegaraan RI)</em></li>
-        <li>Surat penetapan ganti nama dari pejabat berwenang <em>(bagi yang telah mengganti nama)</em></li>
-      </ul>
-    </div>
-
-    <div class="pemisah"></div>
-
-    <!-- ALUR -->
-    <h3 class="judul-seksi">Alur Permohonan</h3>
-    <div class="flow-2kol">
-      <div>
-        <div class="sub-judul">📱 Via Aplikasi M-Paspor</div>
-        <div class="flow">
-          <div class="flow-step">
-            <div class="flow-kiri"><div class="flow-lingkaran" style="width:38px;height:38px;font-size:14px">1</div><div class="flow-garis"></div></div>
-            <div class="flow-isi"><h4>Unduh M-Paspor</h4><p>Tersedia di App Store dan Google Play. Daftar akun dan login.</p></div>
-          </div>
-          <div class="flow-step">
-            <div class="flow-kiri"><div class="flow-lingkaran" style="width:38px;height:38px;font-size:14px">2</div><div class="flow-garis"></div></div>
-            <div class="flow-isi"><h4>Isi Permohonan</h4><p>Lengkapi data diri, unggah dokumen persyaratan, pilih jadwal kedatangan.</p></div>
-          </div>
-          <div class="flow-step">
-            <div class="flow-kiri"><div class="flow-lingkaran" style="width:38px;height:38px;font-size:14px">3</div><div class="flow-garis"></div></div>
-            <div class="flow-isi"><h4>Bayar PNBP</h4><p>Lakukan pembayaran biaya paspor sesuai jenis yang dipilih.</p></div>
-          </div>
-          <div class="flow-step">
-            <div class="flow-kiri"><div class="flow-lingkaran" style="width:38px;height:38px;font-size:14px">4</div></div>
-            <div class="flow-isi" style="margin-bottom:0"><h4>Datang ke Kantor Imigrasi</h4><p>Hadir sesuai jadwal untuk foto, sidik jari, dan wawancara.</p></div>
-          </div>
-        </div>
+    <h3 class="judul-seksi">Penggantian Paspor</h3>
+    <div class="paspor-tile-grid" style="grid-template-columns:repeat(5,1fr)">
+      <div class="paspor-tile" onclick="bukaPasporModal('penggantian',0)">
+        <span class="pt-ikon">📅</span><span class="pt-nama">Habis Masa Berlaku</span>
       </div>
-      <div>
+      <div class="paspor-tile" onclick="bukaPasporModal('penggantian',1)">
+        <span class="pt-ikon">📄</span><span class="pt-nama">Paspor Rusak</span>
+      </div>
+      <div class="paspor-tile" onclick="bukaPasporModal('penggantian',2)">
+        <span class="pt-ikon">🔍</span><span class="pt-nama">Paspor Hilang</span>
+      </div>
+      <div class="paspor-tile" onclick="bukaPasporModal('penggantian',3)">
+        <span class="pt-ikon">🛫</span><span class="pt-nama">Di Luar Negeri</span>
+      </div>
+      <div class="paspor-tile" onclick="bukaPasporModal('penggantian',4)">
+        <span class="pt-ikon">📝</span><span class="pt-nama">Perubahan Data</span>
+      </div>
     </div>
 
     <div class="pemisah"></div>
-
+     
     <!-- BIAYA -->
-    <h3 class="judul-seksi">Biaya Resmi (PNBP)</h3>
-    <div class="kartu-grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
-      <div class="kartu">
-        <h3 style="color:var(--putih)">Paspor Biasa Elektronik (e-Paspor)</h3>
-        <p class="sub">Dengan chip biometrik</p>
-        <div style="margin-top:12px">
-          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:14px">
-            <span style="color:var(--emas-terang)">5 tahun</span>
-            <span style="color:var(--emas);font-weight:700">Rp650.000</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;padding:8px 0;font-size:14px">
-            <span style="color:var(--emas-terang)">10 tahun</span>
-            <span style="color:var(--emas);font-weight:700">Rp950.000</span>
-          </div>
-        </div>
-      </div>
-      <div class="kartu">
-        <h3 style="color:var(--putih)">Layanan Percepatan</h3>
-        <p class="sub">Selesai hari yang sama</p>
-        <div style="margin-top:12px">
-          <div style="display:flex;justify-content:space-between;padding:8px 0;font-size:14px">
-            <span style="color:var(--emas-terang)">Biaya tambahan</span>
-            <span style="color:var(--emas);font-weight:700">Rp1.000.000</span>
-          </div>
-        </div>
-      </div>
+   <h3 class="judul-seksi">Biaya PNBP</h3>
+    <div class="kotak" style="max-width:480px;margin-bottom:16px">
+      <p style="font-size:13px;color:var(--emas-terang);margin-bottom:6px">Detail biaya tersedia di setiap tile Permohonan Baru dan Penggantian Paspor di atas.</p>
+      <p style="font-size:11px;color:var(--emas);font-style:italic">Sumber: imigrasi.go.id · Terakhir diperbarui: 2 Sep 2025</p>
     </div>
 
     <div class="kotak-merah" style="margin-top:20px">
@@ -1692,6 +1716,28 @@ body.bilingual .lang-toggle { display: flex; }
   <button class="vm-nav vm-kanan" onclick="navVisaModal(1);event.stopPropagation()">›</button>
 </div>   
 
+<!-- MODAL PASPOR -->
+<div id="paspor-modal" onclick="tutupPasporModal(event)">
+  <button class="pm-nav pm-kiri" onclick="navPasporModal(-1);event.stopPropagation()">‹</button>
+  <div class="pm-box">
+    <div class="pm-header">
+      <div class="pm-set" id="pm-set"></div>
+      <h3 id="pm-nama"></h3>
+      <button class="pm-tutup" onclick="tutupPasporModal()">✕</button>
+    </div>
+    <div class="pm-tabs">
+      <button class="pm-tab aktif" data-tab="info"      onclick="gantiTabPm(this,'info')">Informasi Umum</button>
+      <button class="pm-tab"       data-tab="syarat"    onclick="gantiTabPm(this,'syarat')">Persyaratan</button>
+      <button class="pm-tab"       data-tab="prosedur"  onclick="gantiTabPm(this,'prosedur')">Prosedur</button>
+      <button class="pm-tab"       data-tab="mekanisme" onclick="gantiTabPm(this,'mekanisme')">Mekanisme</button>
+      <button class="pm-tab"       data-tab="biaya"     onclick="gantiTabPm(this,'biaya')">Biaya</button>
+    </div>
+    <div class="pm-body" id="pm-body"></div>
+    <div class="pm-counter" id="pm-counter"></div>
+  </div>
+  <button class="pm-nav pm-kanan" onclick="navPasporModal(1);event.stopPropagation()">›</button>
+</div>
+   
 <!-- MODAL WEB -->
 <div id="web-modal">
   <div class="web-modal-box">
@@ -1869,6 +1915,358 @@ function navVisaModal(arah) {
 function tutupVisaModal(e) {
   if (!e || e.target.id === 'visa-modal') {
     document.getElementById('visa-modal').classList.remove('buka');
+    document.body.style.overflow = '';
+  }
+}
+
+/* ── DATA & MODAL PASPOR ────────────────────────────────── */
+const _BIAYA = `<table class="pm-tabel">
+  <tr><th>Layanan</th><th>Biaya</th></tr>
+  <tr><td>Layanan Percepatan (selesai hari yang sama)</td><td>Rp 1.000.000</td></tr>
+  <tr><td>Paspor Non-Elektronik — 5 Tahun</td><td>Rp 350.000</td></tr>
+  <tr><td>Paspor Non-Elektronik — 10 Tahun</td><td>Rp 650.000</td></tr>
+  <tr><td>e-Paspor — 5 Tahun</td><td>Rp 650.000</td></tr>
+  <tr><td>e-Paspor — 10 Tahun</td><td>Rp 950.000</td></tr>
+</table>`;
+
+const _MEK = `<ol class="pm-list pm-ol">
+  <li>Pemeriksaan kelengkapan dan keabsahan persyaratan</li>
+  <li>Pembayaran biaya paspor</li>
+  <li>Pengambilan foto dan sidik jari</li>
+  <li>Wawancara</li><li>Verifikasi</li><li>Adjudikasi</li>
+</ol>`;
+
+const _PROSEDUR = `<p class="pm-note">Lakukan pendaftaran melalui aplikasi M-Paspor (App Store / Google Play). Permohonan manual dapat dilakukan dengan cara berikut.</p>
+<ol class="pm-list pm-ol">
+  <li>Isi data di aplikasi yang disediakan pada loket permohonan dan lampirkan dokumen kelengkapan persyaratan.</li>
+  <li>Tunggu Pejabat Imigrasi memeriksa dokumen kelengkapan persyaratan.</li>
+  <li>Dapatkan tanda terima permohonan dan kode pembayaran dari Pejabat Imigrasi setelah dokumen persyaratan dinyatakan lengkap.</li>
+  <li>Jika dokumen persyaratan dinyatakan belum lengkap, terima dokumen permohonan yang dikembalikan. Permohonan dianggap ditarik kembali.</li>
+</ol>`;
+
+const _INFO = `<ul class="pm-list">
+  <li>Permohonan paspor biasa dapat diajukan oleh warga negara Indonesia, baik di dalam maupun luar wilayah Indonesia.</li>
+  <li>Paspor biasa terdiri atas paspor biasa elektronik (e-paspor) dan paspor biasa nonelektronik.</li>
+  <li>Paspor biasa diterbitkan dengan menggunakan Sistem Informasi Manajemen Keimigrasian.</li>
+  <li>Permohonan paspor biasa dapat diajukan secara manual atau elektronik dengan melampirkan dokumen kelengkapan persyaratan.</li>
+</ul>`;
+
+const dataPaspor = {
+  baru: [
+    {
+      nama:'Masyarakat Umum', ikon:'👤',
+      info: _INFO,
+      syarat:`<ul class="pm-list">
+        <li>Kartu tanda penduduk (KTP) yang masih berlaku atau surat keterangan pindah ke luar negeri</li>
+        <li>Kartu keluarga (KK)</li>
+        <li>Dokumen berupa akta kelahiran, akta perkawinan, buku nikah, ijazah, atau surat baptis</li>
+        <li>Surat pewarganegaraan Indonesia bagi Orang Asing yang memperoleh kewarganegaraan Indonesia</li>
+        <li>Surat penetapan ganti nama dari pejabat yang berwenang (bagi yang telah mengganti nama)</li>
+      </ul>
+      <p class="pm-catatan">Nama, tempat dan tanggal lahir, serta nama orang tua harus tercantum dalam dokumen. Jika tidak, dapat melampirkan surat keterangan dari instansi yang berwenang.</p>`,
+      prosedur: _PROSEDUR, mekanisme: _MEK, biaya: _BIAYA
+    },
+    {
+      nama:'Anak di Bawah 17 Tahun', ikon:'👶',
+      info: _INFO,
+      syarat:`<ul class="pm-list">
+        <li>Kartu tanda penduduk (KTP) ayah atau ibu yang masih berlaku atau surat keterangan pindah ke luar negeri</li>
+        <li>Kartu keluarga (KK)</li>
+        <li>Akta kelahiran atau surat baptis</li>
+        <li>Akta perkawinan atau buku nikah orang tua</li>
+        <li>Surat penetapan ganti nama dari pejabat yang berwenang (bagi yang telah mengganti nama)</li>
+        <li>Paspor biasa lama bagi yang telah memiliki paspor biasa</li>
+      </ul>`,
+      prosedur: _PROSEDUR, mekanisme: _MEK, biaya: _BIAYA
+    },
+    {
+      nama:'Anak Dwikewarganegaraan', ikon:'🌐',
+      info:`<p class="pm-note">Status kewarganegaraan ganda terbatas diberikan kepada seorang anak hingga usia 18 tahun.</p>
+      <p class="pm-subjudul">Pasal 4 UU No. 12 Tahun 2006</p>
+      <ul class="pm-list">
+        <li>Anak dari perkawinan sah ayah WNI dengan ibu WNA</li>
+        <li>Anak dari perkawinan sah ayah WNA dengan ibu WNI</li>
+        <li>Anak di luar perkawinan sah ibu WNA yang diakui oleh ayah WNI sebelum anak berusia 18 tahun</li>
+        <li>Anak lahir di luar wilayah Indonesia dari ayah dan ibu WNI, jika negara tempat lahir memberikan kewarganegaraan kepada anak tersebut</li>
+      </ul>
+      <p class="pm-subjudul">Pasal 5 UU No. 12 Tahun 2006</p>
+      <ul class="pm-list">
+        <li>Anak di luar perkawinan sah, belum 18 tahun, yang diakui secara sah oleh ayah WNA</li>
+        <li>Anak WNI yang belum berusia 5 tahun yang diangkat sebagai anak sah oleh WNA berdasarkan ketetapan pengadilan</li>
+      </ul>
+      <p class="pm-catatan">Anak harus memilih salah satu kewarganegaraan setelah berusia 18 tahun/menikah, paling lambat 3 tahun setelahnya.</p>`,
+      syarat:`<ul class="pm-list">
+        <li>Kartu tanda penduduk (KTP) yang masih berlaku atau surat keterangan pindah ke luar negeri</li>
+        <li>Kartu keluarga (KK)</li>
+        <li>Dokumen berupa akta kelahiran, akta perkawinan, buku nikah, ijazah, atau surat baptis</li>
+        <li>Surat pewarganegaraan Indonesia bagi Orang Asing yang memperoleh kewarganegaraan Indonesia</li>
+        <li>Surat penetapan ganti nama dari pejabat yang berwenang (bagi yang telah mengganti nama)</li>
+      </ul>
+      <p class="pm-catatan">Nama, tempat dan tanggal lahir, serta nama orang tua harus tercantum dalam dokumen.</p>`,
+      prosedur:`<p class="pm-subjudul">Lahir sebelum 1 Agustus 2006</p>
+      <ul class="pm-list">
+        <li>Jika belum melakukan pendaftaran tetap: anak harus memiliki izin keimigrasian — penyelesaian di kantor imigrasi setempat.</li>
+        <li>Jika telah melakukan pendaftaran tetap: orang tua/wali melapor ke kantor imigrasi, mengembalikan dokumen imigrasi, anak dapat diberikan paspor RI dengan cap kewarganegaraan ganda.</li>
+        <li>Anak yang memiliki paspor kebangsaan lain harus melampirkan afidavit (biaya Rp 400.000).</li>
+      </ul>
+      <p class="pm-subjudul">Lahir setelah 1 Agustus 2006</p>
+      <ul class="pm-list">
+        <li>Anak dapat diberikan DPRI walaupun mempunyai paspor asing.</li>
+        <li>Anak dapat diberikan DPRI dengan cap kewarganegaraan ganda terbatas.</li>
+        <li>Anak yang memiliki paspor kebangsaan lain harus melampirkan afidavit (biaya Rp 400.000).</li>
+      </ul>`,
+      mekanisme: _MEK, biaya: _BIAYA
+    },
+    {
+      nama:'Calon Pekerja Migran Indonesia', ikon:'✈️',
+      info:`<ul class="pm-list">
+        <li>Permohonan paspor biasa dapat diajukan oleh warga negara Indonesia, baik di dalam maupun luar wilayah Indonesia.</li>
+        <li>Paspor biasa terdiri atas paspor biasa elektronik (e-paspor) dan paspor biasa non elektronik.</li>
+        <li>Paspor biasa diterbitkan dengan menggunakan Sistem Informasi Manajemen Keimigrasian.</li>
+        <li>Permohonan paspor biasa dapat diajukan secara manual atau elektronik.</li>
+        <li>Permohonan bagi CPMI yang berdomisili di wilayah Indonesia diajukan di kantor imigrasi dalam provinsi yang sama dengan domisili yang bersangkutan.</li>
+        <li>Pengajuan permohonan dapat dilakukan secara perorangan maupun kolektif melalui perusahaan pengerah TKI.</li>
+      </ul>`,
+      syarat:`<ul class="pm-list">
+        <li>Kartu tanda penduduk (KTP) yang masih berlaku atau surat keterangan pindah ke luar negeri</li>
+        <li>Kartu keluarga (KK)</li>
+        <li>Dokumen berupa akta kelahiran, akta perkawinan, buku nikah, ijazah, atau surat baptis</li>
+        <li>Surat pewarganegaraan Indonesia bagi Orang Asing yang memperoleh kewarganegaraan Indonesia</li>
+        <li>Surat penetapan ganti nama dari pejabat yang berwenang (bagi yang telah mengganti nama)</li>
+        <li>Surat rekomendasi permohonan paspor CPMI dari Dinas Tenaga Kerja Provinsi atau Kabupaten/Kota</li>
+        <li>Paspor biasa lama bagi yang telah memiliki paspor biasa</li>
+      </ul>
+      <p class="pm-catatan">Nama, tempat dan tanggal lahir, serta nama orang tua harus tercantum dalam dokumen.</p>`,
+      prosedur:`<ol class="pm-list pm-ol">
+        <li>Isi data di aplikasi yang disediakan pada loket permohonan dan lampirkan dokumen kelengkapan persyaratan.</li>
+        <li>Tunggu Pejabat Imigrasi memeriksa dokumen kelengkapan persyaratan.</li>
+        <li>Dapatkan tanda terima permohonan dan kode pembayaran dari Pejabat Imigrasi setelah dokumen persyaratan dinyatakan lengkap.</li>
+        <li>Jika dokumen persyaratan dinyatakan belum lengkap, permohonan dianggap ditarik kembali.</li>
+      </ol>`,
+      mekanisme: _MEK, biaya: _BIAYA
+    },
+    {
+      nama:'Haji & Umroh', ikon:'🕌',
+      info: _INFO,
+      syarat:`<ul class="pm-list">
+        <li>Kartu tanda penduduk (KTP) yang masih berlaku atau surat keterangan pindah ke luar negeri</li>
+        <li>Kartu keluarga (KK)</li>
+        <li>Dokumen berupa akta kelahiran, akta perkawinan, buku nikah, atau ijazah</li>
+        <li>Surat pewarganegaraan Indonesia bagi Orang Asing yang memperoleh kewarganegaraan Indonesia</li>
+        <li>Surat penetapan ganti nama dari pejabat yang berwenang (bagi yang telah mengganti nama)</li>
+        <li>Paspor biasa lama bagi yang telah memiliki paspor biasa</li>
+      </ul>
+      <p class="pm-catatan">Nama, tempat dan tanggal lahir, serta nama orang tua harus tercantum dalam dokumen.</p>`,
+      prosedur:`<ol class="pm-list pm-ol">
+        <li>Isi data di aplikasi yang disediakan pada loket permohonan dan lampirkan dokumen kelengkapan persyaratan.</li>
+        <li>Tunggu Pejabat Imigrasi memeriksa dokumen kelengkapan persyaratan.</li>
+        <li>Dapatkan tanda terima permohonan dan kode pembayaran setelah dokumen dinyatakan lengkap.</li>
+        <li>Jika dokumen belum lengkap, permohonan dianggap ditarik kembali.</li>
+      </ol>`,
+      mekanisme: _MEK, biaya: _BIAYA
+    },
+    {
+      nama:'Anak Lahir di Luar Negeri', ikon:'🌍',
+      info:`<p class="pm-note">Bagi anak berkewarganegaraan Indonesia yang lahir di luar wilayah Indonesia, permohonan paspor baru diajukan kepada menteri atau Pejabat Imigrasi pada Perwakilan Republik Indonesia.</p>`,
+      syarat:`<ul class="pm-list">
+        <li>Paspor ayah dan/atau ibu WNI</li>
+        <li>Surat keterangan lahir dari Perwakilan Republik Indonesia</li>
+      </ul>`,
+      prosedur:`<ol class="pm-list pm-ol">
+        <li>Isi data di aplikasi yang disediakan pada loket permohonan dan lampirkan dokumen kelengkapan persyaratan.</li>
+        <li>Tunggu petugas memeriksa dokumen kelengkapan persyaratan.</li>
+        <li>Dapatkan tanda terima permohonan dan kode pembayaran setelah dokumen dinyatakan lengkap.</li>
+        <li>Jika dokumen belum lengkap, permohonan dianggap ditarik kembali.</li>
+      </ol>`,
+      mekanisme: _MEK, biaya: _BIAYA
+    }
+  ],
+  penggantian: [
+    {
+      nama:'Habis Masa Berlaku', ikon:'📅',
+      info: _INFO,
+      syarat:`<p class="pm-subjudul">Paspor terbitan 2009 dan setelahnya</p>
+      <ul class="pm-list">
+        <li>Kartu tanda penduduk (KTP) elektronik</li>
+        <li>Paspor lama</li>
+      </ul>
+      <p class="pm-subjudul">Paspor terbitan sebelum 2009</p>
+      <ul class="pm-list">
+        <li>KTP yang masih berlaku atau surat keterangan pindah ke luar negeri</li>
+        <li>Kartu keluarga (KK)</li>
+        <li>Dokumen berupa akta kelahiran, akta perkawinan, buku nikah, ijazah, atau surat baptis</li>
+        <li>Surat pewarganegaraan Indonesia bagi Orang Asing yang memperoleh kewarganegaraan Indonesia</li>
+        <li>Surat penetapan ganti nama dari pejabat yang berwenang</li>
+        <li>Paspor biasa lama</li>
+      </ul>
+      <p class="pm-catatan">Nama, tempat dan tanggal lahir, serta nama orang tua harus tercantum dalam dokumen.</p>`,
+      prosedur:`<ol class="pm-list pm-ol">
+        <li>Isi data di aplikasi yang disediakan pada loket permohonan dan lampirkan dokumen kelengkapan persyaratan.</li>
+        <li>Tunggu Pejabat Imigrasi memeriksa dokumen kelengkapan persyaratan.</li>
+        <li>Dapatkan tanda terima permohonan dan kode pembayaran setelah dokumen dinyatakan lengkap.</li>
+        <li>Jika dokumen belum lengkap, permohonan dianggap ditarik kembali.</li>
+      </ol>`,
+      mekanisme:`<ul class="pm-list">
+        <li><strong style="color:var(--emas-terang)">Musibah</strong> (kebakaran, banjir, gempa bumi): dapat diberikan penggantian langsung.</li>
+        <li><strong style="color:var(--emas-terang)">Kurang hati-hati</strong> dan kehilangan di luar kemampuan: diberikan penggantian paspor biasa.</li>
+        <li><strong style="color:var(--emas-terang)">Kecerobohan atau kelalaian</strong> dengan alasan tidak dapat diterima: pemberian paspor biasa dapat ditangguhkan paling sedikit 6 bulan sampai paling lama 2 tahun.</li>
+      </ul>`,
+      biaya: _BIAYA
+    },
+    {
+      nama:'Paspor Rusak', ikon:'📄',
+      info:`<ul class="pm-list">
+        <li>Masa berlaku paspor akan habis (kurang dari enam bulan)</li>
+        <li>Masa berlaku paspor telah habis</li>
+        <li>Paspor hilang</li>
+        <li>Paspor rusak saat proses penerbitan</li>
+        <li>Paspor rusak di luar proses penerbitan (robek, basah, terbakar, tercoret, dll.) sehingga keterangan di dalamnya menjadi tidak jelas</li>
+      </ul>
+      <p class="pm-catatan">Penggantian paspor karena keadaan kahar meliputi: banjir, gempa bumi, kebakaran, huru-hara, atau bencana alam lainnya yang ditetapkan oleh instansi yang berwenang.</p>`,
+      syarat:`<ul class="pm-list">
+        <li>KTP yang masih berlaku atau surat keterangan pindah ke luar negeri</li>
+        <li>Kartu keluarga (KK)</li>
+        <li>Dokumen berupa akta kelahiran, akta perkawinan, buku nikah, ijazah, atau surat baptis</li>
+        <li>Surat pewarganegaraan Indonesia bagi Orang Asing yang memperoleh kewarganegaraan Indonesia</li>
+        <li>Surat penetapan ganti nama dari pejabat yang berwenang</li>
+        <li>Paspor biasa lama</li>
+      </ul>
+      <p class="pm-subjudul">Tambahan untuk keadaan kahar</p>
+      <ul class="pm-list">
+        <li>Surat permohonan penggantian paspor hilang kepada Kepala Kantor Imigrasi</li>
+        <li>Surat keterangan dari kelurahan/otoritas yang berwenang menyatakan pemohon mengalami keadaan kahar</li>
+      </ul>`,
+      prosedur:`<ol class="pm-list pm-ol">
+        <li>Datang ke kantor imigrasi terdekat.</li>
+        <li>Isi data pada loket permohonan dan lampirkan dokumen kelengkapan persyaratan.</li>
+        <li>Tunggu Pejabat Imigrasi memeriksa dokumen dan menuangkannya dalam Berita Acara Pemeriksaan (BAP).</li>
+        <li>BAP disampaikan kepada Kepala Kantor Imigrasi untuk mendapatkan pertimbangan.</li>
+        <li>Jika disetujui, Pejabat Imigrasi akan mengganti paspor setelah Anda melakukan pembayaran.</li>
+      </ol>`,
+      mekanisme:`<ul class="pm-list">
+        <li><strong style="color:var(--emas-terang)">Musibah:</strong> dapat diberikan penggantian langsung.</li>
+        <li><strong style="color:var(--emas-terang)">Kurang hati-hati:</strong> diberikan penggantian paspor biasa.</li>
+        <li><strong style="color:var(--emas-terang)">Kecerobohan/kelalaian:</strong> pemberian paspor biasa dapat ditangguhkan 6 bulan sampai 2 tahun.</li>
+      </ul>`,
+      biaya: _BIAYA
+    },
+    {
+      nama:'Paspor Hilang', ikon:'🔍',
+      info:`<ul class="pm-list">
+        <li>Masa berlakunya akan habis (kurang dari enam bulan)</li>
+        <li>Masa berlaku telah habis</li>
+        <li>Hilang</li>
+        <li>Rusak saat proses penerbitan</li>
+        <li>Rusak di luar proses penerbitan</li>
+      </ul>
+      <p class="pm-catatan">Penggantian karena keadaan kahar meliputi: banjir, gempa bumi, kebakaran, huru-hara, bencana alam lainnya.</p>`,
+      syarat:`<p class="pm-subjudul">Persyaratan paspor hilang</p>
+      <ul class="pm-list">
+        <li>Surat lapor kehilangan dari kepolisian setempat</li>
+        <li>Kartu tanda penduduk (KTP) yang masih berlaku</li>
+        <li>Kartu keluarga (KK)</li>
+        <li>Akta lahir</li>
+      </ul>
+      <p class="pm-subjudul">Tambahan untuk keadaan kahar</p>
+      <ul class="pm-list">
+        <li>Surat permohonan penggantian paspor hilang kepada Kepala Kantor Imigrasi</li>
+        <li>Surat keterangan dari kelurahan/otoritas yang berwenang</li>
+      </ul>`,
+      prosedur:`<ol class="pm-list pm-ol">
+        <li>Isi data di aplikasi yang disediakan pada loket permohonan dan lampirkan dokumen kelengkapan persyaratan.</li>
+        <li>Tunggu Pejabat Imigrasi memeriksa dokumen (dituangkan dalam BAP).</li>
+        <li>BAP disampaikan kepada Kepala Kantor Imigrasi untuk mendapatkan pertimbangan.</li>
+        <li>Jika disetujui, Pejabat Imigrasi akan mengganti paspor setelah Anda melakukan pembayaran.</li>
+      </ol>`,
+      mekanisme:`<ul class="pm-list">
+        <li><strong style="color:var(--emas-terang)">Kurang hati-hati</strong> dan kehilangan di luar kemampuan: diberikan penggantian paspor biasa.</li>
+        <li><strong style="color:var(--emas-terang)">Kecerobohan atau kelalaian</strong> dengan alasan tidak dapat diterima: pemberian paspor biasa dapat ditangguhkan 6 bulan sampai 2 tahun.</li>
+      </ul>`,
+      biaya: _BIAYA
+    },
+    {
+      nama:'Di Luar Negeri', ikon:'🛫',
+      info:`<p class="pm-note">Permohonan penggantian paspor diajukan kepada menteri atau Pejabat Imigrasi pada Perwakilan Republik Indonesia di negara setempat.</p>`,
+      syarat:`<ul class="pm-list">
+        <li>Paspor ayah dan/atau ibu WNI</li>
+        <li>Surat keterangan lahir dari Perwakilan Republik Indonesia</li>
+      </ul>`,
+      prosedur:`<ol class="pm-list pm-ol">
+        <li>Isi data di aplikasi yang disediakan pada loket permohonan dan lampirkan dokumen kelengkapan persyaratan.</li>
+        <li>Tunggu petugas memeriksa dokumen kelengkapan persyaratan.</li>
+        <li>Dapatkan tanda terima permohonan dan kode pembayaran setelah dokumen dinyatakan lengkap.</li>
+        <li>Jika dokumen belum lengkap, permohonan dianggap ditarik kembali.</li>
+      </ol>`,
+      mekanisme:`<ul class="pm-list">
+        <li><strong style="color:var(--emas-terang)">Musibah</strong> (kebakaran, banjir, gempa bumi): penggantian langsung.</li>
+        <li><strong style="color:var(--emas-terang)">Kurang hati-hati</strong> dan di luar kemampuan: diberikan penggantian paspor biasa.</li>
+        <li><strong style="color:var(--emas-terang)">Kecerobohan/kelalaian:</strong> ditangguhkan 6 bulan sampai 2 tahun.</li>
+      </ul>`,
+      biaya: _BIAYA
+    },
+    {
+      nama:'Perubahan Data', ikon:'📝',
+      info:`<p class="pm-note">Perubahan data identitas diri pemegang paspor dapat diajukan kepada Kepala Kantor Imigrasi atau Pejabat Imigrasi. Perubahan meliputi nama, tempat tanggal lahir, atau jenis kelamin.</p>`,
+      syarat:`<ul class="pm-list">
+        <li>Paspor</li>
+        <li>Kartu tanda penduduk (KTP) dan kartu keluarga (KK)</li>
+        <li>Dokumen lain dari instansi pemerintah sebagai dasar perubahan data paspor, seperti surat penetapan pengadilan, akta kelahiran, surat nikah, atau dokumen sejenis</li>
+      </ul>`,
+      prosedur:`<ol class="pm-list pm-ol">
+        <li>Anda melakukan pengajuan permohonan.</li>
+        <li>Anda mendapatkan persetujuan Kepala Kantor Imigrasi atau Pejabat Imigrasi.</li>
+        <li>Anda mendapatkan persetujuan Direktur Jenderal Imigrasi.</li>
+        <li>Paspor baru Anda diterbitkan.</li>
+      </ol>`,
+      mekanisme:`<ol class="pm-list pm-ol">
+        <li>Serahkan berkas persyaratan (asli dan fotokopi) serta Perdim 11 yang telah diisi lengkap kepada petugas loket.</li>
+        <li>Petugas akan memproses perubahan data paspor.</li>
+        <li>Pejabat Imigrasi akan menyetujui perubahan data paspor.</li>
+        <li>Petugas akan mencetak paspor baru setelah mendapatkan persetujuan Direktur Jenderal Imigrasi.</li>
+        <li>Paspor baru yang telah selesai akan diberikan kepada Anda.</li>
+      </ol>
+      <p class="pm-catatan">Alasan penolakan: persyaratan tidak lengkap, nama pemohon terdapat dalam daftar pencegahan ke luar negeri, atau alasan keimigrasian lain.</p>`,
+      biaya:`<p class="pm-note">Pelayanan ini dikenakan biaya penggantian paspor sesuai tarif yang berlaku.</p>` + _BIAYA
+    }
+  ]
+};
+
+let pmSet = 'baru', pmIdx = 0, pmTabAktif = 'info';
+
+function bukaPasporModal(set, idx) {
+  pmSet = set; pmIdx = idx; pmTabAktif = 'info';
+  renderPasporModal();
+  document.getElementById('paspor-modal').classList.add('buka');
+  document.body.style.overflow = 'hidden';
+}
+
+function renderPasporModal() {
+  const d = dataPaspor[pmSet][pmIdx];
+  const total = dataPaspor[pmSet].length;
+  document.getElementById('pm-set').textContent = pmSet === 'baru' ? 'Permohonan Baru' : 'Penggantian Paspor';
+  document.getElementById('pm-nama').textContent = d.ikon + ' ' + d.nama;
+  document.getElementById('pm-counter').textContent = `${pmIdx + 1} / ${total}`;
+  document.getElementById('pm-body').innerHTML = d[pmTabAktif] || '';
+  document.querySelectorAll('.pm-tab').forEach(t => {
+    t.classList.toggle('aktif', t.dataset.tab === pmTabAktif);
+  });
+}
+
+function gantiTabPm(btn, tab) {
+  pmTabAktif = tab;
+  renderPasporModal();
+}
+
+function navPasporModal(arah) {
+  const total = dataPaspor[pmSet].length;
+  pmIdx = (pmIdx + arah + total) % total;
+  pmTabAktif = 'info';
+  renderPasporModal();
+}
+
+function tutupPasporModal(e) {
+  if (!e || e.target.id === 'paspor-modal') {
+    document.getElementById('paspor-modal').classList.remove('buka');
     document.body.style.overflow = '';
   }
 }
