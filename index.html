@@ -410,37 +410,6 @@ body {
 .ig-post-ikon { font-size: 32px; position: relative; z-index: 1; }
 .ig-post-label { font-size: 11px; color: var(--emas-terang); text-align: center; padding: 0 8px; position: relative; z-index: 1; }
 
-<!-- /* ─── UNDUH MATERI ───────────────────────────────────────── */
- <!-- .unduh-seksi { margin-bottom: 36px; }
-.unduh-seksi h3 { font-size: 18px; font-weight: 700; color: var(--emas); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
-.file-list { display: flex; flex-direction: column; gap: 10px; }
-.file-baris {
-  background: var(--biru2); border: 1px solid var(--border);
-  border-radius: 12px; padding: 18px 22px;
-  display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  transition: all .2s;
-}
-.file-baris:hover { border-color: var(--emas); background: var(--biru); }
-.file-kiri { display: flex; align-items: center; gap: 16px; }
-.file-ikon { font-size: 28px; width: 44px; text-align: center; flex-shrink: 0; }
-.file-nama { font-size: 15px; font-weight: 600; }
-.file-meta { font-size: 12px; color: var(--emas-terang); margin-top: 2px; }
-.file-aksi { display: flex; gap: 10px; flex-shrink: 0; }
-.btn-lihat {
-  background: transparent; border: 1px solid rgba(189,147,76,.5);
-  color: var(--emas); padding: 8px 18px; border-radius: 8px;
-  cursor: pointer; font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600;
-  transition: all .2s;
-}
-.btn-lihat:hover { background: rgba(189,147,76,.12); }
-.btn-unduh-file {
-  background: var(--biru); border: 1px solid var(--biru);
-  color: white; padding: 8px 18px; border-radius: 8px;
-  cursor: pointer; font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600;
-  transition: all .2s;
-}
-.btn-unduh-file:hover { background: var(--emas); color: var(--hitam); border-color: var(--emas); }
-
 /* ─── KOTAK PANDUAN ──────────────────────────────────────── */
 .panduan-box {
   background: var(--biru2); border: 1px solid var(--border);
@@ -996,9 +965,8 @@ body.bilingual .lang-toggle { display: flex; }
     <button class="nb-btn" onclick="buka('visa')">✈️ Visa</button>
     <button class="nb-btn" onclick="buka('izin')">📋 Izin Tinggal</button>
     <button class="nb-btn" onclick="buka('pelaporan')">📍 Pelaporan OA</button>
-    <button class="nb-btn" onclick="buka('paspor')">🛂 Paspor</button>
+    <button class="nb-btn" onclick="buka('paspor')">🛂 Paspor RI</button>
     <button class="nb-btn" onclick="buka('media')">🎬 Media</button>
-    <button class="nb-btn" onclick="buka('unduh')">⬇️ Unduh</button>
   </div>
   <div class="lang-toggle">
     <button class="lang-btn aktif" onclick="gantiBahasa('id')">ID</button>
@@ -1116,10 +1084,6 @@ body.bilingual .lang-toggle { display: flex; }
     <button class="menu-btn" onclick="buka('media')">
       <span class="menu-ikon">🎬</span>
       <span>MEDIA</span>
-    </button>
-    <button class="menu-btn" onclick="buka('unduh')">
-      <span class="menu-ikon">⬇️</span>
-      <span>UNDUH MATERI</span>
     </button>
   </div>
   <footer>
@@ -2225,7 +2189,7 @@ function tutupPasporModal(e) {
 }
    
 /* ── NAVIGASI ───────────────────────────────────────────── */
-const petaNav = ['beranda','visa','izin','pelaporan','paspor','media','unduh'];
+const petaNav = ['beranda','visa','izin','pelaporan','paspor','media'];
 let sesiLbAktif = [], idxLb = 0;
 
 function buka(id) {
